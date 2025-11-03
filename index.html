@@ -1,0 +1,526 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LocalMarket - Plataforma de Comercio Electrónico</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            overflow-x: hidden;
+            background: #fefefe;
+            color: #3d3d3d;
+        }
+
+        /* Header */
+        header {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            padding: 1.5rem 5%;
+            background: #ffffff;
+            box-shadow: 0 1px 5px rgba(0, 0, 0, 0.05);
+            z-index: 1000;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 400;
+            color: #3d3d3d;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-family: 'Georgia', serif;
+        }
+
+        nav {
+            display: flex;
+            gap: 3rem;
+            align-items: center;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: #8a8a8a;
+            font-weight: 400;
+            font-size: 0.95rem;
+            transition: color 0.3s;
+        }
+
+        nav a:hover {
+            color: #3d3d3d;
+        }
+
+        .header-icons {
+            display: flex;
+            gap: 1.5rem;
+            align-items: center;
+        }
+
+        .icon-btn {
+            background: none;
+            border: none;
+            font-size: 1.3rem;
+            color: #3d3d3d;
+            cursor: pointer;
+            transition: opacity 0.3s;
+        }
+
+        .icon-btn:hover {
+            opacity: 0.7;
+        }
+
+        /* Hero Section */
+        .hero {
+            margin-top: 80px;
+            min-height: 90vh;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            align-items: center;
+            padding: 4rem 5%;
+            gap: 4rem;
+            background: #fefefe;
+        }
+
+        .hero-content {
+            max-width: 600px;
+        }
+
+        .hero h1 {
+            font-size: 4rem;
+            font-weight: 400;
+            margin-bottom: 1.5rem;
+            line-height: 1.1;
+            color: #2d2d2d;
+            font-family: 'Georgia', serif;
+        }
+
+        .hero p {
+            font-size: 1.1rem;
+            margin-bottom: 2.5rem;
+            color: #6d6d6d;
+            line-height: 1.8;
+            font-weight: 300;
+        }
+
+        .hero-stats {
+            display: flex;
+            align-items: center;
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .stat-badge {
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+        }
+
+        .stat-icon {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: #f5f5f5;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+        }
+
+        .stat-text h3 {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: #2d2d2d;
+        }
+
+        .stat-text p {
+            font-size: 0.9rem;
+            color: #8a8a8a;
+            margin: 0;
+        }
+
+        .hero-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.8rem;
+            padding: 1rem 2.5rem;
+            background: #2d2d2d;
+            color: white;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: 500;
+            font-size: 1rem;
+            transition: all 0.3s;
+        }
+
+        .hero-btn:hover {
+            background: #1a1a1a;
+            transform: translateX(5px);
+        }
+
+        .hero-image {
+            position: relative;
+            height: 600px;
+            border-radius: 20px;
+            overflow: hidden;
+        }
+
+        .hero-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .floating-badge {
+            position: absolute;
+            top: 10%;
+            right: -5%;
+            background: white;
+            padding: 1.5rem;
+            border-radius: 50%;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            animation: float 3s ease-in-out infinite;
+        }
+
+        .floating-badge p {
+            font-size: 0.75rem;
+            color: #8a8a8a;
+            text-align: center;
+            margin: 0;
+            writing-mode: vertical-rl;
+            text-orientation: mixed;
+        }
+
+        /* Categories Section */
+        .categories {
+            padding: 6rem 5%;
+            background: #fefefe;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 0.9rem;
+            font-weight: 400;
+            letter-spacing: 3px;
+            color: #8a8a8a;
+            text-transform: uppercase;
+            margin-bottom: 4rem;
+        }
+
+        .categories-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 3rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .category-item {
+            text-align: center;
+            cursor: pointer;
+            transition: transform 0.3s;
+        }
+
+        .category-item:hover {
+            transform: translateY(-10px);
+        }
+
+        .category-circle {
+            width: 100%;
+            aspect-ratio: 1;
+            border-radius: 50%;
+            overflow: hidden;
+            margin-bottom: 1.5rem;
+            position: relative;
+        }
+
+        .category-circle img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s;
+        }
+
+        .category-item:hover .category-circle img {
+            transform: scale(1.1);
+        }
+
+        .category-name {
+            font-size: 1.1rem;
+            color: #8a8a8a;
+            font-weight: 400;
+        }
+
+        /* CTA Section */
+        .cta-section {
+            padding: 6rem 5%;
+            background: #f9f9f9;
+        }
+
+        .cta-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 3rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .cta-card {
+            background: white;
+            padding: 4rem;
+            border-radius: 10px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
+            transition: all 0.3s;
+        }
+
+        .cta-card:hover {
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+            transform: translateY(-5px);
+        }
+
+        .cta-icon {
+            font-size: 3rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .cta-card h2 {
+            font-size: 2rem;
+            font-weight: 400;
+            margin-bottom: 1rem;
+            color: #2d2d2d;
+            font-family: 'Georgia', serif;
+        }
+
+        .cta-card p {
+            font-size: 1rem;
+            color: #6d6d6d;
+            line-height: 1.8;
+            margin-bottom: 2rem;
+        }
+
+        .cta-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.9rem 2rem;
+            background: transparent;
+            color: #2d2d2d;
+            text-decoration: none;
+            border: 1.5px solid #2d2d2d;
+            border-radius: 50px;
+            font-weight: 500;
+            font-size: 0.95rem;
+            transition: all 0.3s;
+        }
+
+        .cta-btn:hover {
+            background: #2d2d2d;
+            color: white;
+        }
+
+        /* Footer */
+        footer {
+            background: #2d2d2d;
+            color: white;
+            padding: 3rem 5%;
+            text-align: center;
+        }
+
+        footer p {
+            opacity: 0.7;
+            font-size: 0.9rem;
+            font-weight: 300;
+        }
+
+        /* Animations */
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-20px);
+            }
+        }
+
+        /* Responsive */
+        @media (max-width: 1024px) {
+            .hero {
+                grid-template-columns: 1fr;
+                padding: 3rem 5%;
+            }
+
+            .hero h1 {
+                font-size: 3rem;
+            }
+
+            .categories-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .cta-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 768px) {
+            nav {
+                display: none;
+            }
+
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .categories-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 2rem;
+            }
+
+            .hero-image {
+                height: 400px;
+            }
+        }
+    </style>
+</head>
+<body>
+<header>
+    <div class="logo">
+        <span>🏪</span> LocalMarket
+    </div>
+    <nav>
+        <a href="#inicio">Inicio</a>
+        <a href="#tiendas">Tiendas</a>
+        <a href="#categorias">Categorias</a>
+        <a href="#contacto">Contact</a>
+    </nav>
+    <div class="header-icons">
+        <button class="icon-btn">🔍</button>
+        <button class="icon-btn">🛒</button>
+    </div>
+</header>
+
+<section class="hero" id="inicio">
+    <div class="hero-content">
+        <h1>Donde el Comercio Local Comienza</h1>
+        <p>Eleva tu experiencia de compra con productos únicos de emprendimientos locales. Descubre las últimas tendencias en moda y calzado en una plataforma diseñada para ti.</p>
+
+        <a href="#tiendas" class="hero-btn">
+            Explorar Ahora
+            <span>→</span>
+        </a>
+
+        <div class="hero-stats">
+            <div class="stat-badge">
+                <div class="stat-icon">👥</div>
+                <div class="stat-text">
+                    <h3>500+</h3>
+                    <p>Tiendas locales</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="hero-image">
+        <img src="https://images.pexels.com/photos/1884579/pexels-photo-1884579.jpeg" alt="Hero Image">
+        <div class="floating-badge">
+            <p>Every Day - Beauty That Feels as Good</p>
+        </div>
+    </div>
+</section>
+
+<section class="categories" id="categorias">
+    <h2 class="section-title">CATEGORÍAS</h2>
+
+    <div class="categories-grid">
+        <div class="category-item">
+            <div class="category-circle">
+                <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 400'%3E%3Cdefs%3E%3CradialGradient id='c1'%3E%3Cstop offset='0%25' style='stop-color:%23f5e6d3'/%3E%3Cstop offset='100%25' style='stop-color:%23d4c4b0'/%3E%3C/radialGradient%3E%3C/defs%3E%3Ccircle cx='200' cy='200' r='200' fill='url(%23c1)'/%3E%3Cellipse cx='200' cy='180' rx='60' ry='80' fill='%23c9b8a3' opacity='0.6'/%3E%3Ccircle cx='170' cy='160' r='15' fill='%235c4f3d'/%3E%3Ccircle cx='230' cy='160' r='15' fill='%235c4f3d'/%3E%3Cpath d='M160,220 Q200,240 240,220' stroke='%235c4f3d' stroke-width='3' fill='none'/%3E%3Cellipse cx='120' cy='200' rx='40' ry='50' fill='%239d8b73' opacity='0.3'/%3E%3C/svg%3E" alt="Ropa Casual">
+            </div>
+            <p class="category-name">Ropa Casual</p>
+        </div>
+
+        <div class="category-item">
+            <div class="category-circle">
+                <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 400'%3E%3Cdefs%3E%3CradialGradient id='c2'%3E%3Cstop offset='0%25' style='stop-color:%23d4a574'/%3E%3Cstop offset='100%25' style='stop-color:%23b8845a'/%3E%3C/radialGradient%3E%3C/defs%3E%3Ccircle cx='200' cy='200' r='200' fill='url(%23c2)'/%3E%3Cpath d='M100,150 L300,150 L280,350 L120,350 Z' fill='%235c4f3d' opacity='0.8'/%3E%3Ccircle cx='200' cy='180' r='40' fill='%23f5e6d3'/%3E%3C/svg%3E" alt="Calzado">
+            </div>
+            <p class="category-name">Calzado</p>
+        </div>
+
+        <div class="category-item">
+            <div class="category-circle">
+                <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 400'%3E%3Cdefs%3E%3CradialGradient id='c3'%3E%3Cstop offset='0%25' style='stop-color:%23e8d5c4'/%3E%3Cstop offset='100%25' style='stop-color:%23c9b8a3'/%3E%3C/radialGradient%3E%3C/defs%3E%3Ccircle cx='200' cy='200' r='200' fill='url(%23c3)'/%3E%3Cellipse cx='200' cy='250' rx='80' ry='100' fill='%239d8b73' opacity='0.5'/%3E%3Ccircle cx='200' cy='200' r='50' fill='%235c4f3d' opacity='0.6'/%3E%3C/svg%3E" alt="Accesorios">
+            </div>
+            <p class="category-name">Accesorios</p>
+        </div>
+
+        <div class="category-item">
+            <div class="category-circle">
+                <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 400'%3E%3Cdefs%3E%3CradialGradient id='c4'%3E%3Cstop offset='0%25' style='stop-color:%23d4c4b0'/%3E%3Cstop offset='100%25' style='stop-color:%23b8a88f'/%3E%3C/radialGradient%3E%3C/defs%3E%3Ccircle cx='200' cy='200' r='200' fill='url(%23c4)'/%3E%3Cellipse cx='150' cy='180' rx='30' ry='40' fill='%23f5e6d3' opacity='0.8'/%3E%3Cellipse cx='250' cy='180' rx='30' ry='40' fill='%23f5e6d3' opacity='0.8'/%3E%3Cpath d='M120,240 Q200,280 280,240' stroke='%235c4f3d' stroke-width='2' fill='none'/%3E%3C/svg%3E" alt="Ropa Formal">
+            </div>
+            <p class="category-name">Ropa Formal</p>
+        </div>
+    </div>
+</section>
+
+<section class="cta-section">
+    <div class="cta-grid">
+        <div class="cta-card">
+            <div class="cta-icon">🛍️</div>
+            <h2>Para Compradores</h2>
+            <p>Explora un catálogo exclusivo de tiendas locales especializadas en moda y calzado. Compra con seguridad y apoya el talento de tu comunidad.</p>
+            <a href="/tiendas.html" class="cta-btn">Ver Tiendas →</a>
+        </div>
+
+        <div class="cta-card">
+            <div class="cta-icon">📊</div>
+            <h2>Para Vendedores</h2>
+            <p>Únete a nuestra plataforma y lleva tu emprendimiento al siguiente nivel. Sin costos iniciales, con herramientas profesionales de gestión.</p>
+            <a href="/Registro.html" class="cta-btn">Registrar Tienda →</a>
+        </div>
+    </div>
+</section>
+
+<footer>
+    <p>&copy; 2025 LocalMarket. Plataforma de comercio electrónico para emprendimientos locales.</p>
+</footer>
+
+<script>
+    // Smooth scroll
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function (e) {
+            e.preventDefault();
+            const target = document.querySelector(this.getAttribute('href'));
+            if (target) {
+                target.scrollIntoView({
+                    behavior: 'smooth',
+                    block: 'start'
+                });
+            }
+        });
+    });
+
+    // Header scroll effect
+    let lastScroll = 0;
+    const header = document.querySelector('header');
+
+    window.addEventListener('scroll', () => {
+        const currentScroll = window.scrollY;
+
+        if (currentScroll > 50) {
+            header.style.boxShadow = '0 2px 10px rgba(0, 0, 0, 0.1)';
+        } else {
+            header.style.boxShadow = '0 1px 5px rgba(0, 0, 0, 0.05)';
+        }
+    });
+</script>
+</body>
+</html>

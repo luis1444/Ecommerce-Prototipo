@@ -1,0 +1,1222 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dashboard - LocalMarket</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: #f5f1eb;
+      color: #3d3d3d;
+    }
+
+    /* Sidebar */
+    .sidebar {
+      position: fixed;
+      left: 0;
+      top: 0;
+      width: 280px;
+      height: 100vh;
+      background: #ffffff;
+      box-shadow: 2px 0 10px rgba(0, 0, 0, 0.05);
+      overflow-y: auto;
+      transition: transform 0.3s;
+      z-index: 1000;
+    }
+
+    .sidebar.collapsed {
+      transform: translateX(-280px);
+    }
+
+    .sidebar-header {
+      padding: 2rem 1.5rem;
+      border-bottom: 1px solid #f0f0f0;
+    }
+
+    .store-info {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      margin-bottom: 1rem;
+    }
+
+    .store-logo {
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #d4a574, #b8845a);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.5rem;
+    }
+
+    .store-details h3 {
+      font-size: 1.1rem;
+      font-weight: 500;
+      color: #2d2d2d;
+      margin-bottom: 0.2rem;
+    }
+
+    .store-status {
+      display: inline-block;
+      font-size: 0.75rem;
+      padding: 0.3rem 0.8rem;
+      background: #e8f5e9;
+      color: #2e7d32;
+      border-radius: 12px;
+      font-weight: 500;
+    }
+
+    .store-stats {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 0.8rem;
+      margin-top: 1rem;
+    }
+
+    .stat-mini {
+      text-align: center;
+      padding: 0.8rem;
+      background: #f9f9f9;
+      border-radius: 8px;
+    }
+
+    .stat-mini .number {
+      font-size: 1.2rem;
+      font-weight: 600;
+      color: #2d2d2d;
+    }
+
+    .stat-mini .label {
+      font-size: 0.75rem;
+      color: #8a8a8a;
+      margin-top: 0.2rem;
+    }
+
+    /* Navigation */
+    .nav-section {
+      padding: 1.5rem 0;
+      border-bottom: 1px solid #f0f0f0;
+    }
+
+    .nav-title {
+      padding: 0 1.5rem;
+      font-size: 0.75rem;
+      font-weight: 600;
+      color: #8a8a8a;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-bottom: 0.8rem;
+    }
+
+    .nav-item {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      padding: 0.9rem 1.5rem;
+      color: #6d6d6d;
+      text-decoration: none;
+      transition: all 0.3s;
+      cursor: pointer;
+    }
+
+    .nav-item:hover {
+      background: #f9f9f9;
+      color: #2d2d2d;
+    }
+
+    .nav-item.active {
+      background: #f5f1eb;
+      color: #2d2d2d;
+      font-weight: 500;
+      border-right: 3px solid #2d2d2d;
+    }
+
+    .nav-icon {
+      font-size: 1.3rem;
+      width: 24px;
+      text-align: center;
+    }
+
+    .nav-badge {
+      margin-left: auto;
+      background: #d47d7d;
+      color: white;
+      padding: 0.2rem 0.6rem;
+      border-radius: 10px;
+      font-size: 0.7rem;
+      font-weight: 600;
+    }
+
+    /* Main Content */
+    .main-content {
+      margin-left: 280px;
+      transition: margin-left 0.3s;
+    }
+
+    .main-content.expanded {
+      margin-left: 0;
+    }
+
+    /* Header */
+    .header {
+      background: #ffffff;
+      padding: 1.5rem 2rem;
+      box-shadow: 0 1px 5px rgba(0, 0, 0, 0.05);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .header-left {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .menu-toggle {
+      background: none;
+      border: none;
+      font-size: 1.5rem;
+      cursor: pointer;
+      color: #3d3d3d;
+    }
+
+    .header-title h1 {
+      font-size: 1.8rem;
+      font-weight: 400;
+      color: #2d2d2d;
+      font-family: 'Georgia', serif;
+    }
+
+    .header-subtitle {
+      font-size: 0.85rem;
+      color: #8a8a8a;
+      margin-top: 0.2rem;
+    }
+
+    .header-actions {
+      display: flex;
+      gap: 1rem;
+      align-items: center;
+    }
+
+    .icon-btn {
+      background: #f9f9f9;
+      border: none;
+      width: 42px;
+      height: 42px;
+      border-radius: 50%;
+      font-size: 1.2rem;
+      cursor: pointer;
+      transition: all 0.3s;
+      position: relative;
+    }
+
+    .icon-btn:hover {
+      background: #f0f0f0;
+    }
+
+    .icon-btn .badge {
+      position: absolute;
+      top: -5px;
+      right: -5px;
+      background: #d47d7d;
+      color: white;
+      width: 18px;
+      height: 18px;
+      border-radius: 50%;
+      font-size: 0.65rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 600;
+    }
+
+    .add-btn {
+      padding: 0.8rem 1.5rem;
+      background: #2d2d2d;
+      color: white;
+      border: none;
+      border-radius: 50px;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all 0.3s;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .add-btn:hover {
+      background: #1a1a1a;
+      transform: translateY(-2px);
+    }
+
+    /* Content Area */
+    .content {
+      padding: 2rem;
+    }
+
+    /* Stats Cards */
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1.5rem;
+      margin-bottom: 2rem;
+    }
+
+    .stat-card {
+      background: white;
+      padding: 1.5rem;
+      border-radius: 12px;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+      transition: transform 0.3s;
+    }
+
+    .stat-card:hover {
+      transform: translateY(-5px);
+    }
+
+    .stat-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 1rem;
+    }
+
+    .stat-icon-large {
+      width: 50px;
+      height: 50px;
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.5rem;
+    }
+
+    .stat-icon-large.blue {
+      background: #e3f2fd;
+    }
+
+    .stat-icon-large.green {
+      background: #e8f5e9;
+    }
+
+    .stat-icon-large.orange {
+      background: #fff3e0;
+    }
+
+    .stat-icon-large.purple {
+      background: #f3e5f5;
+    }
+
+    .stat-value {
+      font-size: 2rem;
+      font-weight: 600;
+      color: #2d2d2d;
+      margin-bottom: 0.3rem;
+    }
+
+    .stat-label {
+      font-size: 0.9rem;
+      color: #8a8a8a;
+    }
+
+    .stat-change {
+      display: flex;
+      align-items: center;
+      gap: 0.3rem;
+      font-size: 0.85rem;
+      margin-top: 0.5rem;
+    }
+
+    .stat-change.positive {
+      color: #2e7d32;
+    }
+
+    .stat-change.negative {
+      color: #c62828;
+    }
+
+    /* Section */
+    .section {
+      background: white;
+      border-radius: 12px;
+      padding: 1.5rem;
+      margin-bottom: 2rem;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+    }
+
+    .section-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 1.5rem;
+      padding-bottom: 1rem;
+      border-bottom: 1px solid #f0f0f0;
+    }
+
+    .section-title {
+      font-size: 1.3rem;
+      font-weight: 500;
+      color: #2d2d2d;
+    }
+
+    .section-actions {
+      display: flex;
+      gap: 0.8rem;
+    }
+
+    .btn-secondary {
+      padding: 0.6rem 1.2rem;
+      background: #f9f9f9;
+      border: 1px solid #e0e0e0;
+      border-radius: 8px;
+      font-size: 0.9rem;
+      cursor: pointer;
+      transition: all 0.3s;
+    }
+
+    .btn-secondary:hover {
+      background: #f0f0f0;
+    }
+
+    /* Table */
+    .table-container {
+      overflow-x: auto;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+
+    thead th {
+      text-align: left;
+      padding: 1rem;
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: #8a8a8a;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      border-bottom: 2px solid #f0f0f0;
+    }
+
+    tbody td {
+      padding: 1rem;
+      border-bottom: 1px solid #f5f5f5;
+    }
+
+    tbody tr:hover {
+      background: #fafafa;
+    }
+
+    .product-cell {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .product-image {
+      width: 50px;
+      height: 50px;
+      border-radius: 8px;
+      object-fit: cover;
+      background: #f0f0f0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.5rem;
+    }
+
+    .product-info h4 {
+      font-size: 0.95rem;
+      font-weight: 500;
+      color: #2d2d2d;
+      margin-bottom: 0.2rem;
+    }
+
+    .product-sku {
+      font-size: 0.8rem;
+      color: #8a8a8a;
+    }
+
+    .status-badge {
+      display: inline-block;
+      padding: 0.4rem 0.9rem;
+      border-radius: 20px;
+      font-size: 0.8rem;
+      font-weight: 500;
+    }
+
+    .status-badge.active {
+      background: #e8f5e9;
+      color: #2e7d32;
+    }
+
+    .status-badge.inactive {
+      background: #ffebee;
+      color: #c62828;
+    }
+
+    .status-badge.pending {
+      background: #fff3e0;
+      color: #ef6c00;
+    }
+
+    .status-badge.completed {
+      background: #e3f2fd;
+      color: #1565c0;
+    }
+
+    .action-buttons {
+      display: flex;
+      gap: 0.5rem;
+    }
+
+    .btn-icon {
+      background: none;
+      border: none;
+      font-size: 1.2rem;
+      cursor: pointer;
+      padding: 0.5rem;
+      border-radius: 6px;
+      transition: all 0.3s;
+    }
+
+    .btn-icon:hover {
+      background: #f0f0f0;
+    }
+
+    /* Orders Section */
+    .order-item {
+      display: grid;
+      grid-template-columns: 1fr 2fr 1fr 1fr 1fr auto;
+      align-items: center;
+      gap: 1rem;
+      padding: 1rem;
+      border-bottom: 1px solid #f0f0f0;
+    }
+
+    .order-item:last-child {
+      border-bottom: none;
+    }
+
+    .order-item:hover {
+      background: #fafafa;
+    }
+
+    .order-id {
+      font-weight: 600;
+      color: #2d2d2d;
+    }
+
+    .customer-info {
+      display: flex;
+      align-items: center;
+      gap: 0.8rem;
+    }
+
+    .customer-avatar {
+      width: 35px;
+      height: 35px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #d4a574, #b8845a);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-weight: 600;
+      font-size: 0.9rem;
+    }
+
+    .customer-name {
+      font-weight: 500;
+      color: #2d2d2d;
+    }
+
+    .order-date {
+      font-size: 0.85rem;
+      color: #8a8a8a;
+    }
+
+    .order-total {
+      font-size: 1.1rem;
+      font-weight: 600;
+      color: #2d2d2d;
+    }
+
+    /* Responsive */
+    @media (max-width: 1024px) {
+      .sidebar {
+        transform: translateX(-280px);
+      }
+
+      .sidebar.open {
+        transform: translateX(0);
+      }
+
+      .main-content {
+        margin-left: 0;
+      }
+
+      .stats-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .order-item {
+        grid-template-columns: 1fr;
+        gap: 0.5rem;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .header {
+        padding: 1rem;
+      }
+
+      .header-title h1 {
+        font-size: 1.3rem;
+      }
+
+      .content {
+        padding: 1rem;
+      }
+
+      .stats-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .add-btn span:last-child {
+        display: none;
+      }
+
+      .section-actions {
+        flex-direction: column;
+        gap: 0.5rem;
+      }
+    }
+  </style>
+</head>
+<body>
+<!-- Sidebar -->
+<aside class="sidebar" id="sidebar">
+  <div class="sidebar-header">
+    <div class="store-info">
+      <div class="store-logo">👕</div>
+      <div class="store-details">
+        <h3>Fashion Store</h3>
+        <span class="store-status">● Activa</span>
+      </div>
+    </div>
+    <div class="store-stats">
+      <div class="stat-mini">
+        <div class="number">4.8</div>
+        <div class="label">Rating</div>
+      </div>
+      <div class="stat-mini">
+        <div class="number">156</div>
+        <div class="label">Reseñas</div>
+      </div>
+    </div>
+  </div>
+
+  <nav>
+    <div class="nav-section">
+      <div class="nav-title">Principal</div>
+      <a href="#" class="nav-item active" data-view="dashboard">
+        <span class="nav-icon">📊</span>
+        <span>Dashboard</span>
+      </a>
+      <a href="#" class="nav-item" data-view="catalog">
+        <span class="nav-icon">📦</span>
+        <span>Catálogo</span>
+        <span class="nav-badge">24</span>
+      </a>
+      <a href="#" class="nav-item" data-view="orders">
+        <span class="nav-icon">🛒</span>
+        <span>Pedidos</span>
+        <span class="nav-badge">8</span>
+      </a>
+    </div>
+
+    <div class="nav-section">
+      <div class="nav-title">Gestión</div>
+      <a href="#" class="nav-item" data-view="inventory">
+        <span class="nav-icon">📋</span>
+        <span>Inventario</span>
+      </a>
+      <a href="#" class="nav-item" data-view="customers">
+        <span class="nav-icon">👥</span>
+        <span>Clientes</span>
+      </a>
+      <a href="#" class="nav-item" data-view="analytics">
+        <span class="nav-icon">📈</span>
+        <span>Estadísticas</span>
+      </a>
+      <a href="#" class="nav-item" data-view="promotions">
+        <span class="nav-icon">🎁</span>
+        <span>Promociones</span>
+      </a>
+    </div>
+
+    <div class="nav-section">
+      <div class="nav-title">Configuración</div>
+      <a href="#" class="nav-item" data-view="store-settings">
+        <span class="nav-icon">⚙️</span>
+        <span>Mi Tienda</span>
+      </a>
+      <a href="#" class="nav-item" data-view="payments">
+        <span class="nav-icon">💳</span>
+        <span>Pagos</span>
+      </a>
+      <a href="#" class="nav-item" data-view="shipping">
+        <span class="nav-icon">🚚</span>
+        <span>Envíos</span>
+      </a>
+      <a href="#" class="nav-item" data-view="notifications">
+        <span class="nav-icon">🔔</span>
+        <span>Notificaciones</span>
+      </a>
+    </div>
+
+    <div class="nav-section">
+      <a href="#" class="nav-item" data-view="support">
+        <span class="nav-icon">💬</span>
+        <span>Soporte</span>
+      </a>
+      <a href="#" class="nav-item" data-view="logout">
+        <span class="nav-icon">🚪</span>
+        <span>Cerrar Sesión</span>
+      </a>
+    </div>
+  </nav>
+</aside>
+
+<!-- Main Content -->
+<main class="main-content" id="mainContent">
+  <!-- Header -->
+  <header class="header">
+    <div class="header-left">
+      <button class="menu-toggle" id="menuToggle">☰</button>
+      <div class="header-title">
+        <h1>Dashboard</h1>
+        <p class="header-subtitle">Bienvenido de nuevo, aquí está tu resumen de hoy</p>
+      </div>
+    </div>
+    <div class="header-actions">
+      <button class="icon-btn">
+        🔔
+        <span class="badge">3</span>
+      </button>
+      <button class="icon-btn">📧</button>
+      <button class="add-btn" id="addProductBtn">
+        <span>+</span>
+        <span>Agregar Producto</span>
+      </button>
+    </div>
+  </header>
+
+  <!-- Content -->
+  <div class="content">
+    <!-- Stats Cards -->
+    <div class="stats-grid">
+      <div class="stat-card">
+        <div class="stat-header">
+          <div class="stat-icon-large blue">💰</div>
+        </div>
+        <div class="stat-value">$2,450,000</div>
+        <div class="stat-label">Ventas del Mes</div>
+        <div class="stat-change positive">
+          ↑ 12.5% vs mes anterior
+        </div>
+      </div>
+
+      <div class="stat-card">
+        <div class="stat-header">
+          <div class="stat-icon-large green">📦</div>
+        </div>
+        <div class="stat-value">48</div>
+        <div class="stat-label">Pedidos Activos</div>
+        <div class="stat-change positive">
+          ↑ 8 nuevos hoy
+        </div>
+      </div>
+
+      <div class="stat-card">
+        <div class="stat-header">
+          <div class="stat-icon-large orange">👥</div>
+        </div>
+        <div class="stat-value">1,234</div>
+        <div class="stat-label">Total Clientes</div>
+        <div class="stat-change positive">
+          ↑ 23 esta semana
+        </div>
+      </div>
+
+      <div class="stat-card">
+        <div class="stat-header">
+          <div class="stat-icon-large purple">⭐</div>
+        </div>
+        <div class="stat-value">4.8</div>
+        <div class="stat-label">Rating Promedio</div>
+        <div class="stat-change positive">
+          ↑ 0.3 este mes
+        </div>
+      </div>
+    </div>
+
+    <!-- Recent Orders -->
+    <div class="section">
+      <div class="section-header">
+        <h2 class="section-title">Pedidos Recientes</h2>
+        <div class="section-actions">
+          <button class="btn-secondary">Filtrar</button>
+          <button class="btn-secondary">Exportar</button>
+        </div>
+      </div>
+
+      <div class="order-item">
+        <div class="order-id">#ORD-1847</div>
+        <div class="customer-info">
+          <div class="customer-avatar">MG</div>
+          <div>
+            <div class="customer-name">María González</div>
+            <div class="order-date">Hace 2 horas</div>
+          </div>
+        </div>
+        <div class="order-total">$145,000</div>
+        <div><span class="status-badge pending">Pendiente</span></div>
+        <div>3 productos</div>
+        <div class="action-buttons">
+          <button class="btn-icon" title="Ver detalles">👁️</button>
+          <button class="btn-icon" title="Procesar">✓</button>
+        </div>
+      </div>
+
+      <div class="order-item">
+        <div class="order-id">#ORD-1846</div>
+        <div class="customer-info">
+          <div class="customer-avatar">JR</div>
+          <div>
+            <div class="customer-name">Juan Rodríguez</div>
+            <div class="order-date">Hace 4 horas</div>
+          </div>
+        </div>
+        <div class="order-total">$89,500</div>
+        <div><span class="status-badge completed">Enviado</span></div>
+        <div>2 productos</div>
+        <div class="action-buttons">
+          <button class="btn-icon" title="Ver detalles">👁️</button>
+          <button class="btn-icon" title="Imprimir">🖨️</button>
+        </div>
+      </div>
+
+      <div class="order-item">
+        <div class="order-id">#ORD-1845</div>
+        <div class="customer-info">
+          <div class="customer-avatar">LC</div>
+          <div>
+            <div class="customer-name">Laura Castro</div>
+            <div class="order-date">Ayer</div>
+          </div>
+        </div>
+        <div class="order-total">$220,000</div>
+        <div><span class="status-badge completed">Completado</span></div>
+        <div>5 productos</div>
+        <div class="action-buttons">
+          <button class="btn-icon" title="Ver detalles">👁️</button>
+          <button class="btn-icon" title="Factura">📄</button>
+        </div>
+      </div>
+
+      <div class="order-item">
+        <div class="order-id">#ORD-1844</div>
+        <div class="customer-info">
+          <div class="customer-avatar">PS</div>
+          <div>
+            <div class="customer-name">Pedro Silva</div>
+            <div class="order-date">Ayer</div>
+          </div>
+        </div>
+        <div class="order-total">$75,000</div>
+        <div><span class="status-badge pending">En preparación</span></div>
+        <div>1 producto</div>
+        <div class="action-buttons">
+          <button class="btn-icon" title="Ver detalles">👁️</button>
+          <button class="btn-icon" title="Procesar">✓</button>
+        </div>
+      </div>
+
+      <div class="order-item">
+        <div class="order-id">#ORD-1843</div>
+        <div class="customer-info">
+          <div class="customer-avatar">AR</div>
+          <div>
+            <div class="customer-name">Ana Ramírez</div>
+            <div class="order-date">Hace 2 días</div>
+          </div>
+        </div>
+        <div class="order-total">$180,000</div>
+        <div><span class="status-badge completed">Completado</span></div>
+        <div>4 productos</div>
+        <div class="action-buttons">
+          <button class="btn-icon" title="Ver detalles">👁️</button>
+          <button class="btn-icon" title="Factura">📄</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Catalog Section -->
+    <div class="section">
+      <div class="section-header">
+        <h2 class="section-title">Catálogo de Productos</h2>
+        <div class="section-actions">
+          <button class="btn-secondary">Filtrar</button>
+          <button class="btn-secondary">Ordenar</button>
+        </div>
+      </div>
+
+      <div class="table-container">
+        <table>
+          <thead>
+          <tr>
+            <th>Producto</th>
+            <th>Categoría</th>
+            <th>Precio</th>
+            <th>Stock</th>
+            <th>Estado</th>
+            <th>Acciones</th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr>
+            <td>
+              <div class="product-cell">
+                <div class="product-image">👕</div>
+                <div class="product-info">
+                  <h4>Camiseta Básica Blanca</h4>
+                  <span class="product-sku">SKU: TSH-001</span>
+                </div>
+              </div>
+            </td>
+            <td>Ropa Casual</td>
+            <td>$45,000</td>
+            <td>24 unidades</td>
+            <td><span class="status-badge active">Activo</span></td>
+            <td>
+              <div class="action-buttons">
+                <button class="btn-icon" title="Editar">✏️</button>
+                <button class="btn-icon" title="Duplicar">📋</button>
+                <button class="btn-icon" title="Eliminar">🗑️</button>
+              </div>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <div class="product-cell">
+                <div class="product-image">👖</div>
+                <div class="product-info">
+                  <h4>Jean Skinny Azul</h4>
+                  <span class="product-sku">SKU: JEA-002</span>
+                </div>
+              </div>
+            </td>
+            <td>Ropa Casual</td>
+            <td>$89,900</td>
+            <td>12 unidades</td>
+            <td><span class="status-badge active">Activo</span></td>
+            <td>
+              <div class="action-buttons">
+                <button class="btn-icon" title="Editar">✏️</button>
+                <button class="btn-icon" title="Duplicar">📋</button>
+                <button class="btn-icon" title="Eliminar">🗑️</button>
+              </div>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <div class="product-cell">
+                <div class="product-image">👟</div>
+                <div class="product-info">
+                  <h4>Zapatillas Deportivas</h4>
+                  <span class="product-sku">SKU: ZAP-003</span>
+                </div>
+              </div>
+            </td>
+            <td>Calzado</td>
+            <td>$120,000</td>
+            <td>8 unidades</td>
+            <td><span class="status-badge inactive">Agotado</span></td>
+            <td>
+              <div class="action-buttons">
+                <button class="btn-icon" title="Editar">✏️</button>
+                <button class="btn-icon" title="Duplicar">📋</button>
+                <button class="btn-icon" title="Eliminar">🗑️</button>
+              </div>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <div class="product-cell">
+                <div class="product-image">👔</div>
+                <div class="product-info">
+                  <h4>Camisa Formal Blanca</h4>
+                  <span class="product-sku">SKU: CAM-004</span>
+                </div>
+              </div>
+            </td>
+            <td>Ropa Formal</td>
+            <td>$65,000</td>
+            <td>18 unidades</td>
+            <td><span class="status-badge active">Activo</span></td>
+            <td>
+              <div class="action-buttons">
+                <button class="btn-icon" title="Editar">✏️</button>
+                <button class="btn-icon" title="Duplicar">📋</button>
+                <button class="btn-icon" title="Eliminar">🗑️</button>
+              </div>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <div class="product-cell">
+                <div class="product-image">🧢</div>
+                <div class="product-info">
+                  <h4>Gorra Deportiva</h4>
+                  <span class="product-sku">SKU: ACC-005</span>
+                </div>
+              </div>
+            </td>
+            <td>Accesorios</td>
+            <td>$35,000</td>
+            <td>30 unidades</td>
+            <td><span class="status-badge active">Activo</span></td>
+            <td>
+              <div class="action-buttons">
+                <button class="btn-icon" title="Editar">✏️</button>
+                <button class="btn-icon" title="Duplicar">📋</button>
+                <button class="btn-icon" title="Eliminar">🗑️</button>
+              </div>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <div class="product-cell">
+                <div class="product-image">👗</div>
+                <div class="product-info">
+                  <h4>Vestido Casual Verano</h4>
+                  <span class="product-sku">SKU: VES-006</span>
+                </div>
+              </div>
+            </td>
+            <td>Ropa Casual</td>
+            <td>$95,000</td>
+            <td>15 unidades</td>
+            <td><span class="status-badge active">Activo</span></td>
+            <td>
+              <div class="action-buttons">
+                <button class="btn-icon" title="Editar">✏️</button>
+                <button class="btn-icon" title="Duplicar">📋</button>
+                <button class="btn-icon" title="Eliminar">🗑️</button>
+              </div>
+            </td>
+          </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</main>
+
+<script>
+  // Sidebar toggle
+  const sidebar = document.getElementById('sidebar');
+  const mainContent = document.getElementById('mainContent');
+  const menuToggle = document.getElementById('menuToggle');
+
+  menuToggle.addEventListener('click', () => {
+    sidebar.classList.toggle('open');
+    sidebar.classList.toggle('collapsed');
+    mainContent.classList.toggle('expanded');
+  });
+
+  // Navigation
+  const navItems = document.querySelectorAll('.nav-item');
+  navItems.forEach(item => {
+    item.addEventListener('click', (e) => {
+      e.preventDefault();
+
+      // Remove active class from all items
+      navItems.forEach(nav => nav.classList.remove('active'));
+
+      // Add active class to clicked item
+      item.classList.add('active');
+
+      // Get view name
+      const view = item.dataset.view;
+
+      // Update header title
+      const headerTitle = document.querySelector('.header-title h1');
+      const headerSubtitle = document.querySelector('.header-subtitle');
+
+      const viewNames = {
+        'dashboard': {
+          title: 'Dashboard',
+          subtitle: 'Bienvenido de nuevo, aquí está tu resumen de hoy'
+        },
+        'catalog': {
+          title: 'Catálogo de Productos',
+          subtitle: 'Gestiona tu inventario de productos'
+        },
+        'orders': {
+          title: 'Pedidos',
+          subtitle: 'Administra todos los pedidos de tu tienda'
+        },
+        'inventory': {
+          title: 'Gestión de Inventario',
+          subtitle: 'Controla el stock y movimientos de productos'
+        },
+        'customers': {
+          title: 'Clientes',
+          subtitle: 'Base de datos de clientes y su historial'
+        },
+        'analytics': {
+          title: 'Estadísticas y Análisis',
+          subtitle: 'Reportes detallados de ventas y rendimiento'
+        },
+        'promotions': {
+          title: 'Promociones y Descuentos',
+          subtitle: 'Crea y gestiona ofertas especiales'
+        },
+        'store-settings': {
+          title: 'Configuración de Tienda',
+          subtitle: 'Información general y preferencias'
+        },
+        'payments': {
+          title: 'Métodos de Pago',
+          subtitle: 'Configura las opciones de pago'
+        },
+        'shipping': {
+          title: 'Configuración de Envíos',
+          subtitle: 'Gestiona zonas y costos de envío'
+        },
+        'notifications': {
+          title: 'Centro de Notificaciones',
+          subtitle: 'Configuración de alertas y mensajes'
+        },
+        'support': {
+          title: 'Soporte y Ayuda',
+          subtitle: 'Contacta con nuestro equipo'
+        },
+        'logout': {
+          title: 'Cerrar Sesión',
+          subtitle: '¿Estás seguro de que deseas salir?'
+        }
+      };
+
+      if (headerTitle && viewNames[view]) {
+        headerTitle.textContent = viewNames[view].title;
+        headerSubtitle.textContent = viewNames[view].subtitle;
+      }
+
+      // Close sidebar on mobile
+      if (window.innerWidth <= 1024) {
+        sidebar.classList.add('collapsed');
+        sidebar.classList.remove('open');
+      }
+    });
+  });
+
+  // Add Product Button
+  document.getElementById('addProductBtn').addEventListener('click', () => {
+    alert('🎉 Función de agregar producto\n\nAquí se abriría un formulario completo para agregar nuevos productos a tu catálogo con:\n\n• Nombre y descripción\n• Categoría\n• Precio y descuentos\n• Imágenes del producto\n• Variantes (tallas, colores)\n• Stock disponible\n• SEO y etiquetas');
+  });
+
+  // Action buttons simulation
+  document.querySelectorAll('.btn-icon').forEach(btn => {
+    btn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      const title = btn.getAttribute('title');
+
+      if (title === 'Editar') {
+        alert('✏️ Editar producto\n\nAbriendo formulario de edición...');
+      } else if (title === 'Duplicar') {
+        alert('📋 Duplicar producto\n\n¡Producto duplicado exitosamente!');
+      } else if (title === 'Eliminar') {
+        if (confirm('🗑️ ¿Estás seguro de eliminar este producto?')) {
+          alert('Producto eliminado correctamente');
+        }
+      } else if (title === 'Ver detalles') {
+        alert('👁️ Ver detalles del pedido\n\nMostrando información completa...');
+      } else if (title === 'Procesar') {
+        alert('✓ Procesar pedido\n\n¡Pedido marcado como procesado!');
+      } else if (title === 'Imprimir' || title === 'Factura') {
+        alert('🖨️ Generando documento...');
+      }
+    });
+  });
+
+  // Secondary buttons
+  document.querySelectorAll('.btn-secondary').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const text = btn.textContent;
+      if (text === 'Filtrar') {
+        alert('🔍 Panel de filtros\n\nOpciones de filtrado disponibles...');
+      } else if (text === 'Exportar') {
+        alert('📊 Exportar datos\n\n¿En qué formato deseas exportar?\n• Excel\n• PDF\n• CSV');
+      } else if (text === 'Ordenar') {
+        alert('⬆️⬇️ Ordenar productos\n\n• Por nombre\n• Por precio\n• Por stock\n• Por fecha');
+      }
+    });
+  });
+
+  // Notification bell
+  document.querySelector('.icon-btn').addEventListener('click', function() {
+    if (this.textContent.includes('🔔')) {
+      alert('🔔 Notificaciones (3)\n\n• Nuevo pedido recibido\n• Stock bajo en 2 productos\n• Nueva reseña de cliente');
+    }
+  });
+
+  // Responsive sidebar
+  window.addEventListener('resize', () => {
+    if (window.innerWidth > 1024) {
+      sidebar.classList.remove('collapsed', 'open');
+      mainContent.classList.remove('expanded');
+    } else {
+      sidebar.classList.add('collapsed');
+      sidebar.classList.remove('open');
+      mainContent.classList.add('expanded');
+    }
+  });
+
+  // Initialize responsive state
+  if (window.innerWidth <= 1024) {
+    sidebar.classList.add('collapsed');
+    mainContent.classList.add('expanded');
+  }
+
+  // Stats animation on load
+  window.addEventListener('load', () => {
+    const statValues = document.querySelectorAll('.stat-value');
+    statValues.forEach((stat, index) => {
+      stat.style.opacity = '0';
+      stat.style.transform = 'translateY(20px)';
+      setTimeout(() => {
+        stat.style.transition = 'all 0.5s ease';
+        stat.style.opacity = '1';
+        stat.style.transform = 'translateY(0)';
+      }, index * 100);
+    });
+  });
+</script>
+</body>
+</html>

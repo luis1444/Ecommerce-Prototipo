@@ -1,0 +1,651 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tiendas Disponibles - LocalMarket</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            overflow-x: hidden;
+            background: #fefefe;
+            color: #3d3d3d;
+        }
+
+        /* Header */
+        header {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            padding: 1.5rem 5%;
+            background: #ffffff;
+            box-shadow: 0 1px 5px rgba(0, 0, 0, 0.05);
+            z-index: 1000;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 400;
+            color: #3d3d3d;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-family: 'Georgia', serif;
+            cursor: pointer;
+        }
+
+        nav {
+            display: flex;
+            gap: 3rem;
+            align-items: center;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: #8a8a8a;
+            font-weight: 400;
+            font-size: 0.95rem;
+            transition: color 0.3s;
+        }
+
+        nav a:hover, nav a.active {
+            color: #3d3d3d;
+        }
+
+        .header-icons {
+            display: flex;
+            gap: 1.5rem;
+            align-items: center;
+        }
+
+        .icon-btn {
+            background: none;
+            border: none;
+            font-size: 1.3rem;
+            color: #3d3d3d;
+            cursor: pointer;
+            transition: opacity 0.3s;
+        }
+
+        .icon-btn:hover {
+            opacity: 0.7;
+        }
+
+        /* Hero Banner */
+        .hero-banner {
+            margin-top: 80px;
+            height: 400px;
+            background: linear-gradient(135deg, #e8d5c4 0%, #d4c4b0 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-banner::before {
+            content: '';
+            position: absolute;
+            width: 300px;
+            height: 300px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            top: -100px;
+            right: 10%;
+        }
+
+        .hero-banner::after {
+            content: '';
+            position: absolute;
+            width: 200px;
+            height: 200px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            bottom: -50px;
+            left: 15%;
+        }
+
+        .hero-banner-content {
+            z-index: 1;
+        }
+
+        .hero-banner h1 {
+            font-size: 3.5rem;
+            font-weight: 400;
+            color: #2d2d2d;
+            font-family: 'Georgia', serif;
+            margin-bottom: 1rem;
+        }
+
+        .hero-banner p {
+            font-size: 1.1rem;
+            color: #5c4f3d;
+            font-weight: 300;
+        }
+
+        /* Filter Section */
+        .filter-section {
+            padding: 3rem 5%;
+            background: #fefefe;
+            border-bottom: 1px solid #f0f0f0;
+        }
+
+        .filter-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 2rem;
+        }
+
+        .filter-group {
+            display: flex;
+            gap: 1rem;
+            align-items: center;
+        }
+
+        .filter-label {
+            font-size: 0.85rem;
+            color: #8a8a8a;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .filter-select {
+            padding: 0.7rem 1.5rem;
+            border: 1px solid #e0e0e0;
+            border-radius: 50px;
+            background: white;
+            color: #3d3d3d;
+            font-size: 0.9rem;
+            cursor: pointer;
+            transition: all 0.3s;
+            outline: none;
+        }
+
+        .filter-select:hover {
+            border-color: #2d2d2d;
+        }
+
+        .search-box {
+            position: relative;
+            flex: 1;
+            max-width: 400px;
+        }
+
+        .search-box input {
+            width: 100%;
+            padding: 0.8rem 1.5rem 0.8rem 3rem;
+            border: 1px solid #e0e0e0;
+            border-radius: 50px;
+            font-size: 0.9rem;
+            outline: none;
+            transition: all 0.3s;
+        }
+
+        .search-box input:focus {
+            border-color: #2d2d2d;
+        }
+
+        .search-box::before {
+            content: '🔍';
+            position: absolute;
+            left: 1.2rem;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 1rem;
+        }
+
+        /* Store Grid */
+        .stores-section {
+            padding: 4rem 5%;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 3rem;
+        }
+
+        .section-header h2 {
+            font-size: 0.85rem;
+            color: #8a8a8a;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-weight: 400;
+        }
+
+        .view-toggle {
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        .view-btn {
+            background: none;
+            border: 1px solid #e0e0e0;
+            padding: 0.5rem 1rem;
+            cursor: pointer;
+            color: #8a8a8a;
+            transition: all 0.3s;
+            font-size: 1rem;
+        }
+
+        .view-btn.active {
+            background: #2d2d2d;
+            color: white;
+            border-color: #2d2d2d;
+        }
+
+        .stores-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 3rem;
+        }
+
+        .store-card {
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            transition: all 0.3s;
+            cursor: pointer;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+        }
+
+        .store-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .store-image {
+            width: 100%;
+            height: 280px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .store-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s;
+        }
+
+        .store-card:hover .store-image img {
+            transform: scale(1.1);
+        }
+
+        .store-badge {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            background: white;
+            padding: 0.4rem 1rem;
+            border-radius: 50px;
+            font-size: 0.75rem;
+            color: #2d2d2d;
+            font-weight: 500;
+        }
+
+        .store-info {
+            padding: 1.8rem;
+        }
+
+        .store-category {
+            font-size: 0.75rem;
+            color: #8a8a8a;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 0.5rem;
+        }
+
+        .store-name {
+            font-size: 1.5rem;
+            font-weight: 400;
+            color: #2d2d2d;
+            margin-bottom: 0.8rem;
+            font-family: 'Georgia', serif;
+        }
+
+        .store-description {
+            font-size: 0.9rem;
+            color: #6d6d6d;
+            line-height: 1.6;
+            margin-bottom: 1.2rem;
+        }
+
+        .store-meta {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-top: 1rem;
+            border-top: 1px solid #f0f0f0;
+        }
+
+        .store-rating {
+            display: flex;
+            align-items: center;
+            gap: 0.3rem;
+            font-size: 0.85rem;
+            color: #2d2d2d;
+        }
+
+        .store-products {
+            font-size: 0.85rem;
+            color: #8a8a8a;
+        }
+
+        /* Pagination */
+        .pagination {
+            display: flex;
+            justify-content: center;
+            gap: 0.5rem;
+            margin-top: 4rem;
+            padding-bottom: 4rem;
+        }
+
+        .page-btn {
+            padding: 0.7rem 1.2rem;
+            border: 1px solid #e0e0e0;
+            background: white;
+            color: #3d3d3d;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-size: 0.9rem;
+        }
+
+        .page-btn:hover {
+            background: #f5f5f5;
+        }
+
+        .page-btn.active {
+            background: #2d2d2d;
+            color: white;
+            border-color: #2d2d2d;
+        }
+
+        /* Footer */
+        footer {
+            background: #2d2d2d;
+            color: white;
+            padding: 3rem 5%;
+            text-align: center;
+        }
+
+        footer p {
+            opacity: 0.7;
+            font-size: 0.9rem;
+            font-weight: 300;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            nav {
+                display: none;
+            }
+
+            .hero-banner h1 {
+                font-size: 2.5rem;
+            }
+
+            .filter-container {
+                flex-direction: column;
+                align-items: stretch;
+            }
+
+            .search-box {
+                max-width: 100%;
+            }
+
+            .stores-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .section-header {
+                flex-direction: column;
+                gap: 1rem;
+                align-items: flex-start;
+            }
+        }
+    </style>
+</head>
+<body>
+<header>
+    <div class="logo" onclick="window.location.href='#'">
+        <span>🏪</span> LocalMarket
+    </div>
+    <nav>
+        <a href="#inicio">Home</a>
+        <a href="#tiendas" class="active">Shop</a>
+        <a href="#categorias">Categories</a>
+        <a href="#nosotros">About Us</a>
+        <a href="#contacto">Contact</a>
+    </nav>
+    <div class="header-icons">
+        <button class="icon-btn">🔍</button>
+        <button class="icon-btn">🛒</button>
+    </div>
+</header>
+
+<section class="hero-banner">
+    <div class="hero-banner-content">
+        <h1>Tiendas Disponibles</h1>
+        <p>Descubre emprendimientos locales únicos de moda y calzado</p>
+    </div>
+</section>
+
+<section class="filter-section">
+    <div class="filter-container">
+        <div class="filter-group">
+            <span class="filter-label">Categoría</span>
+            <select class="filter-select">
+                <option>Todas las categorías</option>
+                <option>Ropa Casual</option>
+                <option>Calzado</option>
+                <option>Accesorios</option>
+                <option>Ropa Formal</option>
+            </select>
+        </div>
+
+        <div class="filter-group">
+            <span class="filter-label">Ordenar</span>
+            <select class="filter-select">
+                <option>Más populares</option>
+                <option>Más recientes</option>
+                <option>Mejor valoradas</option>
+                <option>A-Z</option>
+            </select>
+        </div>
+
+        <div class="search-box">
+            <input type="text" placeholder="Buscar tiendas...">
+        </div>
+    </div>
+</section>
+
+<section class="stores-section">
+    <div class="section-header">
+        <h2>524 Tiendas Encontradas</h2>
+        <div class="view-toggle">
+            <button class="view-btn active">⊞</button>
+            <button class="view-btn">☰</button>
+        </div>
+    </div>
+
+    <div class="stores-grid">
+        <div class="store-card">
+            <div class="store-image">
+                <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 350'%3E%3Cdefs%3E%3ClinearGradient id='g1' x1='0%25' y1='0%25' x2='100%25' y2='100%25'%3E%3Cstop offset='0%25' style='stop-color:%23e8d5c4'/%3E%3Cstop offset='100%25' style='stop-color:%23d4c4b0'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect fill='url(%23g1)' width='400' height='350'/%3E%3Crect x='80' y='80' width='240' height='190' rx='10' fill='%23fff' opacity='0.3'/%3E%3Ccircle cx='200' cy='175' r='40' fill='%235c4f3d' opacity='0.2'/%3E%3C/svg%3E" alt="Tienda">
+                <span class="store-badge">Nueva</span>
+            </div>
+            <div class="store-info">
+                <div class="store-category">Ropa Casual</div>
+                <h3 class="store-name">Urban Style Co.</h3>
+                <p class="store-description">Moda urbana contemporánea con diseños únicos para expresar tu estilo personal.</p>
+                <div class="store-meta">
+                    <div class="store-rating">
+                        ⭐ 4.8 <span style="color: #8a8a8a;">(127)</span>
+                    </div>
+                    <div class="store-products">45 productos</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="store-card">
+            <div class="store-image">
+                <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 350'%3E%3Cdefs%3E%3ClinearGradient id='g2' x1='0%25' y1='0%25' x2='100%25' y2='100%25'%3E%3Cstop offset='0%25' style='stop-color:%23d4a574'/%3E%3Cstop offset='100%25' style='stop-color:%23b8845a'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect fill='url(%23g2)' width='400' height='350'/%3E%3Cellipse cx='200' cy='175' rx='80' ry='100' fill='%235c4f3d' opacity='0.3'/%3E%3Crect x='160' y='120' width='80' height='110' fill='%23fff' opacity='0.2'/%3E%3C/svg%3E" alt="Tienda">
+                <span class="store-badge">Destacada</span>
+            </div>
+            <div class="store-info">
+                <div class="store-category">Calzado</div>
+                <h3 class="store-name">Sole & Soul</h3>
+                <p class="store-description">Calzado artesanal de alta calidad, diseñado para comodidad y estilo duradero.</p>
+                <div class="store-meta">
+                    <div class="store-rating">
+                        ⭐ 4.9 <span style="color: #8a8a8a;">(203)</span>
+                    </div>
+                    <div class="store-products">68 productos</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="store-card">
+            <div class="store-image">
+                <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 350'%3E%3Cdefs%3E%3ClinearGradient id='g3' x1='0%25' y1='0%25' x2='100%25' y2='100%25'%3E%3Cstop offset='0%25' style='stop-color:%23f5e6d3'/%3E%3Cstop offset='100%25' style='stop-color:%23e8d5c4'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect fill='url(%23g3)' width='400' height='350'/%3E%3Ccircle cx='150' cy='150' r='60' fill='%239d8b73' opacity='0.3'/%3E%3Ccircle cx='250' cy='200' r='70' fill='%23c9b8a3' opacity='0.3'/%3E%3C/svg%3E" alt="Tienda">
+            </div>
+            <div class="store-info">
+                <div class="store-category">Accesorios</div>
+                <h3 class="store-name">Charm & Co.</h3>
+                <p class="store-description">Accesorios elegantes que complementan tu look con un toque de distinción.</p>
+                <div class="store-meta">
+                    <div class="store-rating">
+                        ⭐ 4.7 <span style="color: #8a8a8a;">(89)</span>
+                    </div>
+                    <div class="store-products">32 productos</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="store-card">
+            <div class="store-image">
+                <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 350'%3E%3Cdefs%3E%3ClinearGradient id='g4' x1='0%25' y1='0%25' x2='100%25' y2='100%25'%3E%3Cstop offset='0%25' style='stop-color:%23c9b8a3'/%3E%3Cstop offset='100%25' style='stop-color:%23b8a88f'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect fill='url(%23g4)' width='400' height='350'/%3E%3Cpath d='M100,120 L300,120 L280,280 L120,280 Z' fill='%235c4f3d' opacity='0.2'/%3E%3C/svg%3E" alt="Tienda">
+            </div>
+            <div class="store-info">
+                <div class="store-category">Ropa Formal</div>
+                <h3 class="store-name">Elegance Studio</h3>
+                <p class="store-description">Vestimenta formal y elegante para ocasiones especiales que requieren distinción.</p>
+                <div class="store-meta">
+                    <div class="store-rating">
+                        ⭐ 4.9 <span style="color: #8a8a8a;">(156)</span>
+                    </div>
+                    <div class="store-products">52 productos</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="store-card">
+            <div class="store-image">
+                <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 350'%3E%3Cdefs%3E%3ClinearGradient id='g5' x1='0%25' y1='0%25' x2='100%25' y2='100%25'%3E%3Cstop offset='0%25' style='stop-color:%23e0d0c0'/%3E%3Cstop offset='100%25' style='stop-color:%23d4c4b0'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect fill='url(%23g5)' width='400' height='350'/%3E%3Cellipse cx='200' cy='175' rx='100' ry='80' fill='%23fff' opacity='0.3'/%3E%3C/svg%3E" alt="Tienda">
+                <span class="store-badge">Nueva</span>
+            </div>
+            <div class="store-info">
+                <div class="store-category">Ropa Casual</div>
+                <h3 class="store-name">Coastal Threads</h3>
+                <p class="store-description">Ropa casual con inspiración costera, perfecta para un estilo relajado y fresco.</p>
+                <div class="store-meta">
+                    <div class="store-rating">
+                        ⭐ 4.6 <span style="color: #8a8a8a;">(74)</span>
+                    </div>
+                    <div class="store-products">38 productos</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="store-card">
+            <div class="store-image">
+                <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 350'%3E%3Cdefs%3E%3ClinearGradient id='g6' x1='0%25' y1='0%25' x2='100%25' y2='100%25'%3E%3Cstop offset='0%25' style='stop-color:%23d8c8b8'/%3E%3Cstop offset='100%25' style='stop-color:%23c9b8a3'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect fill='url(%23g6)' width='400' height='350'/%3E%3Ccircle cx='200' cy='175' r='80' fill='%235c4f3d' opacity='0.2'/%3E%3Crect x='140' y='140' width='120' height='70' fill='%23fff' opacity='0.3'/%3E%3C/svg%3E" alt="Tienda">
+            </div>
+            <div class="store-info">
+                <div class="store-category">Calzado</div>
+                <h3 class="store-name">Step Forward</h3>
+                <p class="store-description">Calzado innovador que combina tecnología con diseño moderno y confortable.</p>
+                <div class="store-meta">
+                    <div class="store-rating">
+                        ⭐ 4.8 <span style="color: #8a8a8a;">(142)</span>
+                    </div>
+                    <div class="store-products">56 productos</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="pagination">
+        <button class="page-btn">‹</button>
+        <button class="page-btn active">1</button>
+        <button class="page-btn">2</button>
+        <button class="page-btn">3</button>
+        <button class="page-btn">4</button>
+        <button class="page-btn">5</button>
+        <button class="page-btn">›</button>
+    </div>
+</section>
+
+<footer>
+    <p>&copy; 2025 LocalMarket. Plataforma de comercio electrónico para emprendimientos locales.</p>
+</footer>
+
+<script>
+    // Filter functionality
+    document.querySelectorAll('.filter-select').forEach(select => {
+        select.addEventListener('change', function() {
+            console.log('Filtro aplicado:', this.value);
+        });
+    });
+
+    // Search functionality
+    document.querySelector('.search-box input').addEventListener('input', function(e) {
+        console.log('Buscando:', e.target.value);
+    });
+
+    // View toggle
+    document.querySelectorAll('.view-btn').forEach(btn => {
+        btn.addEventListener('click', function() {
+            document.querySelectorAll('.view-btn').forEach(b => b.classList.remove('active'));
+            this.classList.add('active');
+        });
+    });
+
+    // Store card click
+    document.querySelectorAll('.store-card').forEach(card => {
+        card.addEventListener('click', function() {
+            console.log('Tienda seleccionada:', this.querySelector('.store-name').textContent);
+        });
+    });
+
+    // Pagination
+    document.querySelectorAll('.page-btn').forEach(btn => {
+        btn.addEventListener('click', function() {
+            if (!this.textContent.match(/[‹›]/)) {
+                document.querySelectorAll('.page-btn').forEach(b => b.classList.remove('active'));
+                this.classList.add('active');
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            }
+        });
+    });
+</script>
+</body>
+</html>

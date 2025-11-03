@@ -1,0 +1,657 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registra tu Tienda - LocalMarket</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #f5f1eb;
+            color: #3d3d3d;
+        }
+
+        /* Header */
+        header {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            padding: 1.5rem 5%;
+            background: #ffffff;
+            box-shadow: 0 1px 5px rgba(0, 0, 0, 0.05);
+            z-index: 1000;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 400;
+            color: #3d3d3d;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-family: 'Georgia', serif;
+            text-decoration: none;
+        }
+
+        .back-btn {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            text-decoration: none;
+            color: #8a8a8a;
+            font-size: 0.95rem;
+            transition: color 0.3s;
+        }
+
+        .back-btn:hover {
+            color: #3d3d3d;
+        }
+
+        /* Hero Section */
+        .hero-registration {
+            margin-top: 80px;
+            padding: 4rem 5%;
+            background: linear-gradient(135deg, #f5f1eb 0%, #ebe7e0 100%);
+            text-align: center;
+        }
+
+        .hero-registration h1 {
+            font-size: 3.5rem;
+            font-weight: 400;
+            margin-bottom: 1rem;
+            color: #2d2d2d;
+            font-family: 'Georgia', serif;
+        }
+
+        .hero-registration p {
+            font-size: 1.1rem;
+            color: #6d6d6d;
+            max-width: 600px;
+            margin: 0 auto 3rem;
+            line-height: 1.8;
+        }
+
+        /* Registration Container */
+        .registration-container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 0 5% 6rem;
+        }
+
+        .form-card {
+            background: white;
+            border-radius: 15px;
+            padding: 3rem;
+            box-shadow: 0 5px 30px rgba(0, 0, 0, 0.08);
+        }
+
+        .form-section {
+            margin-bottom: 3rem;
+        }
+
+        .form-section:last-child {
+            margin-bottom: 0;
+        }
+
+        .section-header {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 2rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid #f0f0f0;
+        }
+
+        .section-icon {
+            font-size: 2rem;
+        }
+
+        .section-title {
+            font-size: 1.5rem;
+            font-weight: 400;
+            color: #2d2d2d;
+            font-family: 'Georgia', serif;
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .form-row.full {
+            grid-template-columns: 1fr;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .form-group label {
+            font-size: 0.9rem;
+            color: #6d6d6d;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+        }
+
+        .form-group label .required {
+            color: #d47d7d;
+        }
+
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            padding: 0.9rem 1.2rem;
+            border: 1.5px solid #e0e0e0;
+            border-radius: 8px;
+            font-size: 0.95rem;
+            font-family: inherit;
+            transition: all 0.3s;
+            background: #fafafa;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: #2d2d2d;
+            background: white;
+        }
+
+        .form-group textarea {
+            resize: vertical;
+            min-height: 120px;
+        }
+
+        .checkbox-group {
+            display: flex;
+            gap: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .checkbox-item {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .checkbox-item input[type="checkbox"] {
+            width: 20px;
+            height: 20px;
+            cursor: pointer;
+        }
+
+        .checkbox-item label {
+            margin: 0;
+            cursor: pointer;
+            font-size: 0.95rem;
+            color: #3d3d3d;
+        }
+
+        /* File Upload */
+        .file-upload {
+            border: 2px dashed #e0e0e0;
+            border-radius: 8px;
+            padding: 2rem;
+            text-align: center;
+            background: #fafafa;
+            transition: all 0.3s;
+            cursor: pointer;
+        }
+
+        .file-upload:hover {
+            border-color: #2d2d2d;
+            background: white;
+        }
+
+        .file-upload input[type="file"] {
+            display: none;
+        }
+
+        .file-upload-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.8rem;
+        }
+
+        .file-icon {
+            font-size: 2.5rem;
+        }
+
+        .file-text {
+            font-size: 0.95rem;
+            color: #6d6d6d;
+        }
+
+        .file-text strong {
+            color: #2d2d2d;
+        }
+
+        /* Benefits */
+        .benefits-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1.5rem;
+            margin: 3rem 0;
+        }
+
+        .benefit-item {
+            text-align: center;
+            padding: 1.5rem;
+            background: #f9f9f9;
+            border-radius: 10px;
+            transition: transform 0.3s;
+        }
+
+        .benefit-item:hover {
+            transform: translateY(-5px);
+        }
+
+        .benefit-icon {
+            font-size: 2.5rem;
+            margin-bottom: 0.8rem;
+        }
+
+        .benefit-title {
+            font-size: 1rem;
+            font-weight: 500;
+            color: #2d2d2d;
+            margin-bottom: 0.3rem;
+        }
+
+        .benefit-text {
+            font-size: 0.85rem;
+            color: #8a8a8a;
+        }
+
+        /* Terms */
+        .terms-agreement {
+            margin: 2rem 0;
+            padding: 1.5rem;
+            background: #f9f9f9;
+            border-radius: 8px;
+        }
+
+        .terms-checkbox {
+            display: flex;
+            align-items: flex-start;
+            gap: 0.8rem;
+        }
+
+        .terms-checkbox input[type="checkbox"] {
+            width: 20px;
+            height: 20px;
+            cursor: pointer;
+            margin-top: 0.2rem;
+        }
+
+        .terms-checkbox label {
+            font-size: 0.9rem;
+            color: #6d6d6d;
+            line-height: 1.6;
+            cursor: pointer;
+        }
+
+        .terms-checkbox label a {
+            color: #2d2d2d;
+            text-decoration: underline;
+        }
+
+        /* Submit Button */
+        .submit-section {
+            display: flex;
+            justify-content: center;
+            margin-top: 3rem;
+        }
+
+        .submit-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.8rem;
+            padding: 1.2rem 3rem;
+            background: #2d2d2d;
+            color: white;
+            border: none;
+            border-radius: 50px;
+            font-weight: 500;
+            font-size: 1.05rem;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-family: inherit;
+        }
+
+        .submit-btn:hover {
+            background: #1a1a1a;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 20px rgba(45, 45, 45, 0.3);
+        }
+
+        .submit-btn:disabled {
+            background: #d0d0d0;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        /* Success Message */
+        .success-message {
+            display: none;
+            background: #e8f5e9;
+            color: #2e7d32;
+            padding: 1.5rem;
+            border-radius: 8px;
+            text-align: center;
+            margin-top: 2rem;
+            border: 1px solid #a5d6a7;
+        }
+
+        .success-message.show {
+            display: block;
+        }
+
+        /* Footer */
+        footer {
+            background: #2d2d2d;
+            color: white;
+            padding: 3rem 5%;
+            text-align: center;
+        }
+
+        footer p {
+            opacity: 0.7;
+            font-size: 0.9rem;
+            font-weight: 300;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero-registration h1 {
+                font-size: 2.5rem;
+            }
+
+            .form-card {
+                padding: 2rem 1.5rem;
+            }
+
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+
+            .benefits-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .checkbox-group {
+                flex-direction: column;
+                gap: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+<header>
+    <a href="/" class="logo">
+        <span>🏪</span> LocalMarket
+    </a>
+    <a href="/index.html" class="back-btn">
+        ← Volver al inicio
+    </a>
+    <a href="/DashboardTienda.html" class="cta-btn">Inicia Sesion →</a>
+</header>
+
+<section class="hero-registration">
+    <h1>Registra tu Tienda</h1>
+    <p>Únete a nuestra comunidad de emprendedores y lleva tu negocio al siguiente nivel. Es rápido, fácil y sin costos iniciales.</p>
+</section>
+
+<div class="registration-container">
+    <div class="benefits-grid">
+        <div class="benefit-item">
+            <div class="benefit-icon">💰</div>
+            <div class="benefit-title">Sin Costos Iniciales</div>
+            <div class="benefit-text">Cero comisión por registro</div>
+        </div>
+        <div class="benefit-item">
+            <div class="benefit-icon">📈</div>
+            <div class="benefit-title">Panel de Gestión</div>
+            <div class="benefit-text">Herramientas profesionales</div>
+        </div>
+        <div class="benefit-item">
+            <div class="benefit-icon">🎯</div>
+            <div class="benefit-title">Visibilidad Local</div>
+            <div class="benefit-text">Conecta con tu comunidad</div>
+        </div>
+    </div>
+
+    <form id="registrationForm" class="form-card">
+        <!-- Información Personal -->
+        <div class="form-section">
+            <div class="section-header">
+                <div class="section-icon">👤</div>
+                <h2 class="section-title">Información Personal</h2>
+            </div>
+
+            <div class="form-row">
+                <div class="form-group">
+                    <label>Nombre Completo <span class="required">*</span></label>
+                    <input type="text" name="fullName" required placeholder="Juan Pérez">
+                </div>
+                <div class="form-group">
+                    <label>Cédula / NIT <span class="required">*</span></label>
+                    <input type="text" name="idNumber" required placeholder="1234567890">
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="form-group">
+                    <label>Email <span class="required">*</span></label>
+                    <input type="email" name="email" required placeholder="correo@ejemplo.com">
+                </div>
+                <div class="form-group">
+                    <label>Teléfono / WhatsApp <span class="required">*</span></label>
+                    <input type="tel" name="phone" required placeholder="+57 300 123 4567">
+                </div>
+            </div>
+        </div>
+
+        <!-- Información de la Tienda -->
+        <div class="form-section">
+            <div class="section-header">
+                <div class="section-icon">🏪</div>
+                <h2 class="section-title">Información de la Tienda</h2>
+            </div>
+
+            <div class="form-row">
+                <div class="form-group">
+                    <label>Nombre de la Tienda <span class="required">*</span></label>
+                    <input type="text" name="storeName" required placeholder="Mi Tienda Fashion">
+                </div>
+                <div class="form-group">
+                    <label>Categoría Principal <span class="required">*</span></label>
+                    <select name="category" required>
+                        <option value="">Selecciona una categoría</option>
+                        <option value="ropa-casual">Ropa Casual</option>
+                        <option value="ropa-formal">Ropa Formal</option>
+                        <option value="calzado">Calzado</option>
+                        <option value="accesorios">Accesorios</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="form-row full">
+                <div class="form-group">
+                    <label>Descripción de tu Tienda <span class="required">*</span></label>
+                    <textarea name="description" required placeholder="Cuéntanos sobre tu tienda, qué productos ofreces, qué te hace único..."></textarea>
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="form-group">
+                    <label>Año de Fundación</label>
+                    <input type="number" name="foundedYear" min="1900" max="2025" placeholder="2020">
+                </div>
+                <div class="form-group">
+                    <label>Instagram</label>
+                    <input type="text" name="website" placeholder="@mitienda o www.mitienda.com">
+                </div>
+            </div>
+        </div>
+
+        <!-- Ubicación -->
+        <div class="form-section">
+            <div class="section-header">
+                <div class="section-icon">📍</div>
+                <h2 class="section-title">Ubicación</h2>
+            </div>
+
+            <div class="form-row">
+                <div class="form-group">
+                    <label>Ciudad <span class="required">*</span></label>
+                    <input type="text" name="city" required placeholder="Bogotá">
+                </div>
+                <div class="form-group">
+                    <label>Localidad / Barrio <span class="required">*</span></label>
+                    <input type="text" name="neighborhood" required placeholder="Chapinero">
+                </div>
+            </div>
+
+            <div class="form-row full">
+                <div class="form-group">
+                    <label>Dirección Completa <span class="required">*</span></label>
+                    <input type="text" name="address" required placeholder="Calle 60 # 10-20">
+                </div>
+            </div>
+        </div>
+
+        <!-- Documentos -->
+        <div class="form-section">
+            <div class="section-header">
+                <div class="section-icon">📄</div>
+                <h2 class="section-title">Documentos</h2>
+            </div>
+
+            <div class="form-row">
+                <div class="form-group">
+                    <label>Logo de tu Tienda</label>
+                    <div class="file-upload" onclick="document.getElementById('logo').click()">
+                        <input type="file" id="logo" name="logo" accept="image/*">
+                        <div class="file-upload-content">
+                            <div class="file-icon">🖼️</div>
+                            <div class="file-text">
+                                <strong>Haz clic para subir</strong><br>
+                                PNG, JPG (máx. 5MB)
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label>Cámara de Comercio / RUT</label>
+                    <div class="file-upload" onclick="document.getElementById('docs').click()">
+                        <input type="file" id="docs" name="documents" accept=".pdf,.jpg,.png">
+                        <div class="file-upload-content">
+                            <div class="file-icon">📎</div>
+                            <div class="file-text">
+                                <strong>Haz clic para subir</strong><br>
+                                PDF, JPG, PNG (máx. 10MB)
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Terms -->
+        <div class="terms-agreement">
+            <div class="terms-checkbox">
+                <input type="checkbox" id="terms" name="terms" required>
+                <label for="terms">
+                    Acepto los <a href="#">términos y condiciones</a> de LocalMarket. He leído y entiendo la <a href="#">política de privacidad</a> y las <a href="#">comisiones por venta</a> de la plataforma.
+                </label>
+            </div>
+        </div>
+
+        <div class="submit-section">
+            <button type="submit" class="submit-btn">
+                Registrar mi Tienda
+                <span>→</span>
+            </button>
+        </div>
+
+        <div class="success-message" id="successMessage">
+            <strong>¡Registro Exitoso! 🎉</strong><br>
+            Hemos recibido tu solicitud. Nuestro equipo la revisará y te contactaremos en las próximas 24-48 horas.
+        </div>
+    </form>
+</div>
+
+<footer>
+    <p>&copy; 2025 LocalMarket. Plataforma de comercio electrónico para emprendimientos locales.</p>
+</footer>
+
+<script>
+    // File upload preview
+    document.getElementById('logo').addEventListener('change', function(e) {
+        const fileName = e.target.files[0]?.name;
+        if (fileName) {
+            const container = e.target.parentElement;
+            container.querySelector('.file-text').innerHTML = `<strong>${fileName}</strong><br>Archivo cargado ✓`;
+        }
+    });
+
+    document.getElementById('docs').addEventListener('change', function(e) {
+        const fileName = e.target.files[0]?.name;
+        if (fileName) {
+            const container = e.target.parentElement;
+            container.querySelector('.file-text').innerHTML = `<strong>${fileName}</strong><br>Archivo cargado ✓`;
+        }
+    });
+
+    // Form submission
+    document.getElementById('registrationForm').addEventListener('submit', function(e) {
+        e.preventDefault();
+
+        const btn = this.querySelector('.submit-btn');
+        btn.disabled = true;
+        btn.innerHTML = 'Procesando... ⏳';
+
+        // Simulate form submission
+        setTimeout(() => {
+            document.getElementById('successMessage').classList.add('show');
+            btn.innerHTML = 'Registro Completo ✓';
+
+            setTimeout(() => {
+                this.reset();
+                btn.disabled = false;
+                btn.innerHTML = 'Registrar mi Tienda <span>→</span>';
+                document.getElementById('successMessage').classList.remove('show');
+            }, 5000);
+        }, 2000);
+    });
+
+    // Smooth scroll
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function (e) {
+            e.preventDefault();
+            const target = document.querySelector(this.getAttribute('href'));
+            if (target) {
+                target.scrollIntoView({
+                    behavior: 'smooth',
+                    block: 'start'
+                });
+            }
+        });
+    });
+</script>
+</body>
+</html>
