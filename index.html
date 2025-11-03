@@ -3,8 +3,20 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>LocalMarket - Plataforma de Comercio Electrónico</title>
+    <title>LocalMarket - Tu plataforma de comercio local</title>
     <style>
+        /* Variables y reset */
+        :root {
+            --bg: #f5f1eb;
+            --card: #fff6f0;
+            --accent: #2d2d2d;
+            --muted: #f0e7df;
+            --text: #3d3d3d;
+            --subtext: #8a8a8a;
+            --radius: 18px;
+            --shadow: 0 6px 18px rgba(33,24,20,0.06);
+        }
+
         * {
             margin: 0;
             padding: 0;
@@ -13,13 +25,18 @@
 
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: var(--bg);
+            color: var(--text);
             overflow-x: hidden;
-            background: #fefefe;
-            color: #3d3d3d;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
         }
 
         /* Header */
-        header {
+        .site-header {
             position: fixed;
             top: 0;
             width: 100%;
@@ -27,42 +44,54 @@
             background: #ffffff;
             box-shadow: 0 1px 5px rgba(0, 0, 0, 0.05);
             z-index: 1000;
+        }
+
+        .header-inner {
             display: flex;
             justify-content: space-between;
             align-items: center;
+            max-width: 1400px;
+            margin: 0 auto;
         }
 
-        .logo {
+        .brand {
             font-size: 1.8rem;
             font-weight: 400;
-            color: #3d3d3d;
+            color: var(--text);
+            font-family: 'Georgia', serif;
             display: flex;
             align-items: center;
             gap: 0.5rem;
-            font-family: 'Georgia', serif;
         }
 
-        nav {
+        .search-wrap {
             display: flex;
-            gap: 3rem;
             align-items: center;
+            gap: 8px;
+            background: var(--card);
+            padding: 0.7rem 1.2rem;
+            border-radius: 50px;
+            flex: 1;
+            max-width: 400px;
+            margin: 0 2rem;
         }
 
-        nav a {
-            text-decoration: none;
-            color: #8a8a8a;
-            font-weight: 400;
+        .search-icon {
+            opacity: 0.6;
+        }
+
+        .search-wrap input {
+            border: 0;
+            background: transparent;
+            outline: 0;
             font-size: 0.95rem;
-            transition: color 0.3s;
-        }
-
-        nav a:hover {
-            color: #3d3d3d;
+            color: var(--text);
+            width: 100%;
         }
 
         .header-icons {
             display: flex;
-            gap: 1.5rem;
+            gap: 1rem;
             align-items: center;
         }
 
@@ -70,7 +99,7 @@
             background: none;
             border: none;
             font-size: 1.3rem;
-            color: #3d3d3d;
+            color: var(--text);
             cursor: pointer;
             transition: opacity 0.3s;
         }
@@ -79,16 +108,34 @@
             opacity: 0.7;
         }
 
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            align-items: center;
+        }
+
+        .nav-links a {
+            color: var(--subtext);
+            font-size: 0.95rem;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: var(--text);
+        }
+
         /* Hero Section */
         .hero {
-            margin-top: 80px;
-            min-height: 90vh;
+            margin-top: 90px;
+            min-height: 85vh;
             display: grid;
             grid-template-columns: 1fr 1fr;
             align-items: center;
             padding: 4rem 5%;
             gap: 4rem;
-            background: #fefefe;
+            max-width: 1400px;
+            margin-left: auto;
+            margin-right: auto;
         }
 
         .hero-content {
@@ -100,14 +147,14 @@
             font-weight: 400;
             margin-bottom: 1.5rem;
             line-height: 1.1;
-            color: #2d2d2d;
+            color: var(--text);
             font-family: 'Georgia', serif;
         }
 
         .hero p {
             font-size: 1.1rem;
             margin-bottom: 2.5rem;
-            color: #6d6d6d;
+            color: var(--subtext);
             line-height: 1.8;
             font-weight: 300;
         }
@@ -139,32 +186,45 @@
         .stat-text h3 {
             font-size: 1.5rem;
             font-weight: 600;
-            color: #2d2d2d;
+            color: var(--text);
         }
 
         .stat-text p {
             font-size: 0.9rem;
-            color: #8a8a8a;
+            color: var(--subtext);
             margin: 0;
         }
 
-        .hero-btn {
+        .btn {
             display: inline-flex;
             align-items: center;
             gap: 0.8rem;
             padding: 1rem 2.5rem;
-            background: #2d2d2d;
+            background: var(--accent);
             color: white;
-            text-decoration: none;
             border-radius: 50px;
             font-weight: 500;
             font-size: 1rem;
             transition: all 0.3s;
+            border: none;
+            cursor: pointer;
         }
 
-        .hero-btn:hover {
+        .btn:hover {
             background: #1a1a1a;
             transform: translateX(5px);
+        }
+
+        .btn.ghost {
+            background: transparent;
+            color: var(--text);
+            border: 1.5px solid var(--text);
+        }
+
+        .btn.ghost:hover {
+            background: var(--text);
+            color: white;
+            transform: translateY(-2px);
         }
 
         .hero-image {
@@ -180,30 +240,11 @@
             object-fit: cover;
         }
 
-        .floating-badge {
-            position: absolute;
-            top: 10%;
-            right: -5%;
-            background: white;
-            padding: 1.5rem;
-            border-radius: 50%;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-            animation: float 3s ease-in-out infinite;
-        }
-
-        .floating-badge p {
-            font-size: 0.75rem;
-            color: #8a8a8a;
-            text-align: center;
-            margin: 0;
-            writing-mode: vertical-rl;
-            text-orientation: mixed;
-        }
-
         /* Categories Section */
-        .categories {
+        .section {
             padding: 6rem 5%;
-            background: #fefefe;
+            max-width: 1400px;
+            margin: 0 auto;
         }
 
         .section-title {
@@ -211,59 +252,83 @@
             font-size: 0.9rem;
             font-weight: 400;
             letter-spacing: 3px;
-            color: #8a8a8a;
+            color: var(--subtext);
             text-transform: uppercase;
             margin-bottom: 4rem;
         }
 
-        .categories-grid {
+        .categories-row {
             display: grid;
             grid-template-columns: repeat(4, 1fr);
             gap: 3rem;
-            max-width: 1200px;
-            margin: 0 auto;
         }
 
-        .category-item {
+        .cat-card {
             text-align: center;
             cursor: pointer;
             transition: transform 0.3s;
+            padding: 2rem;
+            background: white;
+            border-radius: 20px;
+            box-shadow: var(--shadow);
         }
 
-        .category-item:hover {
+        .cat-card:hover {
             transform: translateY(-10px);
         }
 
-        .category-circle {
-            width: 100%;
-            aspect-ratio: 1;
-            border-radius: 50%;
-            overflow: hidden;
-            margin-bottom: 1.5rem;
-            position: relative;
+        .cat-ico {
+            font-size: 3rem;
+            margin-bottom: 1rem;
         }
 
-        .category-circle img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            transition: transform 0.5s;
-        }
-
-        .category-item:hover .category-circle img {
-            transform: scale(1.1);
-        }
-
-        .category-name {
+        .cat-label {
             font-size: 1.1rem;
-            color: #8a8a8a;
+            color: var(--text);
             font-weight: 400;
+        }
+
+        /* Featured Stores */
+        .stores-row {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 2rem;
+        }
+
+        .store-card {
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            transition: all 0.3s;
+        }
+
+        .store-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .store-card img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+
+        .store-card-content {
+            padding: 1.5rem;
+        }
+
+        .store-card h3 {
+            font-size: 1.2rem;
+            font-weight: 500;
+            margin-bottom: 1rem;
+            color: var(--text);
         }
 
         /* CTA Section */
         .cta-section {
             padding: 6rem 5%;
-            background: #f9f9f9;
+            background: #fefefe;
         }
 
         .cta-grid {
@@ -296,59 +361,56 @@
             font-size: 2rem;
             font-weight: 400;
             margin-bottom: 1rem;
-            color: #2d2d2d;
+            color: var(--text);
             font-family: 'Georgia', serif;
         }
 
         .cta-card p {
             font-size: 1rem;
-            color: #6d6d6d;
+            color: var(--subtext);
             line-height: 1.8;
             margin-bottom: 2rem;
         }
 
-        .cta-btn {
-            display: inline-flex;
-            align-items: center;
-            gap: 0.5rem;
-            padding: 0.9rem 2rem;
-            background: transparent;
-            color: #2d2d2d;
-            text-decoration: none;
-            border: 1.5px solid #2d2d2d;
-            border-radius: 50px;
-            font-weight: 500;
-            font-size: 0.95rem;
-            transition: all 0.3s;
-        }
-
-        .cta-btn:hover {
-            background: #2d2d2d;
-            color: white;
-        }
-
         /* Footer */
-        footer {
-            background: #2d2d2d;
+        .site-footer {
+            background: var(--accent);
             color: white;
             padding: 3rem 5%;
             text-align: center;
         }
 
-        footer p {
-            opacity: 0.7;
-            font-size: 0.9rem;
-            font-weight: 300;
+        .footer-inner {
+            max-width: 1400px;
+            margin: 0 auto;
         }
 
-        /* Animations */
-        @keyframes float {
-            0%, 100% {
-                transform: translateY(0);
-            }
-            50% {
-                transform: translateY(-20px);
-            }
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-bottom: 1rem;
+        }
+
+        .footer-links a {
+            color: rgba(255, 255, 255, 0.8);
+            font-size: 0.9rem;
+            transition: color 0.3s;
+        }
+
+        .footer-links a:hover {
+            color: white;
+        }
+
+        .socials {
+            opacity: 0.7;
+            font-size: 0.9rem;
+            margin-top: 1rem;
+        }
+
+        /* Mobile Menu */
+        .mobile-menu {
+            display: none;
         }
 
         /* Responsive */
@@ -362,17 +424,22 @@
                 font-size: 3rem;
             }
 
-            .categories-grid {
+            .categories-row,
+            .stores-row {
                 grid-template-columns: repeat(2, 1fr);
             }
 
             .cta-grid {
                 grid-template-columns: 1fr;
             }
+
+            .search-wrap {
+                display: none;
+            }
         }
 
         @media (max-width: 768px) {
-            nav {
+            .nav-links {
                 display: none;
             }
 
@@ -380,117 +447,167 @@
                 font-size: 2.5rem;
             }
 
-            .categories-grid {
+            .categories-row,
+            .stores-row {
                 grid-template-columns: repeat(2, 1fr);
-                gap: 2rem;
+                gap: 1.5rem;
             }
 
             .hero-image {
                 height: 400px;
             }
+
+            .section {
+                padding: 3rem 5%;
+            }
         }
     </style>
 </head>
 <body>
-<header>
-    <div class="logo">
-        <span>🏪</span> LocalMarket
-    </div>
-    <nav>
-        <a href="#inicio">Inicio</a>
-        <a href="#tiendas">Tiendas</a>
-        <a href="#categorias">Categorias</a>
-        <a href="#contacto">Contact</a>
-    </nav>
-    <div class="header-icons">
-        <button class="icon-btn">🔍</button>
-        <button class="icon-btn">🛒</button>
+<header class="site-header">
+    <div class="header-inner">
+        <div class="brand">
+            <span>🏪</span> LocalMarket
+        </div>
+        <div class="search-wrap">
+            <span class="search-icon">🔍</span>
+            <input type="search" placeholder="Buscar tiendas o productos" aria-label="Buscar producto" />
+        </div>
+        <nav class="nav-links">
+            <a href="#inicio">Inicio</a>
+            <a href="tiendas.html">Tiendas</a>
+            <a href="#categorias">Categorías</a>
+            <a href="registro.html">Registrar Tienda</a>
+        </nav>
+        <div class="header-icons">
+            <button class="icon-btn" aria-label="Carrito">🛒</button>
+            <button class="icon-btn" aria-label="Menú">☰</button>
+        </div>
     </div>
 </header>
 
-<section class="hero" id="inicio">
-    <div class="hero-content">
-        <h1>Donde el Comercio Local Comienza</h1>
-        <p>Eleva tu experiencia de compra con productos únicos de emprendimientos locales. Descubre las últimas tendencias en moda y calzado en una plataforma diseñada para ti.</p>
+<main>
+    <section class="hero" id="inicio">
+        <div class="hero-content">
+            <h1>Donde el Comercio Local Comienza</h1>
+            <p>Eleva tu experiencia de compra con productos únicos de emprendimientos locales. Descubre las últimas tendencias en moda y calzado en una plataforma diseñada para ti.</p>
 
-        <a href="#tiendas" class="hero-btn">
-            Explorar Ahora
-            <span>→</span>
-        </a>
+            <a href="tiendas.html" class="btn">
+                Explorar Tiendas
+                <span>→</span>
+            </a>
 
-        <div class="hero-stats">
-            <div class="stat-badge">
-                <div class="stat-icon">👥</div>
-                <div class="stat-text">
-                    <h3>500+</h3>
-                    <p>Tiendas locales</p>
+            <div class="hero-stats">
+                <div class="stat-badge">
+                    <div class="stat-icon">👥</div>
+                    <div class="stat-text">
+                        <h3>500+</h3>
+                        <p>Tiendas locales</p>
+                    </div>
+                </div>
+                <div class="stat-badge">
+                    <div class="stat-icon">⭐</div>
+                    <div class="stat-text">
+                        <h3>4.8</h3>
+                        <p>Rating promedio</p>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
 
-    <div class="hero-image">
-        <img src="https://images.pexels.com/photos/1884579/pexels-photo-1884579.jpeg" alt="Hero Image">
-        <div class="floating-badge">
-            <p>Every Day - Beauty That Feels as Good</p>
+        <div class="hero-image">
+            <img src="https://images.pexels.com/photos/1884579/pexels-photo-1884579.jpeg" alt="Moda local">
         </div>
-    </div>
-</section>
+    </section>
 
-<section class="categories" id="categorias">
-    <h2 class="section-title">CATEGORÍAS</h2>
+    <section class="section" id="categorias">
+        <h2 class="section-title">CATEGORÍAS DESTACADAS</h2>
 
-    <div class="categories-grid">
-        <div class="category-item">
-            <div class="category-circle">
-                <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 400'%3E%3Cdefs%3E%3CradialGradient id='c1'%3E%3Cstop offset='0%25' style='stop-color:%23f5e6d3'/%3E%3Cstop offset='100%25' style='stop-color:%23d4c4b0'/%3E%3C/radialGradient%3E%3C/defs%3E%3Ccircle cx='200' cy='200' r='200' fill='url(%23c1)'/%3E%3Cellipse cx='200' cy='180' rx='60' ry='80' fill='%23c9b8a3' opacity='0.6'/%3E%3Ccircle cx='170' cy='160' r='15' fill='%235c4f3d'/%3E%3Ccircle cx='230' cy='160' r='15' fill='%235c4f3d'/%3E%3Cpath d='M160,220 Q200,240 240,220' stroke='%235c4f3d' stroke-width='3' fill='none'/%3E%3Cellipse cx='120' cy='200' rx='40' ry='50' fill='%239d8b73' opacity='0.3'/%3E%3C/svg%3E" alt="Ropa Casual">
+        <div class="categories-row">
+            <div class="cat-card">
+                <div class="cat-ico">👕</div>
+                <div class="cat-label">Ropa Casual</div>
             </div>
-            <p class="category-name">Ropa Casual</p>
-        </div>
-
-        <div class="category-item">
-            <div class="category-circle">
-                <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 400'%3E%3Cdefs%3E%3CradialGradient id='c2'%3E%3Cstop offset='0%25' style='stop-color:%23d4a574'/%3E%3Cstop offset='100%25' style='stop-color:%23b8845a'/%3E%3C/radialGradient%3E%3C/defs%3E%3Ccircle cx='200' cy='200' r='200' fill='url(%23c2)'/%3E%3Cpath d='M100,150 L300,150 L280,350 L120,350 Z' fill='%235c4f3d' opacity='0.8'/%3E%3Ccircle cx='200' cy='180' r='40' fill='%23f5e6d3'/%3E%3C/svg%3E" alt="Calzado">
+            <div class="cat-card">
+                <div class="cat-ico">👗</div>
+                <div class="cat-label">Ropa Formal</div>
             </div>
-            <p class="category-name">Calzado</p>
-        </div>
-
-        <div class="category-item">
-            <div class="category-circle">
-                <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 400'%3E%3Cdefs%3E%3CradialGradient id='c3'%3E%3Cstop offset='0%25' style='stop-color:%23e8d5c4'/%3E%3Cstop offset='100%25' style='stop-color:%23c9b8a3'/%3E%3C/radialGradient%3E%3C/defs%3E%3Ccircle cx='200' cy='200' r='200' fill='url(%23c3)'/%3E%3Cellipse cx='200' cy='250' rx='80' ry='100' fill='%239d8b73' opacity='0.5'/%3E%3Ccircle cx='200' cy='200' r='50' fill='%235c4f3d' opacity='0.6'/%3E%3C/svg%3E" alt="Accesorios">
+            <div class="cat-card">
+                <div class="cat-ico">👟</div>
+                <div class="cat-label">Calzado</div>
             </div>
-            <p class="category-name">Accesorios</p>
-        </div>
-
-        <div class="category-item">
-            <div class="category-circle">
-                <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 400'%3E%3Cdefs%3E%3CradialGradient id='c4'%3E%3Cstop offset='0%25' style='stop-color:%23d4c4b0'/%3E%3Cstop offset='100%25' style='stop-color:%23b8a88f'/%3E%3C/radialGradient%3E%3C/defs%3E%3Ccircle cx='200' cy='200' r='200' fill='url(%23c4)'/%3E%3Cellipse cx='150' cy='180' rx='30' ry='40' fill='%23f5e6d3' opacity='0.8'/%3E%3Cellipse cx='250' cy='180' rx='30' ry='40' fill='%23f5e6d3' opacity='0.8'/%3E%3Cpath d='M120,240 Q200,280 280,240' stroke='%235c4f3d' stroke-width='2' fill='none'/%3E%3C/svg%3E" alt="Ropa Formal">
+            <div class="cat-card">
+                <div class="cat-ico">👜</div>
+                <div class="cat-label">Accesorios</div>
             </div>
-            <p class="category-name">Ropa Formal</p>
+        </div>
+    </section>
+
+    <section class="section" id="tiendas">
+        <h2 class="section-title">EMPRENDIMIENTOS DESTACADOS</h2>
+
+        <div class="stores-row">
+            <article class="store-card">
+                <img src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?q=80&w=800&auto=format&fit=crop" alt="Fashion Store">
+                <div class="store-card-content">
+                    <h3>Fashion Store</h3>
+                    <a class="btn ghost" href="tiendas.html">Ver tienda →</a>
+                </div>
+            </article>
+            <article class="store-card">
+                <img src="https://images.unsplash.com/photo-1541099649105-f69ad21f3246?q=80&w=800&auto=format&fit=crop" alt="Urban Style">
+                <div class="store-card-content">
+                    <h3>Urban Style</h3>
+                    <a class="btn ghost" href="tiendas.html">Ver tienda →</a>
+                </div>
+            </article>
+            <article class="store-card">
+                <img src="https://images.pexels.com/photos/1598505/pexels-photo-1598505.jpeg" alt="Calzado Premium">
+                <div class="store-card-content">
+                    <h3>Calzado Premium</h3>
+                    <a class="btn ghost" href="tiendas.html">Ver tienda →</a>
+                </div>
+            </article>
+            <article class="store-card">
+                <img src="https://images.pexels.com/photos/1191531/pexels-photo-1191531.jpeg" alt="Accesorios Únicos">
+                <div class="store-card-content">
+                    <h3>Accesorios Únicos</h3>
+                    <a class="btn ghost" href="tiendas.html">Ver tienda →</a>
+                </div>
+            </article>
+        </div>
+    </section>
+
+    <section class="cta-section">
+        <div class="cta-grid">
+            <div class="cta-card">
+                <div class="cta-icon">🛍️</div>
+                <h2>Para Compradores</h2>
+                <p>Explora un catálogo exclusivo de tiendas locales especializadas en moda y calzado. Compra con seguridad y apoya el talento de tu comunidad.</p>
+                <a href="tiendas.html" class="btn ghost">Ver Tiendas →</a>
+            </div>
+
+            <div class="cta-card">
+                <div class="cta-icon">📊</div>
+                <h2>Para Vendedores</h2>
+                <p>Únete a nuestra plataforma y lleva tu emprendimiento al siguiente nivel. Sin costos iniciales, con herramientas profesionales de gestión.</p>
+                <a href="registro.html" class="btn ghost">Registrar Tienda →</a>
+            </div>
+        </div>
+    </section>
+</main>
+
+<footer class="site-footer">
+    <div class="footer-inner">
+        <nav class="footer-links">
+            <a href="#contacto">Contacto</a>
+            <a href="#terminos">Términos</a>
+            <a href="#politica">Política de datos</a>
+        </nav>
+        <div class="socials">
+            <p>&copy; 2025 LocalMarket. Plataforma de comercio electrónico para emprendimientos locales.</p>
         </div>
     </div>
-</section>
-
-<section class="cta-section">
-    <div class="cta-grid">
-        <div class="cta-card">
-            <div class="cta-icon">🛍️</div>
-            <h2>Para Compradores</h2>
-            <p>Explora un catálogo exclusivo de tiendas locales especializadas en moda y calzado. Compra con seguridad y apoya el talento de tu comunidad.</p>
-            <a href="/tiendas.html" class="cta-btn">Ver Tiendas →</a>
-        </div>
-
-        <div class="cta-card">
-            <div class="cta-icon">📊</div>
-            <h2>Para Vendedores</h2>
-            <p>Únete a nuestra plataforma y lleva tu emprendimiento al siguiente nivel. Sin costos iniciales, con herramientas profesionales de gestión.</p>
-            <a href="/Registro.html" class="cta-btn">Registrar Tienda →</a>
-        </div>
-    </div>
-</section>
-
-<footer>
-    <p>&copy; 2025 LocalMarket. Plataforma de comercio electrónico para emprendimientos locales.</p>
 </footer>
 
 <script>
@@ -510,7 +627,7 @@
 
     // Header scroll effect
     let lastScroll = 0;
-    const header = document.querySelector('header');
+    const header = document.querySelector('.site-header');
 
     window.addEventListener('scroll', () => {
         const currentScroll = window.scrollY;
@@ -520,6 +637,18 @@
         } else {
             header.style.boxShadow = '0 1px 5px rgba(0, 0, 0, 0.05)';
         }
+    });
+
+    // Category cards animation
+    const categoryCards = document.querySelectorAll('.cat-card');
+    categoryCards.forEach((card, index) => {
+        card.style.opacity = '0';
+        card.style.transform = 'translateY(20px)';
+        setTimeout(() => {
+            card.style.transition = 'all 0.5s ease';
+            card.style.opacity = '1';
+            card.style.transform = 'translateY(0)';
+        }, index * 100);
     });
 </script>
 </body>
