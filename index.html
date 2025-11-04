@@ -65,7 +65,7 @@
         }
 
         .brand img {
-            height: 40px;
+            height: 60px;
             width: auto;
         }
 
@@ -566,10 +566,25 @@
         </nav>
         <div class="header-icons">
             <button class="icon-btn" aria-label="Carrito">🛒</button>
-            <button class="icon-btn" aria-label="Menú">☰</button>
+            <button class="icon-btn" id="menuToggle" aria-label="Menú">☰</button>
         </div>
     </div>
 </header>
+
+<!-- Mobile Menu Dropdown -->
+<div class="menu-overlay" id="menuOverlay"></div>
+<div class="mobile-menu-dropdown" id="mobileMenu">
+    <div class="mobile-menu-header">Menú</div>
+    <nav class="mobile-menu-links">
+        <a href="#inicio">🏠 Inicio</a>
+        <a href="tiendas.html">🏪 Tiendas</a>
+        <a href="#categorias">📂 Categorías</a>
+        <a href="registro.html">📝 Registrar Tienda</a>
+    </nav>
+    <a href="DashboardTienda.html" class="mobile-login-btn">
+        👤 Iniciar Sesión (Vendedores)
+    </a>
+</div>
 
 <main>
     <section class="hero" id="inicio">
@@ -696,6 +711,21 @@
 </footer>
 
 <script>
+    // Mobile Menu Toggle
+    const menuToggle = document.getElementById('menuToggle');
+    const mobileMenu = document.getElementById('mobileMenu');
+    const menuOverlay = document.getElementById('menuOverlay');
+
+    menuToggle.addEventListener('click', () => {
+        mobileMenu.classList.toggle('active');
+        menuOverlay.classList.toggle('active');
+    });
+
+    menuOverlay.addEventListener('click', () => {
+        mobileMenu.classList.remove('active');
+        menuOverlay.classList.remove('active');
+    });
+
     // Smooth scroll
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
         anchor.addEventListener('click', function (e) {
@@ -706,6 +736,9 @@
                     behavior: 'smooth',
                     block: 'start'
                 });
+                // Close mobile menu if open
+                mobileMenu.classList.remove('active');
+                menuOverlay.classList.remove('active');
             }
         });
     });
