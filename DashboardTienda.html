@@ -265,6 +265,15 @@
       padding: 2rem;
     }
 
+    /* View containers */
+    .view-container {
+      display: none;
+    }
+
+    .view-container.active {
+      display: block;
+    }
+
     /* Stats Cards */
     .stats-grid {
       display: grid;
@@ -477,6 +486,11 @@
       color: #1565c0;
     }
 
+    .status-badge.processing {
+      background: #f3e5f5;
+      color: #7b1fa2;
+    }
+
     .action-buttons {
       display: flex;
       gap: 0.5rem;
@@ -554,6 +568,109 @@
       color: #2d2d2d;
     }
 
+    /* Product Grid */
+    .products-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 1.5rem;
+    }
+
+    .product-card {
+      background: white;
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+      transition: transform 0.3s;
+    }
+
+    .product-card:hover {
+      transform: translateY(-5px);
+    }
+
+    .product-card-image {
+      width: 100%;
+      height: 200px;
+      background: linear-gradient(135deg, #f0f0f0, #e0e0e0);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 4rem;
+    }
+
+    .product-card-body {
+      padding: 1.2rem;
+    }
+
+    .product-card-title {
+      font-size: 1.1rem;
+      font-weight: 500;
+      color: #2d2d2d;
+      margin-bottom: 0.5rem;
+    }
+
+    .product-card-price {
+      font-size: 1.3rem;
+      font-weight: 600;
+      color: #2d2d2d;
+      margin-bottom: 0.8rem;
+    }
+
+    .product-card-footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding-top: 0.8rem;
+      border-top: 1px solid #f0f0f0;
+    }
+
+    /* Filter Bar */
+    .filter-bar {
+      display: flex;
+      gap: 1rem;
+      margin-bottom: 1.5rem;
+      flex-wrap: wrap;
+    }
+
+    .filter-input {
+      flex: 1;
+      min-width: 250px;
+      padding: 0.8rem 1.2rem;
+      border: 1.5px solid #e0e0e0;
+      border-radius: 8px;
+      font-size: 0.9rem;
+    }
+
+    .filter-select {
+      padding: 0.8rem 1.2rem;
+      border: 1.5px solid #e0e0e0;
+      border-radius: 8px;
+      font-size: 0.9rem;
+      cursor: pointer;
+    }
+
+    /* Empty State */
+    .empty-state {
+      text-align: center;
+      padding: 4rem 2rem;
+    }
+
+    .empty-icon {
+      font-size: 4rem;
+      margin-bottom: 1rem;
+      opacity: 0.5;
+    }
+
+    .empty-title {
+      font-size: 1.5rem;
+      color: #6d6d6d;
+      margin-bottom: 0.5rem;
+    }
+
+    .empty-text {
+      color: #8a8a8a;
+      margin-bottom: 2rem;
+    }
+
     /* Responsive */
     @media (max-width: 1024px) {
       .sidebar {
@@ -603,7 +720,156 @@
         flex-direction: column;
         gap: 0.5rem;
       }
+
+      .products-grid {
+        grid-template-columns: 1fr;
+      }
     }
+    .modal {
+  display: none;
+  position: fixed;
+  z-index: 1000;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  animation: fadeIn 0.3s ease;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.modal-content {
+  background-color: #fff;
+  margin: 3% auto;
+  width: 90%;
+  max-width: 600px;
+  border-radius: 12px;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+  animation: slideDown 0.3s ease;
+  max-height: 90vh;
+  overflow-y: auto;
+}
+
+@keyframes slideDown {
+  from {
+    transform: translateY(-50px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+.modal-header {
+  padding: 24px 28px;
+  border-bottom: 1px solid #e0e0e0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.modal-header h2 {
+  margin: 0;
+  font-size: 24px;
+  color: #1a1a1a;
+}
+
+.modal-close {
+  font-size: 32px;
+  color: #8a8a8a;
+  cursor: pointer;
+  line-height: 1;
+  transition: color 0.2s;
+}
+
+.modal-close:hover {
+  color: #1a1a1a;
+}
+
+.modal-body {
+  padding: 28px;
+}
+
+.form-group {
+  margin-bottom: 20px;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 8px;
+  color: #1a1a1a;
+  font-weight: 500;
+  font-size: 14px;
+}
+
+.form-input {
+  width: 100%;
+  padding: 12px 16px;
+  border: 1px solid #d0d0d0;
+  border-radius: 8px;
+  font-size: 14px;
+  transition: border-color 0.2s;
+  box-sizing: border-box;
+}
+
+.form-input:focus {
+  outline: none;
+  border-color: #3b82f6;
+}
+
+.form-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+
+.input-group {
+  display: flex;
+  gap: 8px;
+}
+
+.input-group .form-input {
+  flex: 1;
+}
+
+.form-input-addon {
+  width: 70px;
+  padding: 12px;
+  border: 1px solid #d0d0d0;
+  border-radius: 8px;
+  font-size: 14px;
+  background-color: #f5f5f5;
+}
+
+.modal-footer {
+  display: flex;
+  justify-content: flex-end;
+  gap: 12px;
+  margin-top: 28px;
+  padding-top: 20px;
+  border-top: 1px solid #e0e0e0;
+}
+
+.btn-primary {
+  background-color: #3b82f6;
+  color: white;
+  padding: 12px 24px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 500;
+  transition: background-color 0.2s;
+}
+
+.btn-primary:hover {
+  background-color: #2563eb;
+}
   </style>
 </head>
 <body>
@@ -708,8 +974,8 @@
     <div class="header-left">
       <button class="menu-toggle" id="menuToggle">☰</button>
       <div class="header-title">
-        <h1>Dashboard</h1>
-        <p class="header-subtitle">Bienvenido de nuevo, aquí está tu resumen de hoy</p>
+        <h1 id="headerTitle">Dashboard</h1>
+        <p class="header-subtitle" id="headerSubtitle">Bienvenido de nuevo, aquí está tu resumen de hoy</p>
       </div>
     </div>
     <div class="header-actions">
@@ -718,322 +984,1269 @@
         <span class="badge">3</span>
       </button>
       <button class="icon-btn">📧</button>
-      <button class="add-btn" id="addProductBtn">
+      <button class="add-btn" id="addBtn">
         <span>+</span>
-        <span>Agregar Producto</span>
+        <span id="addBtnText">Agregar Producto</span>
       </button>
     </div>
   </header>
 
   <!-- Content -->
   <div class="content">
-    <!-- Stats Cards -->
-    <div class="stats-grid">
-      <div class="stat-card">
-        <div class="stat-header">
-          <div class="stat-icon-large blue">💰</div>
+
+    <!-- DASHBOARD VIEW -->
+    <div class="view-container active" id="view-dashboard">
+      <!-- Stats Cards -->
+      <div class="stats-grid">
+        <div class="stat-card">
+          <div class="stat-header">
+            <div class="stat-icon-large blue">💰</div>
+          </div>
+          <div class="stat-value">$2,450,000</div>
+          <div class="stat-label">Ventas del Mes</div>
+          <div class="stat-change positive">
+            ↑ 12.5% vs mes anterior
+          </div>
         </div>
-        <div class="stat-value">$2,450,000</div>
-        <div class="stat-label">Ventas del Mes</div>
-        <div class="stat-change positive">
-          ↑ 12.5% vs mes anterior
+
+        <div class="stat-card">
+          <div class="stat-header">
+            <div class="stat-icon-large green">📦</div>
+          </div>
+          <div class="stat-value">48</div>
+          <div class="stat-label">Pedidos Activos</div>
+          <div class="stat-change positive">
+            ↑ 8 nuevos hoy
+          </div>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-header">
+            <div class="stat-icon-large orange">👥</div>
+          </div>
+          <div class="stat-value">1,234</div>
+          <div class="stat-label">Total Clientes</div>
+          <div class="stat-change positive">
+            ↑ 23 esta semana
+          </div>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-header">
+            <div class="stat-icon-large purple">⭐</div>
+          </div>
+          <div class="stat-value">4.8</div>
+          <div class="stat-label">Rating Promedio</div>
+          <div class="stat-change positive">
+            ↑ 0.3 este mes
+          </div>
         </div>
       </div>
 
-      <div class="stat-card">
-        <div class="stat-header">
-          <div class="stat-icon-large green">📦</div>
+      <!-- Recent Orders -->
+      <div class="section">
+        <div class="section-header">
+          <h2 class="section-title">Pedidos Recientes</h2>
+          <div class="section-actions">
+            <button class="btn-secondary">Ver todos</button>
+          </div>
         </div>
-        <div class="stat-value">48</div>
-        <div class="stat-label">Pedidos Activos</div>
-        <div class="stat-change positive">
-          ↑ 8 nuevos hoy
-        </div>
-      </div>
 
-      <div class="stat-card">
-        <div class="stat-header">
-          <div class="stat-icon-large orange">👥</div>
+        <div class="order-item">
+          <div class="order-id">#ORD-1847</div>
+          <div class="customer-info">
+            <div class="customer-avatar">MG</div>
+            <div>
+              <div class="customer-name">María González</div>
+              <div class="order-date">Hace 2 horas</div>
+            </div>
+          </div>
+          <div class="order-total">$145,000</div>
+          <div><span class="status-badge pending">Pendiente</span></div>
+          <div>3 productos</div>
+          <div class="action-buttons">
+            <button class="btn-icon" title="Ver detalles">👁️</button>
+            <button class="btn-icon" title="Procesar">✓</button>
+          </div>
         </div>
-        <div class="stat-value">1,234</div>
-        <div class="stat-label">Total Clientes</div>
-        <div class="stat-change positive">
-          ↑ 23 esta semana
-        </div>
-      </div>
 
-      <div class="stat-card">
-        <div class="stat-header">
-          <div class="stat-icon-large purple">⭐</div>
+        <div class="order-item">
+          <div class="order-id">#ORD-1846</div>
+          <div class="customer-info">
+            <div class="customer-avatar">JR</div>
+            <div>
+              <div class="customer-name">Juan Rodríguez</div>
+              <div class="order-date">Hace 4 horas</div>
+            </div>
+          </div>
+          <div class="order-total">$89,500</div>
+          <div><span class="status-badge completed">Enviado</span></div>
+          <div>2 productos</div>
+          <div class="action-buttons">
+            <button class="btn-icon" title="Ver detalles">👁️</button>
+            <button class="btn-icon" title="Imprimir">🖨️</button>
+          </div>
         </div>
-        <div class="stat-value">4.8</div>
-        <div class="stat-label">Rating Promedio</div>
-        <div class="stat-change positive">
-          ↑ 0.3 este mes
+
+        <div class="order-item">
+          <div class="order-id">#ORD-1845</div>
+          <div class="customer-info">
+            <div class="customer-avatar">LC</div>
+            <div>
+              <div class="customer-name">Laura Castro</div>
+              <div class="order-date">Ayer</div>
+            </div>
+          </div>
+          <div class="order-total">$220,000</div>
+          <div><span class="status-badge completed">Completado</span></div>
+          <div>5 productos</div>
+          <div class="action-buttons">
+            <button class="btn-icon" title="Ver detalles">👁️</button>
+            <button class="btn-icon" title="Factura">📄</button>
+          </div>
         </div>
       </div>
     </div>
 
-    <!-- Recent Orders -->
-    <div class="section">
-      <div class="section-header">
-        <h2 class="section-title">Pedidos Recientes</h2>
-        <div class="section-actions">
-          <button class="btn-secondary">Filtrar</button>
-          <button class="btn-secondary">Exportar</button>
-        </div>
+    <!-- CATALOG VIEW -->
+    <div class="view-container" id="view-catalog">
+      <div class="filter-bar">
+        <input type="text" class="filter-input" placeholder="🔍 Buscar productos...">
+        <select class="filter-select">
+          <option>Todas las categorías</option>
+          <option>Ropa Casual</option>
+          <option>Ropa Formal</option>
+          <option>Calzado</option>
+          <option>Accesorios</option>
+        </select>
+        <select class="filter-select">
+          <option>Todos los estados</option>
+          <option>Activos</option>
+          <option>Inactivos</option>
+          <option>Agotados</option>
+        </select>
       </div>
 
-      <div class="order-item">
-        <div class="order-id">#ORD-1847</div>
-        <div class="customer-info">
-          <div class="customer-avatar">MG</div>
-          <div>
-            <div class="customer-name">María González</div>
-            <div class="order-date">Hace 2 horas</div>
+      <div class="products-grid">
+        <div class="product-card">
+          <div class="product-card-image">👕</div>
+          <div class="product-card-body">
+            <h3 class="product-card-title">Camiseta Básica Blanca</h3>
+            <div class="product-sku">SKU: TSH-001</div>
+            <div class="product-card-price">$45,000</div>
+            <div class="product-card-footer">
+              <span class="status-badge active">Activo</span>
+              <div class="action-buttons">
+                <button class="btn-icon" title="Editar">✏️</button>
+                <button class="btn-icon" title="Eliminar">🗑️</button>
+              </div>
+            </div>
           </div>
         </div>
-        <div class="order-total">$145,000</div>
-        <div><span class="status-badge pending">Pendiente</span></div>
-        <div>3 productos</div>
-        <div class="action-buttons">
-          <button class="btn-icon" title="Ver detalles">👁️</button>
-          <button class="btn-icon" title="Procesar">✓</button>
-        </div>
-      </div>
 
-      <div class="order-item">
-        <div class="order-id">#ORD-1846</div>
-        <div class="customer-info">
-          <div class="customer-avatar">JR</div>
-          <div>
-            <div class="customer-name">Juan Rodríguez</div>
-            <div class="order-date">Hace 4 horas</div>
+        <div class="product-card">
+          <div class="product-card-image">👖</div>
+          <div class="product-card-body">
+            <h3 class="product-card-title">Jean Skinny Azul</h3>
+            <div class="product-sku">SKU: JEA-002</div>
+            <div class="product-card-price">$89,900</div>
+            <div class="product-card-footer">
+              <span class="status-badge active">Activo</span>
+              <div class="action-buttons">
+                <button class="btn-icon" title="Editar">✏️</button>
+                <button class="btn-icon" title="Eliminar">🗑️</button>
+              </div>
+            </div>
           </div>
         </div>
-        <div class="order-total">$89,500</div>
-        <div><span class="status-badge completed">Enviado</span></div>
-        <div>2 productos</div>
-        <div class="action-buttons">
-          <button class="btn-icon" title="Ver detalles">👁️</button>
-          <button class="btn-icon" title="Imprimir">🖨️</button>
-        </div>
-      </div>
 
-      <div class="order-item">
-        <div class="order-id">#ORD-1845</div>
-        <div class="customer-info">
-          <div class="customer-avatar">LC</div>
-          <div>
-            <div class="customer-name">Laura Castro</div>
-            <div class="order-date">Ayer</div>
+        <div class="product-card">
+          <div class="product-card-image">👟</div>
+          <div class="product-card-body">
+            <h3 class="product-card-title">Zapatillas Deportivas</h3>
+            <div class="product-sku">SKU: ZAP-003</div>
+            <div class="product-card-price">$120,000</div>
+            <div class="product-card-footer">
+              <span class="status-badge inactive">Agotado</span>
+              <div class="action-buttons">
+                <button class="btn-icon" title="Editar">✏️</button>
+                <button class="btn-icon" title="Eliminar">🗑️</button>
+              </div>
+            </div>
           </div>
         </div>
-        <div class="order-total">$220,000</div>
-        <div><span class="status-badge completed">Completado</span></div>
-        <div>5 productos</div>
-        <div class="action-buttons">
-          <button class="btn-icon" title="Ver detalles">👁️</button>
-          <button class="btn-icon" title="Factura">📄</button>
-        </div>
-      </div>
 
-      <div class="order-item">
-        <div class="order-id">#ORD-1844</div>
-        <div class="customer-info">
-          <div class="customer-avatar">PS</div>
-          <div>
-            <div class="customer-name">Pedro Silva</div>
-            <div class="order-date">Ayer</div>
+        <div class="product-card">
+          <div class="product-card-image">👔</div>
+          <div class="product-card-body">
+            <h3 class="product-card-title">Camisa Formal Blanca</h3>
+            <div class="product-sku">SKU: CAM-004</div>
+            <div class="product-card-price">$65,000</div>
+            <div class="product-card-footer">
+              <span class="status-badge active">Activo</span>
+              <div class="action-buttons">
+                <button class="btn-icon" title="Editar">✏️</button>
+                <button class="btn-icon" title="Eliminar">🗑️</button>
+              </div>
+            </div>
           </div>
         </div>
-        <div class="order-total">$75,000</div>
-        <div><span class="status-badge pending">En preparación</span></div>
-        <div>1 producto</div>
-        <div class="action-buttons">
-          <button class="btn-icon" title="Ver detalles">👁️</button>
-          <button class="btn-icon" title="Procesar">✓</button>
-        </div>
-      </div>
 
-      <div class="order-item">
-        <div class="order-id">#ORD-1843</div>
-        <div class="customer-info">
-          <div class="customer-avatar">AR</div>
-          <div>
-            <div class="customer-name">Ana Ramírez</div>
-            <div class="order-date">Hace 2 días</div>
+        <div class="product-card">
+          <div class="product-card-image">🧢</div>
+          <div class="product-card-body">
+            <h3 class="product-card-title">Gorra Deportiva</h3>
+            <div class="product-sku">SKU: ACC-005</div>
+            <div class="product-card-price">$35,000</div>
+            <div class="product-card-footer">
+              <span class="status-badge active">Activo</span>
+              <div class="action-buttons">
+                <button class="btn-icon" title="Editar">✏️</button>
+                <button class="btn-icon" title="Eliminar">🗑️</button>
+              </div>
+            </div>
           </div>
         </div>
-        <div class="order-total">$180,000</div>
-        <div><span class="status-badge completed">Completado</span></div>
-        <div>4 productos</div>
-        <div class="action-buttons">
-          <button class="btn-icon" title="Ver detalles">👁️</button>
-          <button class="btn-icon" title="Factura">📄</button>
+
+        <div class="product-card">
+          <div class="product-card-image">👗</div>
+          <div class="product-card-body">
+            <h3 class="product-card-title">Vestido Casual Verano</h3>
+            <div class="product-sku">SKU: VES-006</div>
+            <div class="product-card-price">$95,000</div>
+            <div class="product-card-footer">
+              <span class="status-badge active">Activo</span>
+              <div class="action-buttons">
+                <button class="btn-icon" title="Editar">✏️</button>
+                <button class="btn-icon" title="Eliminar">🗑️</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="product-card">
+          <div class="product-card-image">🧥</div>
+          <div class="product-card-body">
+            <h3 class="product-card-title">Chaqueta de Cuero</h3>
+            <div class="product-sku">SKU: CHA-007</div>
+            <div class="product-card-price">$220,000</div>
+            <div class="product-card-footer">
+              <span class="status-badge active">Activo</span>
+              <div class="action-buttons">
+                <button class="btn-icon" title="Editar">✏️</button>
+                <button class="btn-icon" title="Eliminar">🗑️</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="product-card">
+          <div class="product-card-image">👞</div>
+          <div class="product-card-body">
+            <h3 class="product-card-title">Zapatos Formales</h3>
+            <div class="product-sku">SKU: ZAP-008</div>
+            <div class="product-card-price">$150,000</div>
+            <div class="product-card-footer">
+              <span class="status-badge active">Activo</span>
+              <div class="action-buttons">
+                <button class="btn-icon" title="Editar">✏️</button>
+                <button class="btn-icon" title="Eliminar">🗑️</button>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </div>
 
-    <!-- Catalog Section -->
-    <div class="section">
-      <div class="section-header">
-        <h2 class="section-title">Catálogo de Productos</h2>
-        <div class="section-actions">
-          <button class="btn-secondary">Filtrar</button>
-          <button class="btn-secondary">Ordenar</button>
+    <!-- ORDERS VIEW -->
+    <div class="view-container" id="view-orders">
+      <div class="filter-bar">
+        <input type="text" class="filter-input" placeholder="🔍 Buscar pedidos por ID o cliente...">
+        <select class="filter-select">
+          <option>Todos los estados</option>
+          <option>Pendientes</option>
+          <option>En preparación</option>
+          <option>Enviados</option>
+          <option>Completados</option>
+          <option>Cancelados</option>
+        </select>
+        <select class="filter-select">
+          <option>Últimos 30 días</option>
+          <option>Hoy</option>
+          <option>Esta semana</option>
+          <option>Este mes</option>
+          <option>Personalizado</option>
+        </select>
+      </div>
+
+      <div class="section">
+        <div class="section-header">
+          <h2 class="section-title">Todos los Pedidos</h2>
+          <div class="section-actions">
+            <button class="btn-secondary">Exportar</button>
+          </div>
+        </div>
+
+        <div class="table-container">
+          <table>
+            <thead>
+            <tr>
+              <th>ID Pedido</th>
+              <th>Cliente</th>
+              <th>Fecha</th>
+              <th>Total</th>
+              <th>Productos</th>
+              <th>Estado</th>
+              <th>Acciones</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+              <td class="order-id">#ORD-1847</td>
+              <td>
+                <div class="customer-info">
+                  <div class="customer-avatar">MG</div>
+                  <div class="customer-name">María González</div>
+                </div>
+              </td>
+              <td>18 Nov 2025, 14:30</td>
+              <td class="order-total">$145,000</td>
+              <td>3 productos</td>
+              <td><span class="status-badge pending">Pendiente</span></td>
+              <td>
+                <div class="action-buttons">
+                  <button class="btn-icon" title="Ver detalles">👁️</button>
+                  <button class="btn-icon" title="Procesar">✓</button>
+                  <button class="btn-icon" title="Cancelar">✖️</button>
+                </div>
+              </td>
+            </tr>
+            <tr>
+              <td class="order-id">#ORD-1846</td>
+              <td>
+                <div class="customer-info">
+                  <div class="customer-avatar">JR</div>
+                  <div class="customer-name">Juan Rodríguez</div>
+                </div>
+              </td>
+              <td>18 Nov 2025, 12:15</td>
+              <td class="order-total">$89,500</td>
+              <td>2 productos</td>
+              <td><span class="status-badge completed">Enviado</span></td>
+              <td>
+                <div class="action-buttons">
+                  <button class="btn-icon" title="Ver detalles">👁️</button>
+                  <button class="btn-icon" title="Rastreo">📍</button>
+                  <button class="btn-icon" title="Imprimir">🖨️</button>
+                </div>
+              </td>
+            </tr>
+            <tr>
+              <td class="order-id">#ORD-1845</td>
+              <td>
+                <div class="customer-info">
+                  <div class="customer-avatar">LC</div>
+                  <div class="customer-name">Laura Castro</div>
+                </div>
+              </td>
+              <td>17 Nov 2025, 16:45</td>
+              <td class="order-total">$220,000</td>
+              <td>5 productos</td>
+              <td><span class="status-badge completed">Completado</span></td>
+              <td>
+                <div class="action-buttons">
+                  <button class="btn-icon" title="Ver detalles">👁️</button>
+                  <button class="btn-icon" title="Factura">📄</button>
+                </div>
+              </td>
+            </tr>
+            <tr>
+              <td class="order-id">#ORD-1844</td>
+              <td>
+                <div class="customer-info">
+                  <div class="customer-avatar">PS</div>
+                  <div class="customer-name">Pedro Silva</div>
+                </div>
+              </td>
+              <td>17 Nov 2025, 10:20</td>
+              <td class="order-total">$75,000</td>
+              <td>1 producto</td>
+              <td><span class="status-badge processing">En preparación</span></td>
+              <td>
+                <div class="action-buttons">
+                  <button class="btn-icon" title="Ver detalles">👁️</button>
+                  <button class="btn-icon" title="Marcar enviado">📦</button>
+                </div>
+              </td>
+            </tr>
+            <tr>
+              <td class="order-id">#ORD-1843</td>
+              <td>
+                <div class="customer-info">
+                  <div class="customer-avatar">AR</div>
+                  <div class="customer-name">Ana Ramírez</div>
+                </div>
+              </td>
+              <td>16 Nov 2025, 15:30</td>
+              <td class="order-total">$180,000</td>
+              <td>4 productos</td>
+              <td><span class="status-badge completed">Completado</span></td>
+              <td>
+                <div class="action-buttons">
+                  <button class="btn-icon" title="Ver detalles">👁️</button>
+                  <button class="btn-icon" title="Factura">📄</button>
+                </div>
+              </td>
+            </tr>
+            <tr>
+              <td class="order-id">#ORD-1842</td>
+              <td>
+                <div class="customer-info">
+                  <div class="customer-avatar">CF</div>
+                  <div class="customer-name">Carlos Fernández</div>
+                </div>
+              </td>
+              <td>16 Nov 2025, 09:15</td>
+              <td class="order-total">$95,000</td>
+              <td>2 productos</td>
+              <td><span class="status-badge pending">Pendiente</span></td>
+              <td>
+                <div class="action-buttons">
+                  <button class="btn-icon" title="Ver detalles">👁️</button>
+                  <button class="btn-icon" title="Procesar">✓</button>
+                  <button class="btn-icon" title="Cancelar">✖️</button>
+                </div>
+              </td>
+            </tr>
+            <tr>
+              <td class="order-id">#ORD-1841</td>
+              <td>
+                <div class="customer-info">
+                  <div class="customer-avatar">DM</div>
+                  <div class="customer-name">Diana Martínez</div>
+                </div>
+              </td>
+              <td>15 Nov 2025, 18:00</td>
+              <td class="order-total">$130,000</td>
+              <td>3 productos</td>
+              <td><span class="status-badge completed">Completado</span></td>
+              <td>
+                <div class="action-buttons">
+                  <button class="btn-icon" title="Ver detalles">👁️</button>
+                  <button class="btn-icon" title="Factura">📄</button>
+                </div>
+              </td>
+            </tr>
+            <tr>
+              <td class="order-id">#ORD-1840</td>
+              <td>
+                <div class="customer-info">
+                  <div class="customer-avatar">RL</div>
+                  <div class="customer-name">Roberto López</div>
+                </div>
+              </td>
+              <td>15 Nov 2025, 11:30</td>
+              <td class="order-total">$200,000</td>
+              <td>6 productos</td>
+              <td><span class="status-badge processing">En preparación</span></td>
+              <td>
+                <div class="action-buttons">
+                  <button class="btn-icon" title="Ver detalles">👁️</button>
+                  <button class="btn-icon" title="Marcar enviado">📦</button>
+                </div>
+              </td>
+            </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- INVENTORY VIEW -->
+    <div class="view-container" id="view-inventory">
+      <!-- Stats del inventario -->
+      <div class="stats-grid">
+        <div class="stat-card">
+          <div class="stat-header">
+            <div class="stat-icon-large blue">📦</div>
+          </div>
+          <div class="stat-value">24</div>
+          <div class="stat-label">Productos en Stock</div>
+          <div class="stat-change positive">↑ 3 nuevos</div>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-header">
+            <div class="stat-icon-large orange">⚠️</div>
+          </div>
+          <div class="stat-value">5</div>
+          <div class="stat-label">Stock Bajo</div>
+          <div class="stat-change negative">Requiere atención</div>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-header">
+            <div class="stat-icon-large purple">💰</div>
+          </div>
+          <div class="stat-value">$8,450,000</div>
+          <div class="stat-label">Valor Total Inventario</div>
+          <div class="stat-change positive">↑ 8.5%</div>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-header">
+            <div class="stat-icon-large green">🔄</div>
+          </div>
+          <div class="stat-value">3.2</div>
+          <div class="stat-label">Rotación Promedio</div>
+          <div class="stat-change positive">Muy bueno</div>
         </div>
       </div>
 
-      <div class="table-container">
-        <table>
-          <thead>
-          <tr>
-            <th>Producto</th>
-            <th>Categoría</th>
-            <th>Precio</th>
-            <th>Stock</th>
-            <th>Estado</th>
-            <th>Acciones</th>
-          </tr>
-          </thead>
-          <tbody>
-          <tr>
-            <td>
-              <div class="product-cell">
-                <div class="product-image">👕</div>
-                <div class="product-info">
-                  <h4>Camiseta Básica Blanca</h4>
-                  <span class="product-sku">SKU: TSH-001</span>
+      <!-- Tabla de inventario -->
+      <div class="section">
+        <div class="section-header">
+          <h2 class="section-title">Inventario Detallado</h2>
+          <div class="section-actions">
+            <button class="btn-secondary" onclick="showInventoryModal()">⚙️ Configurar</button>
+            <button class="btn-secondary">📊 Exportar</button>
+          </div>
+        </div>
+
+        <div class="filter-bar">
+          <input type="text" class="filter-input" placeholder="🔍 Buscar productos en inventario...">
+          <select class="filter-select">
+            <option>Todos los productos</option>
+            <option>Stock bajo</option>
+            <option>Stock óptimo</option>
+            <option>Sin stock</option>
+          </select>
+        </div>
+
+        <div class="table-container">
+          <table>
+            <thead>
+            <tr>
+              <th>Producto</th>
+              <th>SKU</th>
+              <th>Stock Actual</th>
+              <th>Stock Mínimo</th>
+              <th>Stock Máximo</th>
+              <th>Estado</th>
+              <th>Acciones</th>
+            </tr>
+            </thead>
+            <tbody id="inventoryTableBody">
+            <tr>
+              <td>
+                <div class="product-cell">
+                  <div class="product-image">👕</div>
+                  <div class="product-info">
+                    <h4>Camiseta Básica Blanca</h4>
+                  </div>
                 </div>
-              </div>
-            </td>
-            <td>Ropa Casual</td>
-            <td>$45,000</td>
-            <td>24 unidades</td>
-            <td><span class="status-badge active">Activo</span></td>
-            <td>
-              <div class="action-buttons">
-                <button class="btn-icon" title="Editar">✏️</button>
-                <button class="btn-icon" title="Duplicar">📋</button>
-                <button class="btn-icon" title="Eliminar">🗑️</button>
-              </div>
-            </td>
-          </tr>
-          <tr>
-            <td>
-              <div class="product-cell">
-                <div class="product-image">👖</div>
-                <div class="product-info">
-                  <h4>Jean Skinny Azul</h4>
-                  <span class="product-sku">SKU: JEA-002</span>
+              </td>
+              <td>TSH-001</td>
+              <td><strong>24</strong> unidades</td>
+              <td>10 unidades</td>
+              <td>50 unidades</td>
+              <td><span class="status-badge active">Stock óptimo</span></td>
+              <td>
+                <div class="action-buttons">
+                  <button class="btn-icon" title="Ajustar stock" onclick="adjustStock('TSH-001')">📝</button>
+                  <button class="btn-icon" title="Historial">📊</button>
                 </div>
-              </div>
-            </td>
-            <td>Ropa Casual</td>
-            <td>$89,900</td>
-            <td>12 unidades</td>
-            <td><span class="status-badge active">Activo</span></td>
-            <td>
-              <div class="action-buttons">
-                <button class="btn-icon" title="Editar">✏️</button>
-                <button class="btn-icon" title="Duplicar">📋</button>
-                <button class="btn-icon" title="Eliminar">🗑️</button>
-              </div>
-            </td>
-          </tr>
-          <tr>
-            <td>
-              <div class="product-cell">
-                <div class="product-image">👟</div>
-                <div class="product-info">
-                  <h4>Zapatillas Deportivas</h4>
-                  <span class="product-sku">SKU: ZAP-003</span>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <div class="product-cell">
+                  <div class="product-image">👖</div>
+                  <div class="product-info">
+                    <h4>Jean Skinny Azul</h4>
+                  </div>
                 </div>
-              </div>
-            </td>
-            <td>Calzado</td>
-            <td>$120,000</td>
-            <td>8 unidades</td>
-            <td><span class="status-badge inactive">Agotado</span></td>
-            <td>
-              <div class="action-buttons">
-                <button class="btn-icon" title="Editar">✏️</button>
-                <button class="btn-icon" title="Duplicar">📋</button>
-                <button class="btn-icon" title="Eliminar">🗑️</button>
-              </div>
-            </td>
-          </tr>
-          <tr>
-            <td>
-              <div class="product-cell">
-                <div class="product-image">👔</div>
-                <div class="product-info">
-                  <h4>Camisa Formal Blanca</h4>
-                  <span class="product-sku">SKU: CAM-004</span>
+              </td>
+              <td>JEA-002</td>
+              <td><strong>12</strong> unidades</td>
+              <td>8 unidades</td>
+              <td>40 unidades</td>
+              <td><span class="status-badge active">Stock óptimo</span></td>
+              <td>
+                <div class="action-buttons">
+                  <button class="btn-icon" title="Ajustar stock" onclick="adjustStock('JEA-002')">📝</button>
+                  <button class="btn-icon" title="Historial">📊</button>
                 </div>
-              </div>
-            </td>
-            <td>Ropa Formal</td>
-            <td>$65,000</td>
-            <td>18 unidades</td>
-            <td><span class="status-badge active">Activo</span></td>
-            <td>
-              <div class="action-buttons">
-                <button class="btn-icon" title="Editar">✏️</button>
-                <button class="btn-icon" title="Duplicar">📋</button>
-                <button class="btn-icon" title="Eliminar">🗑️</button>
-              </div>
-            </td>
-          </tr>
-          <tr>
-            <td>
-              <div class="product-cell">
-                <div class="product-image">🧢</div>
-                <div class="product-info">
-                  <h4>Gorra Deportiva</h4>
-                  <span class="product-sku">SKU: ACC-005</span>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <div class="product-cell">
+                  <div class="product-image">👟</div>
+                  <div class="product-info">
+                    <h4>Zapatillas Deportivas</h4>
+                  </div>
                 </div>
-              </div>
-            </td>
-            <td>Accesorios</td>
-            <td>$35,000</td>
-            <td>30 unidades</td>
-            <td><span class="status-badge active">Activo</span></td>
-            <td>
-              <div class="action-buttons">
-                <button class="btn-icon" title="Editar">✏️</button>
-                <button class="btn-icon" title="Duplicar">📋</button>
-                <button class="btn-icon" title="Eliminar">🗑️</button>
-              </div>
-            </td>
-          </tr>
-          <tr>
-            <td>
-              <div class="product-cell">
-                <div class="product-image">👗</div>
-                <div class="product-info">
-                  <h4>Vestido Casual Verano</h4>
-                  <span class="product-sku">SKU: VES-006</span>
+              </td>
+              <td>ZAP-003</td>
+              <td><strong>3</strong> unidades</td>
+              <td>5 unidades</td>
+              <td>30 unidades</td>
+              <td><span class="status-badge pending">Stock bajo</span></td>
+              <td>
+                <div class="action-buttons">
+                  <button class="btn-icon" title="Ajustar stock" onclick="adjustStock('ZAP-003')">📝</button>
+                  <button class="btn-icon" title="Historial">📊</button>
                 </div>
-              </div>
-            </td>
-            <td>Ropa Casual</td>
-            <td>$95,000</td>
-            <td>15 unidades</td>
-            <td><span class="status-badge active">Activo</span></td>
-            <td>
-              <div class="action-buttons">
-                <button class="btn-icon" title="Editar">✏️</button>
-                <button class="btn-icon" title="Duplicar">📋</button>
-                <button class="btn-icon" title="Eliminar">🗑️</button>
-              </div>
-            </td>
-          </tr>
-          </tbody>
-        </table>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <div class="product-cell">
+                  <div class="product-image">👔</div>
+                  <div class="product-info">
+                    <h4>Camisa Formal Blanca</h4>
+                  </div>
+                </div>
+              </td>
+              <td>CAM-004</td>
+              <td><strong>18</strong> unidades</td>
+              <td>10 unidades</td>
+              <td>45 unidades</td>
+              <td><span class="status-badge active">Stock óptimo</span></td>
+              <td>
+                <div class="action-buttons">
+                  <button class="btn-icon" title="Ajustar stock" onclick="adjustStock('CAM-004')">📝</button>
+                  <button class="btn-icon" title="Historial">📊</button>
+                </div>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <div class="product-cell">
+                  <div class="product-image">🧢</div>
+                  <div class="product-info">
+                    <h4>Gorra Deportiva</h4>
+                  </div>
+                </div>
+              </td>
+              <td>ACC-005</td>
+              <td><strong>30</strong> unidades</td>
+              <td>15 unidades</td>
+              <td>60 unidades</td>
+              <td><span class="status-badge active">Stock óptimo</span></td>
+              <td>
+                <div class="action-buttons">
+                  <button class="btn-icon" title="Ajustar stock" onclick="adjustStock('ACC-005')">📝</button>
+                  <button class="btn-icon" title="Historial">📊</button>
+                </div>
+              </td>
+            </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- Alertas de inventario -->
+      <div class="section">
+        <div class="section-header">
+          <h2 class="section-title">Alertas de Inventario</h2>
+        </div>
+        <div class="inventory-alerts">
+          <div class="alert-item warning">
+            <div class="alert-icon">⚠️</div>
+            <div class="alert-content">
+              <h4>Stock Bajo - Zapatillas Deportivas</h4>
+              <p>Quedan solo 3 unidades. Stock mínimo: 5 unidades</p>
+            </div>
+            <button class="btn-secondary">Reabastecer</button>
+          </div>
+          <div class="alert-item info">
+            <div class="alert-icon">ℹ️</div>
+            <div class="alert-content">
+              <h4>Próxima Revisión de Inventario</h4>
+              <p>Programada para el 25 de Noviembre 2025</p>
+            </div>
+            <button class="btn-secondary">Ver Detalles</button>
+          </div>
+        </div>
       </div>
     </div>
+
+    <!-- CUSTOMERS VIEW -->
+    <div class="view-container" id="view-customers">
+      <div class="section">
+        <div class="section-header">
+          <h2 class="section-title">Base de Clientes</h2>
+          <div class="section-actions">
+            <button class="btn-secondary">Exportar</button>
+          </div>
+        </div>
+
+        <div class="filter-bar">
+          <input type="text" class="filter-input" placeholder="🔍 Buscar clientes...">
+          <select class="filter-select">
+            <option>Todos los clientes</option>
+            <option>Clientes VIP</option>
+            <option>Compradores frecuentes</option>
+            <option>Nuevos clientes</option>
+          </select>
+        </div>
+
+        <div class="table-container">
+          <table>
+            <thead>
+            <tr>
+              <th>Cliente</th>
+              <th>Email</th>
+              <th>Teléfono</th>
+              <th>Pedidos</th>
+              <th>Total Gastado</th>
+              <th>Última Compra</th>
+              <th>Acciones</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+              <td>
+                <div class="customer-info">
+                  <div class="customer-avatar">MG</div>
+                  <div class="customer-name">María González</div>
+                </div>
+              </td>
+              <td>maria.g@email.com</td>
+              <td>+57 300 123 4567</td>
+              <td>12 pedidos</td>
+              <td>$1,245,000</td>
+              <td>Hace 2 horas</td>
+              <td>
+                <div class="action-buttons">
+                  <button class="btn-icon" title="Ver perfil">👁️</button>
+                  <button class="btn-icon" title="Contactar">💬</button>
+                </div>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <div class="customer-info">
+                  <div class="customer-avatar">JR</div>
+                  <div class="customer-name">Juan Rodríguez</div>
+                </div>
+              </td>
+              <td>juan.r@email.com</td>
+              <td>+57 301 234 5678</td>
+              <td>8 pedidos</td>
+              <td>$890,000</td>
+              <td>Hace 4 horas</td>
+              <td>
+                <div class="action-buttons">
+                  <button class="btn-icon" title="Ver perfil">👁️</button>
+                  <button class="btn-icon" title="Contactar">💬</button>
+                </div>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <div class="customer-info">
+                  <div class="customer-avatar">LC</div>
+                  <div class="customer-name">Laura Castro</div>
+                </div>
+              </td>
+              <td>laura.c@email.com</td>
+              <td>+57 302 345 6789</td>
+              <td>15 pedidos</td>
+              <td>$1,650,000</td>
+              <td>Ayer</td>
+              <td>
+                <div class="action-buttons">
+                  <button class="btn-icon" title="Ver perfil">👁️</button>
+                  <button class="btn-icon" title="Contactar">💬</button>
+                </div>
+              </td>
+            </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- ANALYTICS VIEW -->
+    <div class="view-container" id="view-analytics">
+      <div class="stats-grid">
+        <div class="stat-card">
+          <div class="stat-header">
+            <div class="stat-icon-large blue">📊</div>
+          </div>
+          <div class="stat-value">$8,450,000</div>
+          <div class="stat-label">Ventas Totales</div>
+          <div class="stat-change positive">↑ 18.2% este año</div>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-header">
+            <div class="stat-icon-large green">📈</div>
+          </div>
+          <div class="stat-value">345</div>
+          <div class="stat-label">Pedidos Totales</div>
+          <div class="stat-change positive">↑ 23.5% este mes</div>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-header">
+            <div class="stat-icon-large orange">💵</div>
+          </div>
+          <div class="stat-value">$24,500</div>
+          <div class="stat-label">Ticket Promedio</div>
+          <div class="stat-change negative">↓ 2.1% este mes</div>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-header">
+            <div class="stat-icon-large purple">🎯</div>
+          </div>
+          <div class="stat-value">68%</div>
+          <div class="stat-label">Tasa de Conversión</div>
+          <div class="stat-change positive">↑ 5.3% este mes</div>
+        </div>
+      </div>
+
+      <div class="empty-state">
+        <div class="empty-icon">📈</div>
+        <h2 class="empty-title">Reportes y Análisis Detallados</h2>
+        <p class="empty-text">Gráficos, tendencias y métricas avanzadas próximamente</p>
+      </div>
+    </div>
+
+    <!-- PROMOTIONS VIEW -->
+    <!-- PROMOTIONS VIEW -->
+    <div class="view-container" id="view-promotions">
+
+      <!-- Modal Nueva Promoción -->
+      <div id="promotionModal" class="modal">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h2>🎁 Nueva Promoción</h2>
+            <span class="modal-close" onclick="closePromotionModal()">&times;</span>
+          </div>
+          <div class="modal-body">
+            <form id="promotionForm">
+              <div class="form-group">
+                <label>Nombre de la Promoción *</label>
+                <input type="text" class="form-input" placeholder="Ej: Black Friday 2025" required>
+              </div>
+
+              <div class="form-group">
+                <label>Tipo de Promoción *</label>
+                <select class="form-input" required>
+                  <option value="">Seleccionar tipo</option>
+                  <option value="codigo">Código de descuento</option>
+                  <option value="automatico">Descuento automático</option>
+                  <option value="envio">Envío gratis</option>
+                  <option value="2x1">2x1 / 3x2</option>
+                </select>
+              </div>
+
+              <div class="form-row">
+                <div class="form-group">
+                  <label>Código (opcional)</label>
+                  <input type="text" class="form-input" placeholder="Ej: BLACKFRI25">
+                </div>
+                <div class="form-group">
+                  <label>Descuento *</label>
+                  <div class="input-group">
+                    <input type="number" class="form-input" placeholder="50" required>
+                    <select class="form-input-addon">
+                      <option>%</option>
+                      <option>$</option>
+                    </select>
+                  </div>
+                </div>
+              </div>
+
+              <div class="form-row">
+                <div class="form-group">
+                  <label>Fecha Inicio *</label>
+                  <input type="date" class="form-input" required>
+                </div>
+                <div class="form-group">
+                  <label>Fecha Fin *</label>
+                  <input type="date" class="form-input" required>
+                </div>
+              </div>
+
+              <div class="form-row">
+                <div class="form-group">
+                  <label>Límite de Usos</label>
+                  <input type="number" class="form-input" placeholder="100 (dejar vacío para ilimitado)">
+                </div>
+                <div class="form-group">
+                  <label>Compra Mínima ($)</label>
+                  <input type="number" class="form-input" placeholder="0">
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label>
+                  <input type="checkbox"> Solo para primera compra
+                </label>
+              </div>
+
+              <div class="form-group">
+                <label>
+                  <input type="checkbox"> Solo para clientes VIP
+                </label>
+              </div>
+
+              <div class="modal-footer">
+                <button type="button" class="btn-secondary" onclick="closePromotionModal()">Cancelar</button>
+                <button type="submit" class="btn-primary">Crear Promoción</button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+
+      <!-- Stats de promociones -->
+      <div class="stats-grid">
+        <div class="stat-card">
+          <div class="stat-header">
+            <div class="stat-icon-large purple">🎁</div>
+          </div>
+          <div class="stat-value">12</div>
+          <div class="stat-label">Promociones Activas</div>
+          <div class="stat-change positive">↑ 3 esta semana</div>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-header">
+            <div class="stat-icon-large green">💰</div>
+          </div>
+          <div class="stat-value">$1,245,000</div>
+          <div class="stat-label">Ventas con Descuento</div>
+          <div class="stat-change positive">↑ 18.5% este mes</div>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-header">
+            <div class="stat-icon-large orange">📊</div>
+          </div>
+          <div class="stat-value">156</div>
+          <div class="stat-label">Códigos Canjeados</div>
+          <div class="stat-change positive">↑ 23 hoy</div>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-header">
+            <div class="stat-icon-large blue">🎯</div>
+          </div>
+          <div class="stat-value">68%</div>
+          <div class="stat-label">Tasa de Conversión</div>
+          <div class="stat-change positive">↑ 12% vs promedio</div>
+        </div>
+      </div>
+
+      <!-- Tabla de promociones -->
+      <div class="section">
+        <div class="section-header">
+          <h2 class="section-title">Promociones y Descuentos</h2>
+          <div class="section-actions">
+            <button class="btn-secondary" onclick="showPromotionModal()">+ Nueva Promoción</button>
+            <button class="btn-secondary">📊 Reporte</button>
+          </div>
+        </div>
+
+        <div class="filter-bar">
+          <input type="text" class="filter-input" placeholder="🔍 Buscar promociones...">
+          <select class="filter-select">
+            <option>Todas las promociones</option>
+            <option>Activas</option>
+            <option>Programadas</option>
+            <option>Finalizadas</option>
+          </select>
+          <select class="filter-select">
+            <option>Todos los tipos</option>
+            <option>Código de descuento</option>
+            <option>Descuento automático</option>
+            <option>Envío gratis</option>
+            <option>2x1 / 3x2</option>
+          </select>
+        </div>
+
+        <div class="table-container">
+          <table>
+            <thead>
+            <tr>
+              <th>Promoción</th>
+              <th>Código</th>
+              <th>Descuento</th>
+              <th>Uso</th>
+              <th>Vigencia</th>
+              <th>Estado</th>
+              <th>Acciones</th>
+            </tr>
+            </thead>
+            <tbody id="promotionsTableBody">
+            <tr>
+              <td>
+                <div class="product-info">
+                  <h4>🎉 Black Friday 2025</h4>
+                  <span class="product-sku">Descuento por código</span>
+                </div>
+              </td>
+              <td><strong>BLACKFRI25</strong></td>
+              <td><span class="discount-badge">-50%</span></td>
+              <td>23 / 100 usos</td>
+              <td>
+                <div>18 Nov - 30 Nov</div>
+                <small style="color: #8a8a8a;">12 días restantes</small>
+              </td>
+              <td><span class="status-badge active">Activa</span></td>
+              <td>
+                <div class="action-buttons">
+                  <button class="btn-icon" title="Editar" onclick="editPromotion('BLACKFRI25')">✏️</button>
+                  <button class="btn-icon" title="Duplicar">📋</button>
+                  <button class="btn-icon" title="Pausar">⏸️</button>
+                  <button class="btn-icon" title="Eliminar">🗑️</button>
+                </div>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <div class="product-info">
+                  <h4>🎁 Envío Gratis</h4>
+                  <span class="product-sku">Envío gratuito</span>
+                </div>
+              </td>
+              <td><strong>ENVIOGRATIS</strong></td>
+              <td><span class="discount-badge free">Envío $0</span></td>
+              <td>45 / 200 usos</td>
+              <td>
+                <div>01 Nov - 31 Dic</div>
+                <small style="color: #8a8a8a;">43 días restantes</small>
+              </td>
+              <td><span class="status-badge active">Activa</span></td>
+              <td>
+                <div class="action-buttons">
+                  <button class="btn-icon" title="Editar" onclick="editPromotion('ENVIOGRATIS')">✏️</button>
+                  <button class="btn-icon" title="Duplicar">📋</button>
+                  <button class="btn-icon" title="Pausar">⏸️</button>
+                  <button class="btn-icon" title="Eliminar">🗑️</button>
+                </div>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <div class="product-info">
+                  <h4>💝 Clientes VIP</h4>
+                  <span class="product-sku">Descuento por código</span>
+                </div>
+              </td>
+              <td><strong>VIP2025</strong></td>
+              <td><span class="discount-badge">-30%</span></td>
+              <td>12 / 50 usos</td>
+              <td>
+                <div>01 Ene - 31 Dic</div>
+                <small style="color: #8a8a8a;">Todo el año</small>
+              </td>
+              <td><span class="status-badge active">Activa</span></td>
+              <td>
+                <div class="action-buttons">
+                  <button class="btn-icon" title="Editar" onclick="editPromotion('VIP2025')">✏️</button>
+                  <button class="btn-icon" title="Duplicar">📋</button>
+                  <button class="btn-icon" title="Pausar">⏸️</button>
+                  <button class="btn-icon" title="Eliminar">🗑️</button>
+                </div>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <div class="product-info">
+                  <h4>🛍️ 2x1 en Camisetas</h4>
+                  <span class="product-sku">Promoción automática</span>
+                </div>
+              </td>
+              <td><em>Automático</em></td>
+              <td><span class="discount-badge special">2x1</span></td>
+              <td>8 conversiones</td>
+              <td>
+                <div>15 Nov - 20 Nov</div>
+                <small style="color: #ef6c00;">2 días restantes</small>
+              </td>
+              <td><span class="status-badge active">Activa</span></td>
+              <td>
+                <div class="action-buttons">
+                  <button class="btn-icon" title="Editar" onclick="editPromotion('2X1TSH')">✏️</button>
+                  <button class="btn-icon" title="Duplicar">📋</button>
+                  <button class="btn-icon" title="Pausar">⏸️</button>
+                  <button class="btn-icon" title="Eliminar">🗑️</button>
+                </div>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <div class="product-info">
+                  <h4>🎈 Bienvenida Nuevos</h4>
+                  <span class="product-sku">Primera compra</span>
+                </div>
+              </td>
+              <td><strong>BIENVENIDO</strong></td>
+              <td><span class="discount-badge">-20%</span></td>
+              <td>34 / Ilimitado</td>
+              <td>
+                <div>Permanente</div>
+                <small style="color: #8a8a8a;">Sin vencimiento</small>
+              </td>
+              <td><span class="status-badge active">Activa</span></td>
+              <td>
+                <div class="action-buttons">
+                  <button class="btn-icon" title="Editar" onclick="editPromotion('BIENVENIDO')">✏️</button>
+                  <button class="btn-icon" title="Duplicar">📋</button>
+                  <button class="btn-icon" title="Pausar">⏸️</button>
+                  <button class="btn-icon" title="Eliminar">🗑️</button>
+                </div>
+              </td>
+            </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- Mejores promociones -->
+      <div class="section">
+        <div class="section-header">
+          <h2 class="section-title">📈 Promociones Más Exitosas</h2>
+        </div>
+        <div class="promo-cards-grid">
+          <div class="promo-card">
+            <div class="promo-header">
+              <h4>🎉 Black Friday 2025</h4>
+              <span class="status-badge active">Activa</span>
+            </div>
+            <div class="promo-stats">
+              <div class="promo-stat">
+                <span class="label">Conversiones</span>
+                <span class="value">23</span>
+              </div>
+              <div class="promo-stat">
+                <span class="label">Ingresos</span>
+                <span class="value">$685,000</span>
+              </div>
+              <div class="promo-stat">
+                <span class="label">ROI</span>
+                <span class="value positive">+245%</span>
+              </div>
+            </div>
+          </div>
+          <div class="promo-card">
+            <div class="promo-header">
+              <h4>🎁 Envío Gratis</h4>
+              <span class="status-badge active">Activa</span>
+            </div>
+            <div class="promo-stats">
+              <div class="promo-stat">
+                <span class="label">Conversiones</span>
+                <span class="value">45</span>
+              </div>
+              <div class="promo-stat">
+                <span class="label">Ingresos</span>
+                <span class="value">$380,000</span>
+              </div>
+              <div class="promo-stat">
+                <span class="label">ROI</span>
+                <span class="value positive">+180%</span>
+              </div>
+            </div>
+          </div>
+          <div class="promo-card">
+            <div class="promo-header">
+              <h4>🎈 Bienvenida Nuevos</h4>
+              <span class="status-badge active">Activa</span>
+            </div>
+            <div class="promo-stats">
+              <div class="promo-stat">
+                <span class="label">Conversiones</span>
+                <span class="value">34</span>
+              </div>
+              <div class="promo-stat">
+                <span class="label">Ingresos</span>
+                <span class="value">$180,000</span>
+              </div>
+              <div class="promo-stat">
+                <span class="label">ROI</span>
+                <span class="value positive">+156%</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+    <!-- STORE SETTINGS VIEW -->
+    <div class="view-container" id="view-store-settings">
+      <div class="empty-state">
+        <div class="empty-icon">⚙️</div>
+        <h2 class="empty-title">Configuración de Tienda</h2>
+        <p class="empty-text">Información general, horarios, políticas y personalización</p>
+        <button class="add-btn">
+          <span>✏️</span>
+          <span>Editar Configuración</span>
+        </button>
+      </div>
+    </div>
+
+    <!-- PAYMENTS VIEW -->
+    <div class="view-container" id="view-payments">
+      <div class="empty-state">
+        <div class="empty-icon">💳</div>
+        <h2 class="empty-title">Métodos de Pago</h2>
+        <p class="empty-text">Configura las opciones de pago para tu tienda</p>
+        <button class="add-btn">
+          <span>+</span>
+          <span>Agregar Método de Pago</span>
+        </button>
+      </div>
+    </div>
+
+    <!-- SHIPPING VIEW -->
+    <div class="view-container" id="view-shipping">
+      <div class="empty-state">
+        <div class="empty-icon">🚚</div>
+        <h2 class="empty-title">Configuración de Envíos</h2>
+        <p class="empty-text">Gestiona zonas de envío, tarifas y tiempos de entrega</p>
+        <button class="add-btn">
+          <span>+</span>
+          <span>Configurar Envíos</span>
+        </button>
+      </div>
+    </div>
+
+    <!-- NOTIFICATIONS VIEW -->
+    <div class="view-container" id="view-notifications">
+      <div class="empty-state">
+        <div class="empty-icon">🔔</div>
+        <h2 class="empty-title">Centro de Notificaciones</h2>
+        <p class="empty-text">Configura alertas y preferencias de notificación</p>
+        <button class="add-btn">
+          <span>⚙️</span>
+          <span>Gestionar Notificaciones</span>
+        </button>
+      </div>
+    </div>
+
+    <!-- SUPPORT VIEW -->
+    <div class="view-container" id="view-support">
+      <div class="empty-state">
+        <div class="empty-icon">💬</div>
+        <h2 class="empty-title">Soporte y Ayuda</h2>
+        <p class="empty-text">¿Necesitas ayuda? Estamos aquí para ti</p>
+        <button class="add-btn">
+          <span>📧</span>
+          <span>Contactar Soporte</span>
+        </button>
+      </div>
+    </div>
+
   </div>
 </main>
 
@@ -1049,83 +2262,114 @@
     mainContent.classList.toggle('expanded');
   });
 
-  // Navigation
+  // Navigation system
   const navItems = document.querySelectorAll('.nav-item');
+  const viewContainers = document.querySelectorAll('.view-container');
+  const headerTitle = document.getElementById('headerTitle');
+  const headerSubtitle = document.getElementById('headerSubtitle');
+  const addBtn = document.getElementById('addBtn');
+  const addBtnText = document.getElementById('addBtnText');
+
+  const viewConfig = {
+    'dashboard': {
+      title: 'Dashboard',
+      subtitle: 'Bienvenido de nuevo, aquí está tu resumen de hoy',
+      btnText: 'Agregar Producto'
+    },
+    'catalog': {
+      title: 'Catálogo de Productos',
+      subtitle: 'Gestiona tu inventario de productos',
+      btnText: 'Agregar Producto'
+    },
+    'orders': {
+      title: 'Gestión de Pedidos',
+      subtitle: 'Administra todos los pedidos de tu tienda',
+      btnText: 'Crear Pedido'
+    },
+    'inventory': {
+      title: 'Gestión de Inventario',
+      subtitle: 'Controla el stock y movimientos de productos',
+      btnText: 'Ajustar Stock'
+    },
+    'customers': {
+      title: 'Base de Clientes',
+      subtitle: 'Administra la información de tus clientes',
+      btnText: 'Agregar Cliente'
+    },
+    'analytics': {
+      title: 'Estadísticas y Análisis',
+      subtitle: 'Reportes detallados de ventas y rendimiento',
+      btnText: 'Exportar Reporte'
+    },
+    'promotions': {
+      title: 'Promociones y Descuentos',
+      subtitle: 'Crea y gestiona ofertas especiales',
+      btnText: 'Crear Promoción'
+    },
+    'store-settings': {
+      title: 'Configuración de Tienda',
+      subtitle: 'Información general y preferencias',
+      btnText: 'Guardar Cambios'
+    },
+    'payments': {
+      title: 'Métodos de Pago',
+      subtitle: 'Configura las opciones de pago',
+      btnText: 'Agregar Método'
+    },
+    'shipping': {
+      title: 'Configuración de Envíos',
+      subtitle: 'Gestiona zonas y costos de envío',
+      btnText: 'Agregar Zona'
+    },
+    'notifications': {
+      title: 'Centro de Notificaciones',
+      subtitle: 'Configuración de alertas y mensajes',
+      btnText: 'Configurar'
+    },
+    'support': {
+      title: 'Soporte y Ayuda',
+      subtitle: 'Contacta con nuestro equipo',
+      btnText: 'Enviar Mensaje'
+    },
+    'logout': {
+      title: 'Cerrar Sesión',
+      subtitle: '¿Estás seguro de que deseas salir?',
+      btnText: 'Cerrar Sesión'
+    }
+  };
+
   navItems.forEach(item => {
     item.addEventListener('click', (e) => {
       e.preventDefault();
 
-      // Remove active class from all items
-      navItems.forEach(nav => nav.classList.remove('active'));
-
-      // Add active class to clicked item
-      item.classList.add('active');
-
-      // Get view name
       const view = item.dataset.view;
 
-      // Update header title
-      const headerTitle = document.querySelector('.header-title h1');
-      const headerSubtitle = document.querySelector('.header-subtitle');
-
-      const viewNames = {
-        'dashboard': {
-          title: 'Dashboard',
-          subtitle: 'Bienvenido de nuevo, aquí está tu resumen de hoy'
-        },
-        'catalog': {
-          title: 'Catálogo de Productos',
-          subtitle: 'Gestiona tu inventario de productos'
-        },
-        'orders': {
-          title: 'Pedidos',
-          subtitle: 'Administra todos los pedidos de tu tienda'
-        },
-        'inventory': {
-          title: 'Gestión de Inventario',
-          subtitle: 'Controla el stock y movimientos de productos'
-        },
-        'customers': {
-          title: 'Clientes',
-          subtitle: 'Base de datos de clientes y su historial'
-        },
-        'analytics': {
-          title: 'Estadísticas y Análisis',
-          subtitle: 'Reportes detallados de ventas y rendimiento'
-        },
-        'promotions': {
-          title: 'Promociones y Descuentos',
-          subtitle: 'Crea y gestiona ofertas especiales'
-        },
-        'store-settings': {
-          title: 'Configuración de Tienda',
-          subtitle: 'Información general y preferencias'
-        },
-        'payments': {
-          title: 'Métodos de Pago',
-          subtitle: 'Configura las opciones de pago'
-        },
-        'shipping': {
-          title: 'Configuración de Envíos',
-          subtitle: 'Gestiona zonas y costos de envío'
-        },
-        'notifications': {
-          title: 'Centro de Notificaciones',
-          subtitle: 'Configuración de alertas y mensajes'
-        },
-        'support': {
-          title: 'Soporte y Ayuda',
-          subtitle: 'Contacta con nuestro equipo'
-        },
-        'logout': {
-          title: 'Cerrar Sesión',
-          subtitle: '¿Estás seguro de que deseas salir?'
+      // Handle logout
+      if (view === 'logout') {
+        if (confirm('¿Estás seguro de que deseas cerrar sesión?')) {
+          window.location.href = 'login.html';
         }
-      };
+        return;
+      }
 
-      if (headerTitle && viewNames[view]) {
-        headerTitle.textContent = viewNames[view].title;
-        headerSubtitle.textContent = viewNames[view].subtitle;
+      // Update active nav item
+      navItems.forEach(nav => nav.classList.remove('active'));
+      item.classList.add('active');
+
+      // Hide all views
+      viewContainers.forEach(container => container.classList.remove('active'));
+
+      // Show selected view
+      const activeView = document.getElementById(`view-${view}`);
+      if (activeView) {
+        activeView.classList.add('active');
+      }
+
+      // Update header
+      if (viewConfig[view]) {
+        headerTitle.textContent = viewConfig[view].title;
+        headerSubtitle.textContent = viewConfig[view].subtitle;
+        addBtnText.textContent = viewConfig[view].btnText;
       }
 
       // Close sidebar on mobile
@@ -1136,53 +2380,21 @@
     });
   });
 
-  // Add Product Button
-  document.getElementById('addProductBtn').addEventListener('click', () => {
-    alert('🎉 Función de agregar producto\n\nAquí se abriría un formulario completo para agregar nuevos productos a tu catálogo con:\n\n• Nombre y descripción\n• Categoría\n• Precio y descuentos\n• Imágenes del producto\n• Variantes (tallas, colores)\n• Stock disponible\n• SEO y etiquetas');
+  // Add button functionality
+  addBtn.addEventListener('click', () => {
+    const currentView = document.querySelector('.nav-item.active').dataset.view;
+    alert(`🎉 Función: ${viewConfig[currentView]?.btnText || 'Agregar'}\n\nEsta función abrirá el formulario correspondiente.`);
   });
 
-  // Action buttons simulation
-  document.querySelectorAll('.btn-icon').forEach(btn => {
-    btn.addEventListener('click', (e) => {
-      e.stopPropagation();
+  // Action buttons
+  document.addEventListener('click', (e) => {
+    if (e.target.classList.contains('btn-icon') || e.target.closest('.btn-icon')) {
+      const btn = e.target.classList.contains('btn-icon') ? e.target : e.target.closest('.btn-icon');
       const title = btn.getAttribute('title');
 
-      if (title === 'Editar') {
-        alert('✏️ Editar producto\n\nAbriendo formulario de edición...');
-      } else if (title === 'Duplicar') {
-        alert('📋 Duplicar producto\n\n¡Producto duplicado exitosamente!');
-      } else if (title === 'Eliminar') {
-        if (confirm('🗑️ ¿Estás seguro de eliminar este producto?')) {
-          alert('Producto eliminado correctamente');
-        }
-      } else if (title === 'Ver detalles') {
-        alert('👁️ Ver detalles del pedido\n\nMostrando información completa...');
-      } else if (title === 'Procesar') {
-        alert('✓ Procesar pedido\n\n¡Pedido marcado como procesado!');
-      } else if (title === 'Imprimir' || title === 'Factura') {
-        alert('🖨️ Generando documento...');
+      if (title) {
+        alert(`${btn.textContent} ${title}\n\nEsta acción se procesará en la versión completa.`);
       }
-    });
-  });
-
-  // Secondary buttons
-  document.querySelectorAll('.btn-secondary').forEach(btn => {
-    btn.addEventListener('click', () => {
-      const text = btn.textContent;
-      if (text === 'Filtrar') {
-        alert('🔍 Panel de filtros\n\nOpciones de filtrado disponibles...');
-      } else if (text === 'Exportar') {
-        alert('📊 Exportar datos\n\n¿En qué formato deseas exportar?\n• Excel\n• PDF\n• CSV');
-      } else if (text === 'Ordenar') {
-        alert('⬆️⬇️ Ordenar productos\n\n• Por nombre\n• Por precio\n• Por stock\n• Por fecha');
-      }
-    });
-  });
-
-  // Notification bell
-  document.querySelector('.icon-btn').addEventListener('click', function() {
-    if (this.textContent.includes('🔔')) {
-      alert('🔔 Notificaciones (3)\n\n• Nuevo pedido recibido\n• Stock bajo en 2 productos\n• Nueva reseña de cliente');
     }
   });
 
@@ -1217,6 +2429,39 @@
       }, index * 100);
     });
   });
+
+  // Notification bell
+  document.querySelector('.icon-btn').addEventListener('click', function() {
+    if (this.textContent.includes('🔔')) {
+      alert('🔔 Notificaciones (3)\n\n• Nuevo pedido recibido\n• Stock bajo en 2 productos\n• Nueva reseña de cliente');
+    }
+  });
+
+  function showPromotionModal() {
+  document.getElementById('promotionModal').style.display = 'block';
+  document.body.style.overflow = 'hidden';
+}
+
+function closePromotionModal() {
+  document.getElementById('promotionModal').style.display = 'none';
+  document.body.style.overflow = 'auto';
+}
+
+// Cerrar modal al hacer clic fuera
+window.onclick = function(event) {
+  const modal = document.getElementById('promotionModal');
+  if (event.target === modal) {
+    closePromotionModal();
+  }
+}
+
+// Manejar envío del formulario
+document.getElementById('promotionForm').addEventListener('submit', function(e) {
+  e.preventDefault();
+  alert('¡Promoción creada exitosamente!');
+  closePromotionModal();
+  this.reset();
+});
 </script>
 </body>
 </html>
