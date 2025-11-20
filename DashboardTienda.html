@@ -870,6 +870,1127 @@
 .btn-primary:hover {
   background-color: #2563eb;
 }
+/* STORE SETTINGS VIEW STYLES */
+
+/* ----------------------- */
+/* HEADER Y BOTÓN GUARDAR */
+/* ----------------------- */
+.settings-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 2rem;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.save-settings-btn {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.75rem 1.5rem;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  border: none;
+  border-radius: 12px;
+  font-size: 0.95rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
+}
+
+.save-settings-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(102, 126, 234, 0.4);
+}
+
+/* ----------------------- */
+/* NAV TABS */
+/* ----------------------- */
+
+.settings-tabs {
+  display: flex;
+  gap: 0.5rem;
+  margin-bottom: 2rem;
+  overflow-x: auto;
+  padding-bottom: 0.5rem;
+}
+
+.settings-tab {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.75rem 1.25rem;
+  background: white;
+  border: 2px solid #e5e7eb;
+  border-radius: 12px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: #6b7280;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  white-space: nowrap;
+}
+
+.settings-tab:hover {
+  border-color: #667eea;
+  color: #667eea;
+  transform: translateY(-2px);
+}
+
+.settings-tab.active {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  border-color: transparent;
+  color: white;
+}
+
+.tab-icon {
+  font-size: 1.25rem;
+}
+
+/* ----------------------- */
+/* SECCION GENERAL */
+/* ----------------------- */
+
+.settings-content {
+  animation: fadeIn 0.3s ease;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.settings-section {
+  background: white;
+  border-radius: 16px;
+  border: 2px solid #f0f0f0;
+  padding: 2rem;
+  margin-bottom: 1.5rem;
+}
+
+.section-header {
+  margin-bottom: 2rem;
+  padding-bottom: 1rem;
+  border-bottom: 2px solid #f0f0f0;
+}
+
+.section-heading {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #1a1a1a;
+  margin: 0 0 0.5rem 0;
+}
+
+.section-description {
+  font-size: 0.95rem;
+  color: #6b7280;
+  margin: 0;
+}
+
+/* ----------------------- */
+/* GRID DE CAMPOS */
+/* ----------------------- */
+
+.settings-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1.5rem;
+}
+
+.setting-field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.setting-field.full-width {
+  grid-column: 1 / -1;
+}
+
+.field-label {
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: #374151;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.field-input,
+.field-select,
+.field-textarea {
+  padding: 0.75rem 1rem;
+  border: 2px solid #e5e7eb;
+  border-radius: 10px;
+  font-size: 0.95rem;
+  font-family: inherit;
+  color: #1a1a1a;
+  transition: all 0.3s ease;
+  background: white;
+}
+
+.field-input:focus,
+.field-select:focus,
+.field-textarea:focus {
+  outline: none;
+  border-color: #667eea;
+  box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+}
+
+.field-textarea {
+  resize: vertical;
+  min-height: 100px;
+}
+
+.field-help {
+  font-size: 0.8rem;
+  color: #9ca3af;
+  font-style: italic;
+}
+
+/* ----------------------- */
+/* HORARIOS */
+/* ----------------------- */
+
+.hours-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.hours-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem;
+  background: #f9fafb;
+  border-radius: 12px;
+  gap: 1rem;
+}
+
+.hours-day {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  min-width: 150px;
+}
+
+.day-name {
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: #374151;
+}
+
+/* ----------------------- */
+/* TOGGLE SWITCH */
+/* ----------------------- */
+
+.hours-toggle {
+  position: relative;
+  display: inline-block;
+  width: 44px;
+  height: 24px;
+}
+
+.hours-toggle input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.hours-toggle .toggle-slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #d1d5db;
+  transition: 0.4s;
+  border-radius: 34px;
+}
+
+.hours-toggle .toggle-slider:before {
+  position: absolute;
+  content: "";
+  height: 18px;
+  width: 18px;
+  left: 3px;
+  bottom: 3px;
+  background-color: white;
+  transition: 0.4s;
+  border-radius: 50%;
+}
+
+.hours-toggle input:checked + .toggle-slider {
+  background-color: #667eea;
+}
+
+.hours-toggle input:checked + .toggle-slider:before {
+  transform: translateX(20px);
+}
+
+/* Inputs de horas */
+.time-input {
+  padding: 0.5rem;
+  border: 2px solid #e5e7eb;
+  border-radius: 8px;
+}
+
+.time-input:focus {
+  border-color: #667eea;
+  outline: none;
+}
+
+.time-separator {
+  margin: 0 0.5rem;
+  font-weight: 600;
+}
+
+.closed-label {
+  color: #9ca3af;
+  font-style: italic;
+}
+
+/* ----------------------- */
+/* POLICIES */
+/* ----------------------- */
+
+.policy-editor {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.policy-item {
+  border: 2px solid #eee;
+  padding: 1rem;
+  border-radius: 12px;
+}
+
+.policy-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  cursor: pointer;
+}
+
+.policy-title {
+  font-size: 1.1rem;
+  font-weight: 600;
+}
+
+.policy-content {
+  margin-top: 1rem;
+}
+
+.policy-textarea {
+  width: 100%;
+  padding: 1rem;
+  border-radius: 10px;
+  border: 2px solid #e5e7eb;
+}
+
+/* ----------------------- */
+/* APARIENCIA */
+/* ----------------------- */
+
+.appearance-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 1.5rem;
+}
+
+.appearance-card {
+  border: 2px solid #eee;
+  padding: 1.5rem;
+  border-radius: 14px;
+  background: white;
+}
+
+.appearance-card.full-width {
+  grid-column: 1 / -1;
+}
+
+/* ----------------------- */
+/* NOTIFICACIONES */
+/* ----------------------- */
+
+.notifications-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1.5rem;
+}
+
+.notification-category {
+  border: 2px solid #eee;
+  padding: 1.5rem;
+  border-radius: 14px;
+}
+
+.notification-list {
+  margin-top: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.notification-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.notification-name {
+  font-weight: 600;
+}
+
+.notification-desc {
+  font-size: 0.85rem;
+  color: #777;
+}
+
+
+    /* PAYMENTS VIEW STYLES */
+.payments-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 2rem;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.section-title {
+  font-size: 1.75rem;
+  font-weight: 700;
+  color: #1a1a1a;
+  margin: 0 0 0.25rem 0;
+}
+
+.section-subtitle {
+  font-size: 0.95rem;
+  color: #6b7280;
+  margin: 0;
+}
+
+.add-payment-btn {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.75rem 1.5rem;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  border: none;
+  border-radius: 12px;
+  font-size: 0.95rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
+}
+
+.add-payment-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(102, 126, 234, 0.4);
+}
+
+.btn-icon {
+  font-size: 1.25rem;
+  font-weight: 700;
+}
+
+.payments-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 1.5rem;
+}
+
+.payment-card {
+  background: white;
+  border-radius: 16px;
+  border: 2px solid #f0f0f0;
+  padding: 1.5rem;
+  transition: all 0.3s ease;
+  display: flex;
+  flex-direction: column;
+  opacity: 0.7;
+}
+
+.payment-card.active {
+  opacity: 1;
+  border-color: #e0e7ff;
+  background: linear-gradient(135deg, #ffffff 0%, #f9fafb 100%);
+}
+
+.payment-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+  border-color: #667eea;
+}
+
+.payment-card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 1rem;
+}
+
+.payment-icon {
+  font-size: 2.5rem;
+  width: 60px;
+  height: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, #f3f4f6 0%, #e5e7eb 100%);
+  border-radius: 12px;
+}
+
+.payment-card.active .payment-icon {
+  background: linear-gradient(135deg, #eef2ff 0%, #e0e7ff 100%);
+}
+
+.status-badge {
+  padding: 0.375rem 0.75rem;
+  border-radius: 20px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.status-badge.active {
+  background: #d1fae5;
+  color: #065f46;
+}
+
+.status-badge.inactive {
+  background: #fee2e2;
+  color: #991b1b;
+}
+
+.payment-card-body {
+  flex: 1;
+  margin-bottom: 1.25rem;
+}
+
+.payment-title {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: #1a1a1a;
+  margin: 0 0 0.5rem 0;
+}
+
+.payment-description {
+  font-size: 0.9rem;
+  color: #6b7280;
+  margin: 0 0 1.25rem 0;
+  line-height: 1.5;
+}
+
+.payment-stats {
+  display: flex;
+  gap: 1.5rem;
+  padding-top: 1rem;
+  border-top: 1px solid #f0f0f0;
+}
+
+.stat-item {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.stat-label {
+  font-size: 0.75rem;
+  color: #9ca3af;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  font-weight: 600;
+}
+
+.stat-value {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: #1a1a1a;
+}
+
+.payment-card.active .stat-value {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.payment-card-footer {
+  display: flex;
+  gap: 0.75rem;
+  padding-top: 1rem;
+  border-top: 1px solid #f0f0f0;
+}
+
+.btn-secondary {
+  flex: 1;
+  padding: 0.625rem 1rem;
+  background: #f3f4f6;
+  color: #374151;
+  border: 2px solid transparent;
+  border-radius: 10px;
+  font-size: 0.875rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.btn-secondary:hover {
+  background: #e5e7eb;
+  border-color: #667eea;
+  color: #667eea;
+}
+
+.btn-text {
+  padding: 0.625rem 1rem;
+  background: transparent;
+  color: #6b7280;
+  border: none;
+  border-radius: 10px;
+  font-size: 0.875rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.btn-text:hover {
+  background: #f3f4f6;
+  color: #1a1a1a;
+}
+
+@media (max-width: 768px) {
+  .payments-header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .add-payment-btn {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .payments-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .payment-stats {
+    gap: 1rem;
+  }
+
+  .payment-card-footer {
+    flex-direction: column;
+  }
+ .btn-second {
+  }
+}
+    /* SHIPPING VIEW STYLES */
+.shipping-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 2rem;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.add-shipping-btn {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.75rem 1.5rem;
+  background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+  color: white;
+  border: none;
+  border-radius: 12px;
+  font-size: 0.95rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 12px rgba(16, 185, 129, 0.3);
+}
+
+.add-shipping-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(16, 185, 129, 0.4);
+}
+
+/* Shipping Summary */
+.shipping-summary {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 1.25rem;
+  margin-bottom: 2.5rem;
+}
+
+.summary-card {
+  background: white;
+  border-radius: 16px;
+  padding: 1.5rem;
+  display: flex;
+  gap: 1rem;
+  border: 2px solid #f0f0f0;
+  transition: all 0.3s ease;
+}
+
+.summary-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+  border-color: #10b981;
+}
+
+.summary-icon {
+  font-size: 2.5rem;
+  width: 60px;
+  height: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, #ecfdf5 0%, #d1fae5 100%);
+  border-radius: 12px;
+  flex-shrink: 0;
+}
+
+.summary-content {
+  flex: 1;
+}
+
+.summary-value {
+  font-size: 1.75rem;
+  font-weight: 700;
+  color: #1a1a1a;
+  margin: 0 0 0.25rem 0;
+  background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.summary-label {
+  font-size: 0.875rem;
+  color: #6b7280;
+  margin: 0 0 0.5rem 0;
+  font-weight: 500;
+}
+
+.summary-trend {
+  font-size: 0.75rem;
+  font-weight: 600;
+  padding: 0.25rem 0.5rem;
+  border-radius: 6px;
+  display: inline-block;
+}
+
+.summary-trend.positive {
+  background: #d1fae5;
+  color: #065f46;
+}
+
+.summary-trend.negative {
+  background: #fee2e2;
+  color: #991b1b;
+}
+
+/* Shipping Zones Section */
+.shipping-zones-section,
+.carriers-section {
+  margin-bottom: 2.5rem;
+}
+
+.subsection-title {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: #1a1a1a;
+  margin: 0 0 1.5rem 0;
+}
+
+.shipping-zones-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+  gap: 1.5rem;
+}
+
+.shipping-zone-card {
+  background: white;
+  border-radius: 16px;
+  border: 2px solid #f0f0f0;
+  padding: 1.5rem;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.shipping-zone-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+  border-color: #10b981;
+}
+
+.shipping-zone-card.premium {
+  background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%);
+  border-color: #f59e0b;
+}
+
+.shipping-zone-card.free {
+  background: linear-gradient(135deg, #dbeafe 0%, #bfdbfe 100%);
+  border-color: #3b82f6;
+}
+
+.premium-badge,
+.free-badge {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  padding: 0.375rem 0.75rem;
+  border-radius: 20px;
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.premium-badge {
+  background: #f59e0b;
+  color: white;
+}
+
+.free-badge {
+  background: #3b82f6;
+  color: white;
+}
+
+.zone-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 1.5rem;
+  gap: 1rem;
+}
+
+.zone-header-left {
+  display: flex;
+  gap: 1rem;
+  flex: 1;
+}
+
+.zone-icon {
+  font-size: 2.5rem;
+  width: 56px;
+  height: 56px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: white;
+  border-radius: 12px;
+  flex-shrink: 0;
+}
+
+.zone-title {
+  font-size: 1.125rem;
+  font-weight: 700;
+  color: #1a1a1a;
+  margin: 0 0 0.25rem 0;
+}
+
+.zone-subtitle {
+  font-size: 0.875rem;
+  color: #6b7280;
+  margin: 0;
+}
+
+/* Toggle Switch */
+.zone-toggle {
+  flex-shrink: 0;
+}
+
+.toggle-switch {
+  position: relative;
+  display: inline-block;
+  width: 48px;
+  height: 26px;
+}
+
+.toggle-switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.toggle-slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #d1d5db;
+  transition: 0.4s;
+  border-radius: 34px;
+}
+
+.toggle-slider:before {
+  position: absolute;
+  content: "";
+  height: 20px;
+  width: 20px;
+  left: 3px;
+  bottom: 3px;
+  background-color: white;
+  transition: 0.4s;
+  border-radius: 50%;
+}
+
+.toggle-switch input:checked + .toggle-slider {
+  background-color: #10b981;
+}
+
+.toggle-switch input:checked + .toggle-slider:before {
+  transform: translateX(22px);
+}
+
+/* Zone Details */
+.zone-details {
+  display: grid;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.zone-detail-item {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.75rem;
+  background: rgba(255, 255, 255, 0.5);
+  border-radius: 10px;
+}
+
+.shipping-zone-card.premium .zone-detail-item,
+.shipping-zone-card.free .zone-detail-item {
+  background: rgba(255, 255, 255, 0.7);
+}
+
+.detail-icon {
+  font-size: 1.5rem;
+}
+
+.detail-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex: 1;
+  gap: 0.5rem;
+}
+
+.detail-label {
+  font-size: 0.875rem;
+  color: #6b7280;
+  font-weight: 500;
+}
+
+.detail-value {
+  font-size: 0.875rem;
+  color: #1a1a1a;
+  font-weight: 700;
+}
+
+/* Zone Footer */
+.zone-footer {
+  display: flex;
+  gap: 0.75rem;
+  padding-top: 1rem;
+  border-top: 2px solid rgba(0, 0, 0, 0.05);
+}
+
+.btn-zone-edit,
+.btn-zone-details {
+  flex: 1;
+  padding: 0.625rem 1rem;
+  border: 2px solid transparent;
+  border-radius: 10px;
+  font-size: 0.875rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.btn-zone-edit {
+  background: #10b981;
+  color: white;
+}
+
+.btn-zone-edit:hover {
+  background: #059669;
+  transform: translateY(-1px);
+}
+
+.btn-zone-details {
+  background: rgba(16, 185, 129, 0.1);
+  color: #059669;
+}
+
+.btn-zone-details:hover {
+  background: rgba(16, 185, 129, 0.2);
+  border-color: #10b981;
+}
+
+/* Carriers Section */
+.carriers-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 1.25rem;
+}
+
+.carrier-card {
+  background: white;
+  border-radius: 16px;
+  border: 2px solid #f0f0f0;
+  padding: 1.5rem;
+  transition: all 0.3s ease;
+  opacity: 0.6;
+}
+
+.carrier-card.active {
+  opacity: 1;
+  border-color: #d1fae5;
+}
+
+.carrier-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+  border-color: #10b981;
+}
+
+.carrier-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.carrier-logo {
+  font-size: 2.5rem;
+  width: 60px;
+  height: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, #ecfdf5 0%, #d1fae5 100%);
+  border-radius: 12px;
+}
+
+.carrier-status {
+  padding: 0.375rem 0.75rem;
+  border-radius: 20px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.carrier-status.active {
+  background: #d1fae5;
+  color: #065f46;
+}
+
+.carrier-status.inactive {
+  background: #f3f4f6;
+  color: #6b7280;
+}
+
+.carrier-name {
+  font-size: 1.125rem;
+  font-weight: 700;
+  color: #1a1a1a;
+  margin: 0 0 0.5rem 0;
+}
+
+.carrier-description {
+  font-size: 0.875rem;
+  color: #6b7280;
+  margin: 0 0 1.25rem 0;
+}
+
+.carrier-stats {
+  display: flex;
+  gap: 1.5rem;
+  padding-top: 1rem;
+  border-top: 2px solid #f0f0f0;
+}
+
+.carrier-stat {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.carrier-stat .stat-label {
+  font-size: 0.75rem;
+  color: #9ca3af;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  font-weight: 600;
+}
+
+.carrier-stat .stat-value {
+  font-size: 1.125rem;
+  font-weight: 700;
+  color: #1a1a1a;
+}
+
+.carrier-card.active .carrier-stat .stat-value {
+  background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .shipping-header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .add-shipping-btn {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .shipping-summary {
+    grid-template-columns: 1fr;
+  }
+
+  .shipping-zones-grid,
+  .carriers-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .zone-header-left {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .zone-footer {
+    flex-direction: column;
+  }
+}
+
+
   </style>
 </head>
 <body>
@@ -2181,43 +3302,1092 @@
       </div>
     </div>
 
-
     <!-- STORE SETTINGS VIEW -->
     <div class="view-container" id="view-store-settings">
-      <div class="empty-state">
-        <div class="empty-icon">⚙️</div>
-        <h2 class="empty-title">Configuración de Tienda</h2>
-        <p class="empty-text">Información general, horarios, políticas y personalización</p>
-        <button class="add-btn">
-          <span>✏️</span>
-          <span>Editar Configuración</span>
+      <div class="settings-header">
+        <div>
+          <h2 class="section-title">Configuración de Tienda</h2>
+          <p class="section-subtitle">Información general, horarios, políticas y personalización</p>
+        </div>
+        <button class="save-settings-btn">
+          <span class="btn-icon">💾</span>
+          <span>Guardar Cambios</span>
         </button>
       </div>
-    </div>
 
+      <!-- Settings Navigation Tabs -->
+      <div class="settings-tabs">
+        <button class="settings-tab active" data-tab="general">
+          <span class="tab-icon">🏪</span>
+          <span>General</span>
+        </button>
+        <button class="settings-tab" data-tab="hours">
+          <span class="tab-icon">🕐</span>
+          <span>Horarios</span>
+        </button>
+        <button class="settings-tab" data-tab="policies">
+          <span class="tab-icon">📋</span>
+          <span>Políticas</span>
+        </button>
+        <button class="settings-tab" data-tab="appearance">
+          <span class="tab-icon">🎨</span>
+          <span>Apariencia</span>
+        </button>
+        <button class="settings-tab" data-tab="notifications">
+          <span class="tab-icon">🔔</span>
+          <span>Notificaciones</span>
+        </button>
+      </div>
+
+      <!-- General Settings Section -->
+      <div class="settings-content" id="settings-general">
+        <div class="settings-section">
+          <div class="section-header">
+            <h3 class="section-heading">Información Básica</h3>
+            <p class="section-description">Datos principales de tu tienda</p>
+          </div>
+
+          <div class="settings-grid">
+            <div class="setting-field">
+              <label class="field-label">Nombre de la Tienda</label>
+              <input type="text" class="field-input" value="Mi Tienda Online" placeholder="Nombre de tu tienda">
+              <span class="field-help">Este nombre aparecerá en todas las comunicaciones</span>
+            </div>
+
+            <div class="setting-field">
+              <label class="field-label">Correo Electrónico</label>
+              <input type="email" class="field-input" value="contacto@mitienda.com" placeholder="correo@ejemplo.com">
+              <span class="field-help">Email principal para contacto con clientes</span>
+            </div>
+
+            <div class="setting-field">
+              <label class="field-label">Teléfono</label>
+              <input type="tel" class="field-input" value="+57 300 123 4567" placeholder="+57 300 000 0000">
+              <span class="field-help">Número de contacto visible para clientes</span>
+            </div>
+
+            <div class="setting-field full-width">
+              <label class="field-label">Dirección</label>
+              <input type="text" class="field-input" value="Calle 123 #45-67, Bogotá" placeholder="Dirección completa">
+              <span class="field-help">Dirección física de tu tienda o bodega</span>
+            </div>
+
+            <div class="setting-field full-width">
+              <label class="field-label">Descripción de la Tienda</label>
+              <textarea class="field-textarea" rows="4" placeholder="Describe tu tienda...">Somos una tienda comprometida con ofrecer productos de la más alta calidad a los mejores precios. Con más de 10 años de experiencia en el mercado.</textarea>
+              <span class="field-help">Descripción que verán tus clientes (máx. 500 caracteres)</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="settings-section">
+          <div class="section-header">
+            <h3 class="section-heading">Redes Sociales</h3>
+            <p class="section-description">Conecta tus perfiles sociales</p>
+          </div>
+
+          <div class="settings-grid">
+            <div class="setting-field">
+              <label class="field-label">
+                <span class="social-icon">📘</span>
+                Facebook
+              </label>
+              <input type="text" class="field-input" value="@mitienda" placeholder="Usuario o URL">
+            </div>
+
+            <div class="setting-field">
+              <label class="field-label">
+                <span class="social-icon">📸</span>
+                Instagram
+              </label>
+              <input type="text" class="field-input" value="@mitienda" placeholder="Usuario o URL">
+            </div>
+
+            <div class="setting-field">
+              <label class="field-label">
+                <span class="social-icon">🐦</span>
+                Twitter / X
+              </label>
+              <input type="text" class="field-input" value="@mitienda" placeholder="Usuario o URL">
+            </div>
+
+            <div class="setting-field">
+              <label class="field-label">
+                <span class="social-icon">💼</span>
+                LinkedIn
+              </label>
+              <input type="text" class="field-input" placeholder="Usuario o URL">
+            </div>
+          </div>
+        </div>
+
+        <div class="settings-section">
+          <div class="section-header">
+            <h3 class="section-heading">Configuración Regional</h3>
+            <p class="section-description">Idioma, moneda y zona horaria</p>
+          </div>
+
+          <div class="settings-grid">
+            <div class="setting-field">
+              <label class="field-label">Idioma</label>
+              <select class="field-select">
+                <option value="es" selected>Español</option>
+                <option value="en">English</option>
+                <option value="pt">Português</option>
+              </select>
+            </div>
+
+            <div class="setting-field">
+              <label class="field-label">Moneda</label>
+              <select class="field-select">
+                <option value="COP" selected>COP - Peso Colombiano</option>
+                <option value="USD">USD - Dólar Americano</option>
+                <option value="EUR">EUR - Euro</option>
+              </select>
+            </div>
+
+            <div class="setting-field">
+              <label class="field-label">Zona Horaria</label>
+              <select class="field-select">
+                <option value="America/Bogota" selected>América/Bogotá (GMT-5)</option>
+                <option value="America/Mexico_City">América/Ciudad de México (GMT-6)</option>
+                <option value="America/New_York">América/Nueva York (GMT-5)</option>
+              </select>
+            </div>
+
+            <div class="setting-field">
+              <label class="field-label">Formato de Fecha</label>
+              <select class="field-select">
+                <option value="DD/MM/YYYY" selected>DD/MM/YYYY</option>
+                <option value="MM/DD/YYYY">MM/DD/YYYY</option>
+                <option value="YYYY-MM-DD">YYYY-MM-DD</option>
+              </select>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Business Hours Section -->
+      <div class="settings-content" id="settings-hours" style="display: none;">
+        <div class="settings-section">
+          <div class="section-header">
+            <h3 class="section-heading">Horario de Atención</h3>
+            <p class="section-description">Define cuándo está disponible tu tienda</p>
+          </div>
+
+          <div class="hours-list">
+            <div class="hours-item">
+              <div class="hours-day">
+                <label class="hours-toggle">
+                  <input type="checkbox" checked>
+                  <span class="toggle-slider"></span>
+                </label>
+                <span class="day-name">Lunes</span>
+              </div>
+              <div class="hours-time">
+                <input type="time" class="time-input" value="08:00">
+                <span class="time-separator">-</span>
+                <input type="time" class="time-input" value="18:00">
+              </div>
+            </div>
+
+            <div class="hours-item">
+              <div class="hours-day">
+                <label class="hours-toggle">
+                  <input type="checkbox" checked>
+                  <span class="toggle-slider"></span>
+                </label>
+                <span class="day-name">Martes</span>
+              </div>
+              <div class="hours-time">
+                <input type="time" class="time-input" value="08:00">
+                <span class="time-separator">-</span>
+                <input type="time" class="time-input" value="18:00">
+              </div>
+            </div>
+
+            <div class="hours-item">
+              <div class="hours-day">
+                <label class="hours-toggle">
+                  <input type="checkbox" checked>
+                  <span class="toggle-slider"></span>
+                </label>
+                <span class="day-name">Miércoles</span>
+              </div>
+              <div class="hours-time">
+                <input type="time" class="time-input" value="08:00">
+                <span class="time-separator">-</span>
+                <input type="time" class="time-input" value="18:00">
+              </div>
+            </div>
+
+            <div class="hours-item">
+              <div class="hours-day">
+                <label class="hours-toggle">
+                  <input type="checkbox" checked>
+                  <span class="toggle-slider"></span>
+                </label>
+                <span class="day-name">Jueves</span>
+              </div>
+              <div class="hours-time">
+                <input type="time" class="time-input" value="08:00">
+                <span class="time-separator">-</span>
+                <input type="time" class="time-input" value="18:00">
+              </div>
+            </div>
+
+            <div class="hours-item">
+              <div class="hours-day">
+                <label class="hours-toggle">
+                  <input type="checkbox" checked>
+                  <span class="toggle-slider"></span>
+                </label>
+                <span class="day-name">Viernes</span>
+              </div>
+              <div class="hours-time">
+                <input type="time" class="time-input" value="08:00">
+                <span class="time-separator">-</span>
+                <input type="time" class="time-input" value="18:00">
+              </div>
+            </div>
+
+            <div class="hours-item">
+              <div class="hours-day">
+                <label class="hours-toggle">
+                  <input type="checkbox" checked>
+                  <span class="toggle-slider"></span>
+                </label>
+                <span class="day-name">Sábado</span>
+              </div>
+              <div class="hours-time">
+                <input type="time" class="time-input" value="09:00">
+                <span class="time-separator">-</span>
+                <input type="time" class="time-input" value="14:00">
+              </div>
+            </div>
+
+            <div class="hours-item">
+              <div class="hours-day">
+                <label class="hours-toggle">
+                  <input type="checkbox">
+                  <span class="toggle-slider"></span>
+                </label>
+                <span class="day-name">Domingo</span>
+              </div>
+              <div class="hours-time">
+                <span class="closed-label">Cerrado</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="hours-actions">
+            <button class="btn-copy-hours">📋 Copiar horario a todos los días</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Policies Section -->
+      <div class="settings-content" id="settings-policies" style="display: none;">
+        <div class="settings-section">
+          <div class="section-header">
+            <h3 class="section-heading">Políticas de la Tienda</h3>
+            <p class="section-description">Define las reglas y políticas de tu negocio</p>
+          </div>
+
+          <div class="policy-editor">
+            <div class="policy-item">
+              <div class="policy-header">
+                <h4 class="policy-title">📦 Política de Devoluciones</h4>
+                <button class="btn-expand">▼</button>
+              </div>
+              <div class="policy-content">
+                <textarea class="policy-textarea" rows="6">Aceptamos devoluciones dentro de los 30 días posteriores a la compra. El producto debe estar en su empaque original y en perfectas condiciones. Los gastos de envío de devolución corren por cuenta del cliente, excepto en casos de productos defectuosos.</textarea>
+              </div>
+            </div>
+
+            <div class="policy-item">
+              <div class="policy-header">
+                <h4 class="policy-title">🚚 Política de Envíos</h4>
+                <button class="btn-expand">▼</button>
+              </div>
+              <div class="policy-content">
+                <textarea class="policy-textarea" rows="6">Realizamos envíos a nivel nacional. Los tiempos de entrega varían entre 3-7 días hábiles. Envío gratis en compras superiores a $50.000. El cliente recibirá un número de seguimiento una vez el pedido sea despachado.</textarea>
+              </div>
+            </div>
+
+            <div class="policy-item">
+              <div class="policy-header">
+                <h4 class="policy-title">🔒 Política de Privacidad</h4>
+                <button class="btn-expand">▼</button>
+              </div>
+              <div class="policy-content">
+                <textarea class="policy-textarea" rows="6">Protegemos la información personal de nuestros clientes. No compartimos datos con terceros sin consentimiento. Utilizamos encriptación SSL para todas las transacciones. Los datos se utilizan únicamente para procesar pedidos y mejorar el servicio.</textarea>
+              </div>
+            </div>
+
+            <div class="policy-item">
+              <div class="policy-header">
+                <h4 class="policy-title">✅ Términos y Condiciones</h4>
+                <button class="btn-expand">▼</button>
+              </div>
+              <div class="policy-content">
+                <textarea class="policy-textarea" rows="6">Al realizar una compra en nuestra tienda, aceptas nuestros términos y condiciones. Nos reservamos el derecho de rechazar pedidos en casos excepcionales. Los precios pueden cambiar sin previo aviso. Las promociones no son acumulables salvo que se indique lo contrario.</textarea>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Appearance Section -->
+      <div class="settings-content" id="settings-appearance" style="display: none;">
+        <div class="settings-section">
+          <div class="section-header">
+            <h3 class="section-heading">Personalización Visual</h3>
+            <p class="section-description">Colores, logo y estilo de tu tienda</p>
+          </div>
+
+          <div class="appearance-grid">
+            <div class="appearance-card">
+              <h4 class="appearance-title">🎨 Paleta de Colores</h4>
+              <div class="color-palette">
+                <div class="color-picker-group">
+                  <label class="color-label">Color Primario</label>
+                  <div class="color-picker-wrapper">
+                    <input type="color" class="color-picker" value="#667eea">
+                    <span class="color-value">#667eea</span>
+                  </div>
+                </div>
+                <div class="color-picker-group">
+                  <label class="color-label">Color Secundario</label>
+                  <div class="color-picker-wrapper">
+                    <input type="color" class="color-picker" value="#764ba2">
+                    <span class="color-value">#764ba2</span>
+                  </div>
+                </div>
+                <div class="color-picker-group">
+                  <label class="color-label">Color de Acento</label>
+                  <div class="color-picker-wrapper">
+                    <input type="color" class="color-picker" value="#10b981">
+                    <span class="color-value">#10b981</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="appearance-card">
+              <h4 class="appearance-title">🖼️ Logo de la Tienda</h4>
+              <div class="logo-upload">
+                <div class="logo-preview">
+                  <div class="logo-placeholder">🏪</div>
+                </div>
+                <div class="upload-actions">
+                  <button class="btn-upload">📤 Subir Logo</button>
+                  <p class="upload-help">PNG o JPG, máx. 2MB<br>Recomendado: 200x200px</p>
+                </div>
+              </div>
+            </div>
+
+            <div class="appearance-card">
+              <h4 class="appearance-title">🌓 Tema</h4>
+              <div class="theme-selector">
+                <label class="theme-option">
+                  <input type="radio" name="theme" value="light" checked>
+                  <div class="theme-preview light">
+                    <span class="theme-name">☀️ Claro</span>
+                  </div>
+                </label>
+                <label class="theme-option">
+                  <input type="radio" name="theme" value="dark">
+                  <div class="theme-preview dark">
+                    <span class="theme-name">🌙 Oscuro</span>
+                  </div>
+                </label>
+                <label class="theme-option">
+                  <input type="radio" name="theme" value="auto">
+                  <div class="theme-preview auto">
+                    <span class="theme-name">🔄 Automático</span>
+                  </div>
+                </label>
+              </div>
+            </div>
+
+            <div class="appearance-card full-width">
+              <h4 class="appearance-title">✨ Opciones Adicionales</h4>
+              <div class="appearance-options">
+                <label class="option-toggle">
+                  <input type="checkbox" checked>
+                  <span class="option-slider"></span>
+                  <span class="option-label">Mostrar logo en emails</span>
+                </label>
+                <label class="option-toggle">
+                  <input type="checkbox" checked>
+                  <span class="option-slider"></span>
+                  <span class="option-label">Usar colores personalizados en la tienda</span>
+                </label>
+                <label class="option-toggle">
+                  <input type="checkbox">
+                  <span class="option-slider"></span>
+                  <span class="option-label">Modo de alto contraste</span>
+                </label>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Notifications Section -->
+      <div class="settings-content" id="settings-notifications" style="display: none;">
+        <div class="settings-section">
+          <div class="section-header">
+            <h3 class="section-heading">Preferencias de Notificaciones</h3>
+            <p class="section-description">Configura cómo y cuándo recibir notificaciones</p>
+          </div>
+
+          <div class="notifications-grid">
+            <div class="notification-category">
+              <h4 class="category-title">📧 Notificaciones por Email</h4>
+              <div class="notification-list">
+                <label class="notification-item">
+                  <div class="notification-info">
+                    <span class="notification-name">Nuevos pedidos</span>
+                    <span class="notification-desc">Recibe un email cuando llegue un nuevo pedido</span>
+                  </div>
+                  <label class="notification-toggle">
+                    <input type="checkbox" checked>
+                    <span class="toggle-slider"></span>
+                  </label>
+                </label>
+
+                <label class="notification-item">
+                  <div class="notification-info">
+                    <span class="notification-name">Productos con bajo inventario</span>
+                    <span class="notification-desc">Alerta cuando un producto tenga menos de 5 unidades</span>
+                  </div>
+                  <label class="notification-toggle">
+                    <input type="checkbox" checked>
+                    <span class="toggle-slider"></span>
+                  </label>
+                </label>
+
+                <label class="notification-item">
+                  <div class="notification-info">
+                    <span class="notification-name">Nuevas reseñas</span>
+                    <span class="notification-desc">Notificación cuando un cliente deje una reseña</span>
+                  </div>
+                  <label class="notification-toggle">
+                    <input type="checkbox">
+                    <span class="toggle-slider"></span>
+                  </label>
+                </label>
+
+                <label class="notification-item">
+                  <div class="notification-info">
+                    <span class="notification-name">Resumen diario</span>
+                    <span class="notification-desc">Reporte diario de ventas y estadísticas</span>
+                  </div>
+                  <label class="notification-toggle">
+                    <input type="checkbox" checked>
+                    <span class="toggle-slider"></span>
+                  </label>
+                </label>
+              </div>
+            </div>
+
+            <div class="notification-category">
+              <h4 class="category-title">🔔 Notificaciones Push</h4>
+              <div class="notification-list">
+                <label class="notification-item">
+                  <div class="notification-info">
+                    <span class="notification-name">Pedidos urgentes</span>
+                    <span class="notification-desc">Notificación instantánea para pedidos express</span>
+                  </div>
+                  <label class="notification-toggle">
+                    <input type="checkbox" checked>
+                    <span class="toggle-slider"></span>
+                  </label>
+                </label>
+
+                <label class="notification-item">
+                  <div class="notification-info">
+                    <span class="notification-name">Mensajes de clientes</span>
+                    <span class="notification-desc">Alerta cuando un cliente envíe un mensaje</span>
+                  </div>
+                  <label class="notification-toggle">
+                    <input type="checkbox" checked>
+                    <span class="toggle-slider"></span>
+                  </label>
+                </label>
+
+                <label class="notification-item">
+                  <div class="notification-info">
+                    <span class="notification-name">Actualizaciones del sistema</span>
+                    <span class="notification-desc">Notificaciones sobre actualizaciones importantes</span>
+                  </div>
+                  <label class="notification-toggle">
+                    <input type="checkbox">
+                    <span class="toggle-slider"></span>
+                  </label>
+                </label>
+              </div>
+            </div>
+
+            <div class="notification-category">
+              <h4 class="category-title">📱 Notificaciones SMS</h4>
+              <div class="notification-list">
+                <label class="notification-item">
+                  <div class="notification-info">
+                    <span class="notification-name">Alertas críticas</span>
+                    <span class="notification-desc">SMS para problemas urgentes con pedidos</span>
+                  </div>
+                  <label class="notification-toggle">
+                    <input type="checkbox" checked>
+                    <span class="toggle-slider"></span>
+                  </label>
+                </label>
+
+                <label class="notification-item">
+                  <div class="notification-info">
+                    <span class="notification-name">Verificación de seguridad</span>
+                    <span class="notification-desc">Códigos de verificación para acciones importantes</span>
+                  </div>
+                  <label class="notification-toggle">
+                    <input type="checkbox" checked>
+                    <span class="toggle-slider"></span>
+                  </label>
+                </label>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
     <!-- PAYMENTS VIEW -->
     <div class="view-container" id="view-payments">
-      <div class="empty-state">
-        <div class="empty-icon">💳</div>
-        <h2 class="empty-title">Métodos de Pago</h2>
-        <p class="empty-text">Configura las opciones de pago para tu tienda</p>
-        <button class="add-btn">
-          <span>+</span>
-          <span>Agregar Método de Pago</span>
-        </button>
+      <div class="payments-header">
+        <div>
+          <h2 class="section-title">Métodos de Pago</h2>
+          <p class="section-subtitle">Gestiona las opciones de pago disponibles en tu tienda</p>
+        </div>
+      </div>
+
+      <div class="payments-grid">
+        <!-- Credit/Debit Cards -->
+        <div class="payment-card active">
+          <div class="payment-card-header">
+            <div class="payment-icon">💳</div>
+            <div class="payment-status">
+              <span class="status-badge active">Activo</span>
+            </div>
+          </div>
+          <div class="payment-card-body">
+            <h3 class="payment-title">Tarjetas de Crédito/Débito</h3>
+            <p class="payment-description">Visa, Mastercard, American Express</p>
+            <div class="payment-stats">
+              <div class="stat-item">
+                <span class="stat-label">Transacciones</span>
+                <span class="stat-value">1,234</span>
+              </div>
+              <div class="stat-item">
+                <span class="stat-label">Comisión</span>
+                <span class="stat-value">2.9%</span>
+              </div>
+            </div>
+          </div>
+          <div class="payment-card-footer">
+            <button class="btn-secondary">Configurar</button>
+            <button class="btn-text">Desactivar</button>
+          </div>
+        </div>
+
+        <!-- PayPal -->
+        <div class="payment-card active">
+          <div class="payment-card-header">
+            <div class="payment-icon">🅿️</div>
+            <div class="payment-status">
+              <span class="status-badge active">Activo</span>
+            </div>
+          </div>
+          <div class="payment-card-body">
+            <h3 class="payment-title">PayPal</h3>
+            <p class="payment-description">Pagos rápidos y seguros con PayPal</p>
+            <div class="payment-stats">
+              <div class="stat-item">
+                <span class="stat-label">Transacciones</span>
+                <span class="stat-value">856</span>
+              </div>
+              <div class="stat-item">
+                <span class="stat-label">Comisión</span>
+                <span class="stat-value">3.4%</span>
+              </div>
+            </div>
+          </div>
+          <div class="payment-card-footer">
+            <button class="btn-secondary">Configurar</button>
+            <button class="btn-text">Desactivar</button>
+          </div>
+        </div>
+
+        <!-- Bank Transfer -->
+        <div class="payment-card">
+          <div class="payment-card-header">
+            <div class="payment-icon">🏦</div>
+            <div class="payment-status">
+              <span class="status-badge inactive">Inactivo</span>
+            </div>
+          </div>
+          <div class="payment-card-body">
+            <h3 class="payment-title">Transferencia Bancaria</h3>
+            <p class="payment-description">Pago directo a cuenta bancaria</p>
+            <div class="payment-stats">
+              <div class="stat-item">
+                <span class="stat-label">Transacciones</span>
+                <span class="stat-value">423</span>
+              </div>
+              <div class="stat-item">
+                <span class="stat-label">Comisión</span>
+                <span class="stat-value">0%</span>
+              </div>
+            </div>
+          </div>
+          <div class="payment-card-footer">
+            <button class="btn-secondary">Configurar</button>
+            <button class="btn-text">Activar</button>
+          </div>
+        </div>
+
+        <!-- Cash on Delivery -->
+        <div class="payment-card active">
+          <div class="payment-card-header">
+            <div class="payment-icon">💵</div>
+            <div class="payment-status">
+              <span class="status-badge active">Activo</span>
+            </div>
+          </div>
+          <div class="payment-card-body">
+            <h3 class="payment-title">Pago Contra Entrega</h3>
+            <p class="payment-description">Pago en efectivo al recibir el pedido</p>
+            <div class="payment-stats">
+              <div class="stat-item">
+                <span class="stat-label">Transacciones</span>
+                <span class="stat-value">312</span>
+              </div>
+              <div class="stat-item">
+                <span class="stat-label">Comisión</span>
+                <span class="stat-value">0%</span>
+              </div>
+            </div>
+          </div>
+          <div class="payment-card-footer">
+            <button class="btn-secondary">Configurar</button>
+            <button class="btn-text">Desactivar</button>
+          </div>
+        </div>
+
+
+        <!-- Apple Pay -->
+        <div class="payment-card">
+          <div class="payment-card-header">
+            <div class="payment-icon">🍎</div>
+            <div class="payment-status">
+              <span class="status-badge inactive">Inactivo</span>
+            </div>
+          </div>
+          <div class="payment-card-body">
+            <h3 class="payment-title">Apple Pay</h3>
+            <p class="payment-description">Pagos rápidos desde dispositivos Apple</p>
+            <div class="payment-stats">
+              <div class="stat-item">
+                <span class="stat-label">Transacciones</span>
+                <span class="stat-value">0</span>
+              </div>
+              <div class="stat-item">
+                <span class="stat-label">Comisión</span>
+                <span class="stat-value">2.5%</span>
+              </div>
+            </div>
+          </div>
+          <div class="payment-card-footer">
+            <button class="btn-secondary">Configurar</button>
+            <button class="btn-text">Activar</button>
+          </div>
+        </div>
       </div>
     </div>
 
     <!-- SHIPPING VIEW -->
     <div class="view-container" id="view-shipping">
-      <div class="empty-state">
-        <div class="empty-icon">🚚</div>
-        <h2 class="empty-title">Configuración de Envíos</h2>
-        <p class="empty-text">Gestiona zonas de envío, tarifas y tiempos de entrega</p>
-        <button class="add-btn">
-          <span>+</span>
-          <span>Configurar Envíos</span>
+      <div class="shipping-header">
+        <div>
+          <h2 class="section-title">Configuración de Envíos</h2>
+          <p class="section-subtitle">Gestiona zonas de envío, tarifas y tiempos de entrega</p>
+        </div>
+        <button class="add-shipping-btn">
+          <span class="btn-icon">+</span>
+          <span>Nueva Zona de Envío</span>
         </button>
+      </div>
+
+      <!-- Shipping Summary Cards -->
+      <div class="shipping-summary">
+        <div class="summary-card">
+          <div class="summary-icon">📦</div>
+          <div class="summary-content">
+            <h3 class="summary-value">1,847</h3>
+            <p class="summary-label">Envíos Totales</p>
+            <span class="summary-trend positive">+12.5% vs mes anterior</span>
+          </div>
+        </div>
+
+        <div class="summary-card">
+          <div class="summary-icon">⏱️</div>
+          <div class="summary-content">
+            <h3 class="summary-value">2.3 días</h3>
+            <p class="summary-label">Tiempo Promedio</p>
+            <span class="summary-trend positive">-0.5 días mejora</span>
+          </div>
+        </div>
+
+        <div class="summary-card">
+          <div class="summary-icon">✅</div>
+          <div class="summary-content">
+            <h3 class="summary-value">94.2%</h3>
+            <p class="summary-label">Tasa de Entrega</p>
+            <span class="summary-trend positive">+2.1% este mes</span>
+          </div>
+        </div>
+
+        <div class="summary-card">
+          <div class="summary-icon">💰</div>
+          <div class="summary-content">
+            <h3 class="summary-value">$8.50</h3>
+            <p class="summary-label">Costo Promedio</p>
+            <span class="summary-trend negative">+$0.30 vs anterior</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Shipping Zones -->
+      <div class="shipping-zones-section">
+        <h3 class="subsection-title">Zonas de Envío Activas</h3>
+
+        <div class="shipping-zones-grid">
+          <!-- Zone 1 - Local -->
+          <div class="shipping-zone-card">
+            <div class="zone-header">
+              <div class="zone-header-left">
+                <span class="zone-icon">🏙️</span>
+                <div>
+                  <h4 class="zone-title">Envío Local</h4>
+                  <p class="zone-subtitle">Ciudad principal y alrededores</p>
+                </div>
+              </div>
+              <div class="zone-toggle">
+                <label class="toggle-switch">
+                  <input type="checkbox" checked>
+                  <span class="toggle-slider"></span>
+                </label>
+              </div>
+            </div>
+
+            <div class="zone-details">
+              <div class="zone-detail-item">
+                <span class="detail-icon">📍</span>
+                <div class="detail-content">
+                  <span class="detail-label">Cobertura</span>
+                  <span class="detail-value">15 km de radio</span>
+                </div>
+              </div>
+
+              <div class="zone-detail-item">
+                <span class="detail-icon">💵</span>
+                <div class="detail-content">
+                  <span class="detail-label">Tarifa</span>
+                  <span class="detail-value">$3.50 - $5.00</span>
+                </div>
+              </div>
+
+              <div class="zone-detail-item">
+                <span class="detail-icon">🕐</span>
+                <div class="detail-content">
+                  <span class="detail-label">Entrega</span>
+                  <span class="detail-value">24-48 horas</span>
+                </div>
+              </div>
+
+              <div class="zone-detail-item">
+                <span class="detail-icon">📊</span>
+                <div class="detail-content">
+                  <span class="detail-label">Pedidos</span>
+                  <span class="detail-value">1,234 este mes</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="zone-footer">
+              <button class="btn-zone-edit">Editar</button>
+              <button class="btn-zone-details">Ver Detalles</button>
+            </div>
+          </div>
+
+          <!-- Zone 2 - National -->
+          <div class="shipping-zone-card">
+            <div class="zone-header">
+              <div class="zone-header-left">
+                <span class="zone-icon">🗺️</span>
+                <div>
+                  <h4 class="zone-title">Envío Nacional</h4>
+                  <p class="zone-subtitle">Todo el territorio nacional</p>
+                </div>
+              </div>
+              <div class="zone-toggle">
+                <label class="toggle-switch">
+                  <input type="checkbox" checked>
+                  <span class="toggle-slider"></span>
+                </label>
+              </div>
+            </div>
+
+            <div class="zone-details">
+              <div class="zone-detail-item">
+                <span class="detail-icon">📍</span>
+                <div class="detail-content">
+                  <span class="detail-label">Cobertura</span>
+                  <span class="detail-value">32 departamentos</span>
+                </div>
+              </div>
+
+              <div class="zone-detail-item">
+                <span class="detail-icon">💵</span>
+                <div class="detail-content">
+                  <span class="detail-label">Tarifa</span>
+                  <span class="detail-value">$8.00 - $15.00</span>
+                </div>
+              </div>
+
+              <div class="zone-detail-item">
+                <span class="detail-icon">🕐</span>
+                <div class="detail-content">
+                  <span class="detail-label">Entrega</span>
+                  <span class="detail-value">3-7 días</span>
+                </div>
+              </div>
+
+              <div class="zone-detail-item">
+                <span class="detail-icon">📊</span>
+                <div class="detail-content">
+                  <span class="detail-label">Pedidos</span>
+                  <span class="detail-value">547 este mes</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="zone-footer">
+              <button class="btn-zone-edit">Editar</button>
+              <button class="btn-zone-details">Ver Detalles</button>
+            </div>
+          </div>
+
+          <!-- Zone 3 - Express -->
+          <div class="shipping-zone-card premium">
+            <div class="premium-badge">⚡ Express</div>
+            <div class="zone-header">
+              <div class="zone-header-left">
+                <span class="zone-icon">🚀</span>
+                <div>
+                  <h4 class="zone-title">Envío Express</h4>
+                  <p class="zone-subtitle">Entrega urgente en 24h</p>
+                </div>
+              </div>
+              <div class="zone-toggle">
+                <label class="toggle-switch">
+                  <input type="checkbox" checked>
+                  <span class="toggle-slider"></span>
+                </label>
+              </div>
+            </div>
+
+            <div class="zone-details">
+              <div class="zone-detail-item">
+                <span class="detail-icon">📍</span>
+                <div class="detail-content">
+                  <span class="detail-label">Cobertura</span>
+                  <span class="detail-value">Ciudades principales</span>
+                </div>
+              </div>
+
+              <div class="zone-detail-item">
+                <span class="detail-icon">💵</span>
+                <div class="detail-content">
+                  <span class="detail-label">Tarifa</span>
+                  <span class="detail-value">$12.00 - $20.00</span>
+                </div>
+              </div>
+
+              <div class="zone-detail-item">
+                <span class="detail-icon">🕐</span>
+                <div class="detail-content">
+                  <span class="detail-label">Entrega</span>
+                  <span class="detail-value">12-24 horas</span>
+                </div>
+              </div>
+
+              <div class="zone-detail-item">
+                <span class="detail-icon">📊</span>
+                <div class="detail-content">
+                  <span class="detail-label">Pedidos</span>
+                  <span class="detail-value">66 este mes</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="zone-footer">
+              <button class="btn-zone-edit">Editar</button>
+              <button class="btn-zone-details">Ver Detalles</button>
+            </div>
+          </div>
+
+          <!-- Zone 4 - Free Shipping -->
+          <div class="shipping-zone-card free">
+            <div class="free-badge">🎁 Gratis</div>
+            <div class="zone-header">
+              <div class="zone-header-left">
+                <span class="zone-icon">🎉</span>
+                <div>
+                  <h4 class="zone-title">Envío Gratis</h4>
+                  <p class="zone-subtitle">Compras superiores a $50</p>
+                </div>
+              </div>
+              <div class="zone-toggle">
+                <label class="toggle-switch">
+                  <input type="checkbox" checked>
+                  <span class="toggle-slider"></span>
+                </label>
+              </div>
+            </div>
+
+            <div class="zone-details">
+              <div class="zone-detail-item">
+                <span class="detail-icon">📍</span>
+                <div class="detail-content">
+                  <span class="detail-label">Cobertura</span>
+                  <span class="detail-value">Nacional</span>
+                </div>
+              </div>
+
+              <div class="zone-detail-item">
+                <span class="detail-icon">💵</span>
+                <div class="detail-content">
+                  <span class="detail-label">Tarifa</span>
+                  <span class="detail-value">$0.00</span>
+                </div>
+              </div>
+
+              <div class="zone-detail-item">
+                <span class="detail-icon">🕐</span>
+                <div class="detail-content">
+                  <span class="detail-label">Entrega</span>
+                  <span class="detail-value">3-5 días</span>
+                </div>
+              </div>
+
+              <div class="zone-detail-item">
+                <span class="detail-icon">📊</span>
+                <div class="detail-content">
+                  <span class="detail-label">Pedidos</span>
+                  <span class="detail-value">892 este mes</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="zone-footer">
+              <button class="btn-zone-edit">Editar</button>
+              <button class="btn-zone-details">Ver Detalles</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Shipping Carriers -->
+      <div class="carriers-section">
+        <h3 class="subsection-title">Transportadoras Integradas</h3>
+
+        <div class="carriers-grid">
+          <div class="carrier-card active">
+            <div class="carrier-header">
+              <div class="carrier-logo">🚚</div>
+              <span class="carrier-status active">Activo</span>
+            </div>
+            <h4 class="carrier-name">Servientrega</h4>
+            <p class="carrier-description">Cobertura nacional completa</p>
+            <div class="carrier-stats">
+              <div class="carrier-stat">
+                <span class="stat-label">Envíos</span>
+                <span class="stat-value">1,245</span>
+              </div>
+              <div class="carrier-stat">
+                <span class="stat-label">Confiabilidad</span>
+                <span class="stat-value">96%</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="carrier-card active">
+            <div class="carrier-header">
+              <div class="carrier-logo">📮</div>
+              <span class="carrier-status active">Activo</span>
+            </div>
+            <h4 class="carrier-name">Coordinadora</h4>
+            <p class="carrier-description">Envíos rápidos y seguros</p>
+            <div class="carrier-stats">
+              <div class="carrier-stat">
+                <span class="stat-label">Envíos</span>
+                <span class="stat-value">823</span>
+              </div>
+              <div class="carrier-stat">
+                <span class="stat-label">Confiabilidad</span>
+                <span class="stat-value">94%</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="carrier-card">
+            <div class="carrier-header">
+              <div class="carrier-logo">✈️</div>
+              <span class="carrier-status inactive">Inactivo</span>
+            </div>
+            <h4 class="carrier-name">DHL Express</h4>
+            <p class="carrier-description">Envíos internacionales</p>
+            <div class="carrier-stats">
+              <div class="carrier-stat">
+                <span class="stat-label">Envíos</span>
+                <span class="stat-value">0</span>
+              </div>
+              <div class="carrier-stat">
+                <span class="stat-label">Confiabilidad</span>
+                <span class="stat-value">--</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="carrier-card">
+            <div class="carrier-header">
+              <div class="carrier-logo">🏍️</div>
+              <span class="carrier-status inactive">Inactivo</span>
+            </div>
+            <h4 class="carrier-name">Rappi / Mensajero</h4>
+            <p class="carrier-description">Entregas ultra rápidas</p>
+            <div class="carrier-stats">
+              <div class="carrier-stat">
+                <span class="stat-label">Envíos</span>
+                <span class="stat-value">0</span>
+              </div>
+              <div class="carrier-stat">
+                <span class="stat-label">Confiabilidad</span>
+                <span class="stat-value">--</span>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
 
